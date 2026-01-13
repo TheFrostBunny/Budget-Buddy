@@ -39,7 +39,7 @@ export function ProductManager() {
   }
 
   function removeProduct(id: string) {
-    setProducts(products.filter(p => p.id !== id));
+    setProducts(products.filter((p) => p.id !== id));
   }
 
   return (
@@ -48,23 +48,23 @@ export function ProductManager() {
         <CardTitle>Legg til og fjern varer</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
-        <div className="flex gap-2 items-center">
+        <div className="flex items-center gap-2">
           <Input
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Navn på vare"
             className="w-40"
           />
           <Input
             value={unit}
-            onChange={e => setUnit(e.target.value)}
+            onChange={(e) => setUnit(e.target.value)}
             placeholder="Enhet (kg, stk, pk...)"
             className="w-24"
           />
           <Button onClick={addProduct}>Legg til</Button>
         </div>
         <ul className="space-y-2">
-          {products.map(product => (
+          {products.map((product) => (
             <li key={product.id} className="flex items-center gap-2">
               <span className="w-40 truncate">{product.name}</span>
               <span className="text-xs text-muted-foreground">{product.unit}</span>

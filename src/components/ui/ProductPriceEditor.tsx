@@ -60,7 +60,7 @@ export function ProductPriceEditor() {
   }
 
   function removeProduct(id: string) {
-    setProducts(products.filter(p => p.id !== id));
+    setProducts(products.filter((p) => p.id !== id));
     // Remove price for deleted product
     const newPrices = { ...customPrices };
     delete newPrices[id];
@@ -73,26 +73,28 @@ export function ProductPriceEditor() {
         <CardTitle>Endre priser og varer</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
-        <div className="flex gap-2 items-center mb-2">
+        <div className="mb-2 flex items-center gap-2">
           <Input
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Navn på vare"
             className="w-40"
           />
           <select
             value={unit}
-            onChange={e => setUnit(e.target.value)}
-            className="w-24 border rounded px-2 py-1 text-sm"
+            onChange={(e) => setUnit(e.target.value)}
+            className="w-24 rounded border px-2 py-1 text-sm"
           >
             <option value="">Velg enhet</option>
-            {unitOptions.map(opt => (
-              <option key={opt} value={opt}>{opt}</option>
+            {unitOptions.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
             ))}
           </select>
           <Button onClick={addProduct}>Legg til</Button>
         </div>
-        {products.map(product => (
+        {products.map((product) => (
           <div key={product.id} className="flex items-center gap-2">
             <span className="w-40 truncate">{product.name}</span>
             <Input
@@ -100,7 +102,7 @@ export function ProductPriceEditor() {
               min="0"
               step="0.01"
               value={customPrices[product.id]?.toString() ?? ""}
-              onChange={e => handlePriceChange(product.id, e.target.value)}
+              onChange={(e) => handlePriceChange(product.id, e.target.value)}
               placeholder="Pris (€)"
               className="w-24"
             />

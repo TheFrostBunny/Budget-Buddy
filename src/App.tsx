@@ -20,20 +20,20 @@ const App = () => (
     <BudgetProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AppLayout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/shopping-list" element={<ShoppingList />} />
-            <Route path="/stores" element={<Stores />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AppLayout>
-      </BrowserRouter>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AppLayout>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/shopping-list" element={<ShoppingList />} />
+                <Route path="/stores" element={<Stores />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AppLayout>
+          </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
     </BudgetProvider>

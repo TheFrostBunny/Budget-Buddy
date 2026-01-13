@@ -31,11 +31,11 @@
     "økologisk": "Organic"
   },
   "budget": {
-      "status": "Selected Budget Status",
-      "dailyBudget": "Daily Budget",
-      "spent": "Spent Today",
-      "leftover": "Leftover Today",
-      "leftovertotal": "Leftover Total"
+    "status": "Selected Budget Status",
+    "dailyBudget": "Daily Budget",
+    "spent": "Spent Today",
+    "leftover": "Leftover Today",
+    "leftovertotal": "Leftover Total"
   },
   "profile": {
     "title": "Profile",

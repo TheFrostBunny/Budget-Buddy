@@ -16,14 +16,12 @@ export function OfferCard({ offer }: OfferCardProps) {
   if (!product || !store) return null;
 
   const discount = Math.round(
-    ((offer.originalPrice - offer.salePrice) / offer.originalPrice) * 100
+    ((offer.originalPrice - offer.salePrice) / offer.originalPrice) * 100,
   );
 
   const validTo = new Date(offer.validTo);
   const today = new Date();
-  const daysLeft = Math.ceil(
-    (validTo.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
-  );
+  const daysLeft = Math.ceil((validTo.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
   return (
     <Card className="overflow-hidden transition-shadow hover:shadow-md">
@@ -32,9 +30,7 @@ export function OfferCard({ offer }: OfferCardProps) {
           <div className="flex-1 space-y-1">
             <div className="flex items-center gap-2">
               <span className="text-lg">{store.logo}</span>
-              <span className="text-sm font-medium text-muted-foreground">
-                {store.name}
-              </span>
+              <span className="text-sm font-medium text-muted-foreground">{store.name}</span>
             </div>
             <h3 className="font-semibold">{product.name}</h3>
             {offer.description && (
@@ -46,9 +42,7 @@ export function OfferCard({ offer }: OfferCardProps) {
               -{discount}%
             </Badge>
             <div className="space-y-0.5">
-              <p className="text-lg font-bold text-primary">
-                €{offer.salePrice.toFixed(2)}
-              </p>
+              <p className="text-lg font-bold text-primary">€{offer.salePrice.toFixed(2)}</p>
               <p className="text-sm text-muted-foreground line-through">
                 €{offer.originalPrice.toFixed(2)}
               </p>
@@ -60,7 +54,7 @@ export function OfferCard({ offer }: OfferCardProps) {
             Gyldig til {validTo.toLocaleDateString("de-DE")}
           </span>
           {daysLeft <= 3 && (
-            <Badge variant="outline" className="text-warning border-warning">
+            <Badge variant="outline" className="border-warning text-warning">
               {daysLeft === 1 ? "Siste dag!" : `${daysLeft} dager igjen`}
             </Badge>
           )}

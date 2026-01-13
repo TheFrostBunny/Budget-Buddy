@@ -29,7 +29,9 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
 
   const [spending, setSpendingState] = useState<BudgetSpending>(() => {
     const stored = localStorage.getItem(STORAGE_KEYS.SPENDING);
-    return stored ? JSON.parse(stored) : { budgetId: "", spent: 0, transactions: [], dailyRollover: 0 };
+    return stored
+      ? JSON.parse(stored)
+      : { budgetId: "", spent: 0, transactions: [], dailyRollover: 0 };
   });
 
   const [savings, setSavings] = useState<number>(() => {
@@ -41,8 +43,8 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
     if (budget) {
       localStorage.setItem(STORAGE_KEYS.BUDGET, JSON.stringify(budget));
     } else {
-        // If budget is explicitly null/cleared, maybe remove it? 
-        // For now keeping logic same as before, but 'if (budget)' implies we don't clear it if null.
+      // If budget is explicitly null/cleared, maybe remove it?
+      // For now keeping logic same as before, but 'if (budget)' implies we don't clear it if null.
     }
   }, [budget]);
 
@@ -58,7 +60,7 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const checkRollover = () => {
       if (!budget) return;
-      
+
       const lastCheck = localStorage.getItem("budgetbuddy_last_check");
       // Use local time for date check, not ISO (UTC)
       // en-CA format is YYYY-MM-DD
@@ -97,39 +99,39 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
       setBudgetState(updated);
       localStorage.setItem(STORAGE_KEYS.BUDGET, JSON.stringify(updated));
     } else {
-        // If no budget exists, create one
-        setBudget(amount, period || "weekly");
+      // If no budget exists, create one
+      setBudget(amount, period || "weekly");
     }
   };
 
   const addSpending = (amount: number, storeId?: string, description?: string) => {
     let coveredBySavings = 0;
-    
+
     if (budget) {
       // Calculate effective remaining budget (budget - (spent - covered))
       // Actually simpler: total spent including this new amount
-      const currentSpent = spending.spent; // already includes previous savings-covered amounts? 
+      const currentSpent = spending.spent; // already includes previous savings-covered amounts?
       // We want to calculate how much of THIS transaction is over budget.
-      
+
       // Effective spent against budget limit so far:
       const effectiveSpent = currentSpent - (spending.coveredBySavings || 0);
       const remainingBudget = budget.amount - effectiveSpent;
-      
+
       // If we are adding more than what's remaining
       if (amount > remainingBudget) {
         // The overdraft amount
         const overdraft = amount - Math.max(0, remainingBudget);
-        
+
         // Take from savings if available
         if (savings >= overdraft) {
-           coveredBySavings = overdraft;
-           setSavings(prev => prev - overdraft);
+          coveredBySavings = overdraft;
+          setSavings((prev) => prev - overdraft);
         } else {
-           // If we don't have enough savings, we take what we can? 
-           // Or just take all available savings and leave the rest as overspending?
-           // User said "takes from savings account", implying partial coverage is ok.
-           coveredBySavings = Math.max(0, savings);
-           setSavings(0);
+          // If we don't have enough savings, we take what we can?
+          // Or just take all available savings and leave the rest as overspending?
+          // User said "takes from savings account", implying partial coverage is ok.
+          coveredBySavings = Math.max(0, savings);
+          setSavings(0);
         }
       }
     }
@@ -152,18 +154,18 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
   };
 
   const resetSpending = () => {
-    // We only reset the DAILY counters (spent, coveredBySavings). 
+    // We only reset the DAILY counters (spent, coveredBySavings).
     // We MUST preserve transactions to show history and calculate total period spending.
-    setSpendingState(prev => ({ 
-      ...prev, 
-      spent: 0, 
+    setSpendingState((prev) => ({
+      ...prev,
+      spent: 0,
       coveredBySavings: 0,
-      // transactions are implicitly kept by spreading ...prev? 
+      // transactions are implicitly kept by spreading ...prev?
       // No, setSpendingState replaces the object if I don't merge.
       // Wait, the previous line was: setSpendingState({ budgetId: ..., spent: 0, transactions: [] }) ... explicit wipe.
       // So now:
       budgetId: budget?.id || "",
-      transactions: prev.transactions 
+      transactions: prev.transactions,
     }));
   };
 
@@ -186,7 +188,19 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <BudgetContext.Provider value={{ budget, spending, savings, setBudget, updateBudget, addSpending, resetSpending, completePeriod, resetSavingsBalance }}>
+    <BudgetContext.Provider
+      value={{
+        budget,
+        spending,
+        savings,
+        setBudget,
+        updateBudget,
+        addSpending,
+        resetSpending,
+        completePeriod,
+        resetSavingsBalance,
+      }}
+    >
       {children}
     </BudgetContext.Provider>
   );

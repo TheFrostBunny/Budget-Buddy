@@ -13,39 +13,165 @@ export const stores: Store[] = [
 // Common grocery products
 export const products: Product[] = [
   // Frukt & Grønnsaker
-  { id: "apples", name: "Epler", category: "frukt-gronnsaker", unit: "kg", dietaryInfo: ["vegan", "glutenfri", "laktosefri"] },
-  { id: "bananas", name: "Bananer", category: "frukt-gronnsaker", unit: "kg", dietaryInfo: ["vegan", "glutenfri", "laktosefri"] },
-  { id: "tomatoes", name: "Tomater", category: "frukt-gronnsaker", unit: "kg", dietaryInfo: ["vegan", "glutenfri", "laktosefri"] },
-  { id: "potatoes", name: "Poteter", category: "frukt-gronnsaker", unit: "kg", dietaryInfo: ["vegan", "glutenfri", "laktosefri"] },
-  { id: "onions", name: "Løk", category: "frukt-gronnsaker", unit: "kg", dietaryInfo: ["vegan", "glutenfri", "laktosefri"] },
-  { id: "carrots", name: "Gulrøtter", category: "frukt-gronnsaker", unit: "kg", dietaryInfo: ["vegan", "glutenfri", "laktosefri"] },
-  
+  {
+    id: "apples",
+    name: "Epler",
+    category: "frukt-gronnsaker",
+    unit: "kg",
+    dietaryInfo: ["vegan", "glutenfri", "laktosefri"],
+  },
+  {
+    id: "bananas",
+    name: "Bananer",
+    category: "frukt-gronnsaker",
+    unit: "kg",
+    dietaryInfo: ["vegan", "glutenfri", "laktosefri"],
+  },
+  {
+    id: "tomatoes",
+    name: "Tomater",
+    category: "frukt-gronnsaker",
+    unit: "kg",
+    dietaryInfo: ["vegan", "glutenfri", "laktosefri"],
+  },
+  {
+    id: "potatoes",
+    name: "Poteter",
+    category: "frukt-gronnsaker",
+    unit: "kg",
+    dietaryInfo: ["vegan", "glutenfri", "laktosefri"],
+  },
+  {
+    id: "onions",
+    name: "Løk",
+    category: "frukt-gronnsaker",
+    unit: "kg",
+    dietaryInfo: ["vegan", "glutenfri", "laktosefri"],
+  },
+  {
+    id: "carrots",
+    name: "Gulrøtter",
+    category: "frukt-gronnsaker",
+    unit: "kg",
+    dietaryInfo: ["vegan", "glutenfri", "laktosefri"],
+  },
+
   // Meieri
-  { id: "milk", name: "Melk (1L)", category: "meieri", unit: "stk", dietaryInfo: ["vegetar", "glutenfri"] },
-  { id: "butter", name: "Smør (250g)", category: "meieri", unit: "stk", dietaryInfo: ["vegetar", "glutenfri"] },
-  { id: "cheese", name: "Ost Gouda (200g)", category: "meieri", unit: "stk", dietaryInfo: ["vegetar", "glutenfri"] },
-  { id: "yogurt", name: "Yoghurt naturell", category: "meieri", unit: "stk", dietaryInfo: ["vegetar", "glutenfri"] },
-  { id: "eggs", name: "Egg (10 stk)", category: "meieri", unit: "pk", dietaryInfo: ["vegetar", "glutenfri", "laktosefri"] },
-  
+  {
+    id: "milk",
+    name: "Melk (1L)",
+    category: "meieri",
+    unit: "stk",
+    dietaryInfo: ["vegetar", "glutenfri"],
+  },
+  {
+    id: "butter",
+    name: "Smør (250g)",
+    category: "meieri",
+    unit: "stk",
+    dietaryInfo: ["vegetar", "glutenfri"],
+  },
+  {
+    id: "cheese",
+    name: "Ost Gouda (200g)",
+    category: "meieri",
+    unit: "stk",
+    dietaryInfo: ["vegetar", "glutenfri"],
+  },
+  {
+    id: "yogurt",
+    name: "Yoghurt naturell",
+    category: "meieri",
+    unit: "stk",
+    dietaryInfo: ["vegetar", "glutenfri"],
+  },
+  {
+    id: "eggs",
+    name: "Egg (10 stk)",
+    category: "meieri",
+    unit: "pk",
+    dietaryInfo: ["vegetar", "glutenfri", "laktosefri"],
+  },
+
   // Kjøtt & Fisk
-  { id: "chicken", name: "Kyllingfilet", category: "kjott-fisk", unit: "kg", dietaryInfo: ["glutenfri", "laktosefri"] },
-  { id: "ground-beef", name: "Kjøttdeig", category: "kjott-fisk", unit: "500g", dietaryInfo: ["glutenfri", "laktosefri"] },
-  { id: "salmon", name: "Laks", category: "kjott-fisk", unit: "kg", dietaryInfo: ["glutenfri", "laktosefri"] },
-  
+  {
+    id: "chicken",
+    name: "Kyllingfilet",
+    category: "kjott-fisk",
+    unit: "kg",
+    dietaryInfo: ["glutenfri", "laktosefri"],
+  },
+  {
+    id: "ground-beef",
+    name: "Kjøttdeig",
+    category: "kjott-fisk",
+    unit: "500g",
+    dietaryInfo: ["glutenfri", "laktosefri"],
+  },
+  {
+    id: "salmon",
+    name: "Laks",
+    category: "kjott-fisk",
+    unit: "kg",
+    dietaryInfo: ["glutenfri", "laktosefri"],
+  },
+
   // Bakevarer
-  { id: "bread", name: "Brød", category: "bakevarer", unit: "stk", dietaryInfo: ["vegetar", "laktosefri"] },
-  { id: "rolls", name: "Rundstykker (6 stk)", category: "bakevarer", unit: "pk", dietaryInfo: ["vegetar"] },
-  
+  {
+    id: "bread",
+    name: "Brød",
+    category: "bakevarer",
+    unit: "stk",
+    dietaryInfo: ["vegetar", "laktosefri"],
+  },
+  {
+    id: "rolls",
+    name: "Rundstykker (6 stk)",
+    category: "bakevarer",
+    unit: "pk",
+    dietaryInfo: ["vegetar"],
+  },
+
   // Hermetikk
-  { id: "tomato-sauce", name: "Tomatsaus", category: "hermetikk", unit: "stk", dietaryInfo: ["vegan", "glutenfri", "laktosefri"] },
-  { id: "beans", name: "Bønner i tomatsaus", category: "hermetikk", unit: "stk", dietaryInfo: ["vegan", "glutenfri", "laktosefri"] },
-  
+  {
+    id: "tomato-sauce",
+    name: "Tomatsaus",
+    category: "hermetikk",
+    unit: "stk",
+    dietaryInfo: ["vegan", "glutenfri", "laktosefri"],
+  },
+  {
+    id: "beans",
+    name: "Bønner i tomatsaus",
+    category: "hermetikk",
+    unit: "stk",
+    dietaryInfo: ["vegan", "glutenfri", "laktosefri"],
+  },
+
   // Drikke
-  { id: "water", name: "Mineralvann (1.5L)", category: "drikke", unit: "stk", dietaryInfo: ["vegan", "glutenfri", "laktosefri"] },
-  { id: "juice", name: "Appelsinjuice (1L)", category: "drikke", unit: "stk", dietaryInfo: ["vegan", "glutenfri", "laktosefri"] },
-  
+  {
+    id: "water",
+    name: "Mineralvann (1.5L)",
+    category: "drikke",
+    unit: "stk",
+    dietaryInfo: ["vegan", "glutenfri", "laktosefri"],
+  },
+  {
+    id: "juice",
+    name: "Appelsinjuice (1L)",
+    category: "drikke",
+    unit: "stk",
+    dietaryInfo: ["vegan", "glutenfri", "laktosefri"],
+  },
+
   // Husholdning
-  { id: "toilet-paper", name: "Toalettpapir (8 ruller)", category: "husholdning", unit: "pk", dietaryInfo: [] },
+  {
+    id: "toilet-paper",
+    name: "Toalettpapir (8 ruller)",
+    category: "husholdning",
+    unit: "pk",
+    dietaryInfo: [],
+  },
   { id: "dish-soap", name: "Oppvaskmiddel", category: "husholdning", unit: "stk", dietaryInfo: [] },
 ];
 
@@ -268,17 +394,17 @@ export function getStoreById(id: string): Store | undefined {
 }
 
 export function getPriceForProduct(productId: string, storeId: string): number | undefined {
-  const priceEntry = storePrices.find(
-    (p) => p.productId === productId && p.storeId === storeId
-  );
+  const priceEntry = storePrices.find((p) => p.productId === productId && p.storeId === storeId);
   return priceEntry?.price;
 }
 
-export function getCheapestStore(productId: string): { storeId: string; price: number } | undefined {
+export function getCheapestStore(
+  productId: string,
+): { storeId: string; price: number } | undefined {
   const prices = storePrices
     .filter((p) => p.productId === productId)
     .sort((a, b) => a.price - b.price);
-  
+
   if (prices.length === 0) return undefined;
   return { storeId: prices[0].storeId, price: prices[0].price };
 }

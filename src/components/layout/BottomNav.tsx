@@ -15,7 +15,7 @@ export function BottomNav() {
   const { t } = useTranslation();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-card safe-bottom">
+    <nav className="safe-bottom fixed bottom-0 left-0 right-0 z-50 border-t bg-card">
       <div className="flex items-center justify-around py-2">
         {navItems.map(({ to, icon: Icon, labelKey }) => {
           const isActive = location.pathname === to;
@@ -25,9 +25,7 @@ export function BottomNav() {
               to={to}
               className={cn(
                 "flex flex-col items-center gap-1 px-3 py-2 text-xs font-medium transition-colors",
-                isActive
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                isActive ? "text-primary" : "text-muted-foreground hover:text-foreground",
               )}
             >
               <Icon className={cn("h-5 w-5", isActive && "stroke-[2.5]")} />

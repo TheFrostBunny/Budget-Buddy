@@ -16,7 +16,7 @@ export interface Product {
   dietaryInfo: DietaryInfo[];
 }
 
-export type ProductCategory = 
+export type ProductCategory =
   | "frukt-gronnsaker"
   | "meieri"
   | "kjott-fisk"
@@ -28,12 +28,7 @@ export type ProductCategory =
   | "husholdning"
   | "annet";
 
-export type DietaryInfo = 
-  | "vegetar"
-  | "vegan"
-  | "glutenfri"
-  | "laktosefri"
-  | "økologisk";
+export type DietaryInfo = "vegetar" | "vegan" | "glutenfri" | "laktosefri" | "økologisk";
 
 export interface ShoppingListItem {
   id: string;
@@ -88,21 +83,21 @@ export interface UserPreferences {
 
 export const CATEGORY_LABELS: Record<ProductCategory, string> = {
   "frukt-gronnsaker": "Frukt & Grønnsaker",
-  "meieri": "Meieri",
+  meieri: "Meieri",
   "kjott-fisk": "Kjøtt & Fisk",
-  "bakevarer": "Bakevarer",
-  "hermetikk": "Hermetikk",
-  "frossen": "Frossen mat",
-  "drikke": "Drikke",
-  "snacks": "Snacks",
-  "husholdning": "Husholdning",
-  "annet": "Annet",
+  bakevarer: "Bakevarer",
+  hermetikk: "Hermetikk",
+  frossen: "Frossen mat",
+  drikke: "Drikke",
+  snacks: "Snacks",
+  husholdning: "Husholdning",
+  annet: "Annet",
 };
 
 export const DIETARY_LABELS: Record<DietaryInfo, string> = {
-  "vegetar": "Vegetar",
-  "vegan": "Vegan",
-  "glutenfri": "Glutenfri",
-  "laktosefri": "Laktosefri",
-  "økologisk": "Økologisk",
+  vegetar: "Vegetar",
+  vegan: "Vegan",
+  glutenfri: "Glutenfri",
+  laktosefri: "Laktosefri",
+  økologisk: "Økologisk",
 };

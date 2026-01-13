@@ -18,30 +18,26 @@ export function BudgetCard({ budget, spent, period }: BudgetCardProps) {
     <Card className="overflow-hidden">
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center justify-between text-lg">
-          <span>{period === "weekly" ? "Ukentlig" : period === "monthly" ? "Månedlig" : "Hverdag"} budsjett</span>
-          <span className="text-sm font-normal text-muted-foreground">
-            €{budget.toFixed(2)}
+          <span>
+            {period === "weekly" ? "Ukentlig" : period === "monthly" ? "Månedlig" : "Hverdag"}{" "}
+            budsjett
           </span>
+          <span className="text-sm font-normal text-muted-foreground">€{budget.toFixed(2)}</span>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Progress 
-            value={percentageSpent} 
+          <Progress
+            value={percentageSpent}
             className={cn(
               "h-3",
               isOverBudget && "[&>div]:bg-destructive",
-              isNearLimit && "[&>div]:bg-warning"
+              isNearLimit && "[&>div]:bg-warning",
             )}
           />
           <div className="flex justify-between text-sm">
             <span className="text-muted-foreground">Brukt: €{spent.toFixed(2)}</span>
-            <span
-              className={cn(
-                "font-medium",
-                isOverBudget ? "text-destructive" : "text-success"
-              )}
-            >
+            <span className={cn("font-medium", isOverBudget ? "text-destructive" : "text-success")}>
               {isOverBudget ? "Over budsjett" : `Gjenstår: €${remaining.toFixed(2)}`}
             </span>
           </div>

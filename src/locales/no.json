@@ -6,7 +6,7 @@
       "title": "Diettpreferanser",
       "description": "Velg dine preferanser"
     },
-    
+
     "appearance": {
       "title": "Utseende",
       "description": "Velg lyst eller mørkt tema"
@@ -31,98 +31,98 @@
     "laktosefri": "Laktosefri",
     "økologisk": "Økologisk"
   },
-    "budget": {
-        "status": "Status valgt budsjett",
-        "dailyBudget": "Daglig beløp",
-        "spent": "Brukt i dag",
-        "leftover": "Igjen i dag",
-        "leftovertotal": "Igjen av total"
+  "budget": {
+    "status": "Status valgt budsjett",
+    "dailyBudget": "Daglig beløp",
+    "spent": "Brukt i dag",
+    "leftover": "Igjen i dag",
+    "leftovertotal": "Igjen av total"
+  },
+  "profile": {
+    "title": "Profil",
+    "subtitle": "Din oversikt",
+    "period": {
+      "title": "Standard budsjettperiode",
+      "weekly": "Ukentlig",
+      "monthly": "Månedlig",
+      "daily": "Hverdag"
     },
-    "profile": {
-      "title": "Profil",
-      "subtitle": "Din oversikt",
-      "period": {
-        "title": "Standard budsjettperiode",
-        "weekly": "Ukentlig",
-        "monthly": "Månedlig",
-        "daily": "Hverdag"
-      },
-      "labels": {
-        "dailyFood": "Daglig matpenger (NOK)",
-        "monthlyBudget": "Månedlig budsjett (NOK)",
-        "weeklyBudget": "Ukentlig budsjett (NOK)"
-      },
-      "placeholders": {
-        "daily": "Matpenger hver 24 timer (kr)",
-        "amount": "Beløp i kroner",
-        "days": "Antall dager"
-      },
-      "actions": {
-        "title": "Handlinger",
-        "resetSpending": "Nullstill forbruk",
-        "resetSavings": "Slett oppspart beløp",
-        "confirmResetSavings": "Er du sikker på at du vil slette oppspart beløp?"
-      }
+    "labels": {
+      "dailyFood": "Daglig matpenger (NOK)",
+      "monthlyBudget": "Månedlig budsjett (NOK)",
+      "weeklyBudget": "Ukentlig budsjett (NOK)"
     },
-    "dashboard": {
-      "title": "Budget Buddy",
-      "noBudget": "Ingen budsjett satt. Gå til innstillinger for å sette opp.",
-      "overview": {
-        "remaining": "Gjenstående beløp",
-        "spent": "Brukt:",
-        "total": "Totalt:",
-        "savedTotal": "Du har spart totalt:",
-        "autoSaveInfo": "Ubrukt beløp spares automatisk ved midnatt"
-      },
-      "addExpense": {
-        "title": "Registrer utgift",
-        "amount": "Beløp",
-        "date": "Dato",
-        "time": "Tid",
-        "saved": "Lagret!",
-        "add": "Legg til utgift"
-      },
-      "history": {
-        "title": "Utgiftshistorikk",
-        "noDescription": "Ingen beskrivelse"
-      }
+    "placeholders": {
+      "daily": "Matpenger hver 24 timer (kr)",
+      "amount": "Beløp i kroner",
+      "days": "Antall dager"
     },
-    "nav": {
-      "home": "Hjem",
-      "shoppingList": "Handleliste",
-      "stores": "Butikker",
-      "profile": "Profil"
-    },
-    "shoppingList": {
-      "title": "Handleliste",
-      "addItem": "Legg til vare",
-      "placeholder": "Hva trenger du?",
-      "searchPlaceholder": "Søk etter vare...",
-      "add": "Legg til",
-      "empty": "Handlelisten er tom",
-      "emptySubtitle": "Søk og legg til varer ovenfor",
-      "removeChecked": "Fjern avkryssede",
-      "estimatedTotal": "Estimert total (billigste)",
-      "items": "varer"
-    },
-    "stores": {
-      "title": "Butikkoversikt",
-      "searchPlaceholder": "Søk etter butikker...",
-      "yourStores": "Dine Butikker",
-      "nearby": "I nærheten",
-      "offers": "Tilbud",
-      "distance": "km unna",
-      "addLocation": "Legg til butikkplassering",
-      "selectStore": "Velg butikk",
-      "latitude": "Breddegrad",
-      "longitude": "Lengdegrad",
-      "address": "Adresse",
-      "searchAddress": "Søk etter adresse",
-      "searching": "Søker...",
-      "notFound": "Fant ikke adresse",
-      "myLocation": "Min posisjon",
-      "locationError": "Kunne ikke hente posisjon",
-      "add": "Legg til",
-      "coordinatesInfo": "Eller skriv inn koordinater manuelt"
+    "actions": {
+      "title": "Handlinger",
+      "resetSpending": "Nullstill forbruk",
+      "resetSavings": "Slett oppspart beløp",
+      "confirmResetSavings": "Er du sikker på at du vil slette oppspart beløp?"
     }
+  },
+  "dashboard": {
+    "title": "Budget Buddy",
+    "noBudget": "Ingen budsjett satt. Gå til innstillinger for å sette opp.",
+    "overview": {
+      "remaining": "Gjenstående beløp",
+      "spent": "Brukt:",
+      "total": "Totalt:",
+      "savedTotal": "Du har spart totalt:",
+      "autoSaveInfo": "Ubrukt beløp spares automatisk ved midnatt"
+    },
+    "addExpense": {
+      "title": "Registrer utgift",
+      "amount": "Beløp",
+      "date": "Dato",
+      "time": "Tid",
+      "saved": "Lagret!",
+      "add": "Legg til utgift"
+    },
+    "history": {
+      "title": "Utgiftshistorikk",
+      "noDescription": "Ingen beskrivelse"
+    }
+  },
+  "nav": {
+    "home": "Hjem",
+    "shoppingList": "Handleliste",
+    "stores": "Butikker",
+    "profile": "Profil"
+  },
+  "shoppingList": {
+    "title": "Handleliste",
+    "addItem": "Legg til vare",
+    "placeholder": "Hva trenger du?",
+    "searchPlaceholder": "Søk etter vare...",
+    "add": "Legg til",
+    "empty": "Handlelisten er tom",
+    "emptySubtitle": "Søk og legg til varer ovenfor",
+    "removeChecked": "Fjern avkryssede",
+    "estimatedTotal": "Estimert total (billigste)",
+    "items": "varer"
+  },
+  "stores": {
+    "title": "Butikkoversikt",
+    "searchPlaceholder": "Søk etter butikker...",
+    "yourStores": "Dine Butikker",
+    "nearby": "I nærheten",
+    "offers": "Tilbud",
+    "distance": "km unna",
+    "addLocation": "Legg til butikkplassering",
+    "selectStore": "Velg butikk",
+    "latitude": "Breddegrad",
+    "longitude": "Lengdegrad",
+    "address": "Adresse",
+    "searchAddress": "Søk etter adresse",
+    "searching": "Søker...",
+    "notFound": "Fant ikke adresse",
+    "myLocation": "Min posisjon",
+    "locationError": "Kunne ikke hente posisjon",
+    "add": "Legg til",
+    "coordinatesInfo": "Eller skriv inn koordinater manuelt"
+  }
 }

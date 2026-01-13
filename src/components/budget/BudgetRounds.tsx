@@ -46,10 +46,7 @@ export function BudgetRounds() {
   function addRound() {
     const amount = parseFloat(input);
     if (!isNaN(amount) && amount > 0) {
-      setRounds([
-        ...rounds,
-        { id: Date.now(), amount, date: new Date().toLocaleDateString() },
-      ]);
+      setRounds([...rounds, { id: Date.now(), amount, date: new Date().toLocaleDateString() }]);
       setInput("");
     }
   }
@@ -75,44 +72,55 @@ export function BudgetRounds() {
   });
 
   // Farger for kakediagram
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A28BFE", "#FF6699", "#33CC99", "#FF6666"];
+  const COLORS = [
+    "#0088FE",
+    "#00C49F",
+    "#FFBB28",
+    "#FF8042",
+    "#A28BFE",
+    "#FF6699",
+    "#33CC99",
+    "#FF6666",
+  ];
 
   return (
     <div className="space-y-6">
       {/* Fjernet ekstra BudgetCard for å unngå duplikat */}
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <Input
           type="number"
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           placeholder="Beløp brukt denne runden (€)"
         />
         <Button onClick={addRound}>Legg til</Button>
       </div>
-      <div className="flex gap-2 items-center mt-4">
+      <div className="mt-4 flex items-center gap-2">
         <Input
           type="number"
           value={moneyInput}
-          onChange={e => setMoneyInput(e.target.value)}
+          onChange={(e) => setMoneyInput(e.target.value)}
           placeholder="Matpenger mottatt (€)"
         />
         <Input
           type="number"
           value={durationInput}
-          onChange={e => setDurationInput(e.target.value)}
+          onChange={(e) => setDurationInput(e.target.value)}
           placeholder="Antall runder / uker"
         />
         <Button onClick={saveMoneyInfo}>Lagre</Button>
       </div>
       {money && duration && (
         <div className="mt-2 text-sm text-muted-foreground">
-          <span>Mottatt matpenger: <b>€{money.toFixed(2)}</b> hver gang, i <b>{duration}</b> runder</span>
+          <span>
+            Mottatt matpenger: <b>€{money.toFixed(2)}</b> hver gang, i <b>{duration}</b> runder
+          </span>
         </div>
       )}
       {/* PieChart for ubrukte penger per runde */}
       {unusedData.length > 0 && money && (
-        <div className="flex flex-col items-center mt-6">
-          <h3 className="font-semibold mb-2">Ubrukte penger per runde</h3>
+        <div className="mt-6 flex flex-col items-center">
+          <h3 className="mb-2 font-semibold">Ubrukte penger per runde</h3>
           <PieChart width={320} height={220}>
             <Pie
               data={unusedData}
@@ -134,9 +142,9 @@ export function BudgetRounds() {
         </div>
       )}
       <div className="mt-4">
-        <h3 className="font-semibold mb-2">Historikk</h3>
+        <h3 className="mb-2 font-semibold">Historikk</h3>
         <ul className="space-y-1">
-          {rounds.map(round => (
+          {rounds.map((round) => (
             <li key={round.id} className="flex justify-between text-sm">
               <span>{round.date}</span>
               <span>€{round.amount.toFixed(2)}</span>

@@ -27,10 +27,8 @@ export function useShoppingList() {
     if (existing) {
       setItems(
         items.map((item) =>
-          item.productId === productId
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        )
+          item.productId === productId ? { ...item, quantity: item.quantity + quantity } : item,
+        ),
       );
     } else {
       setItems([
@@ -53,17 +51,13 @@ export function useShoppingList() {
     if (quantity <= 0) {
       removeItem(id);
     } else {
-      setItems(
-        items.map((item) => (item.id === id ? { ...item, quantity } : item))
-      );
+      setItems(items.map((item) => (item.id === id ? { ...item, quantity } : item)));
     }
   };
 
   const toggleChecked = (id: string) => {
     setItems(
-      items.map((item) =>
-        item.id === id ? { ...item, isChecked: !item.isChecked } : item
-      )
+      items.map((item) => (item.id === id ? { ...item, isChecked: !item.isChecked } : item)),
     );
   };
 

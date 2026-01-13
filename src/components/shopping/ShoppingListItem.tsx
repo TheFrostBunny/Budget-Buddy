@@ -28,15 +28,15 @@ export function ShoppingListItemComponent({
 
   // Calculate item price based on selected store or cheapest
   const pricePerUnit = selectedStoreId
-    ? (getCheapestStore(item.productId)?.price || 0) // Would need to get specific store price
-    : (cheapest?.price || 0);
+    ? getCheapestStore(item.productId)?.price || 0 // Would need to get specific store price
+    : cheapest?.price || 0;
   const totalPrice = pricePerUnit * item.quantity;
 
   return (
     <div
       className={cn(
         "flex items-center gap-3 rounded-lg border bg-card p-3 transition-opacity",
-        item.isChecked && "opacity-60"
+        item.isChecked && "opacity-60",
       )}
     >
       <Checkbox
@@ -44,11 +44,11 @@ export function ShoppingListItemComponent({
         onCheckedChange={() => onToggleChecked(item.id)}
         className="h-5 w-5"
       />
-      <div className="flex-1 min-w-0">
+      <div className="min-w-0 flex-1">
         <p
           className={cn(
-            "font-medium truncate",
-            item.isChecked && "line-through text-muted-foreground"
+            "truncate font-medium",
+            item.isChecked && "text-muted-foreground line-through",
           )}
         >
           {product.name}
@@ -58,9 +58,7 @@ export function ShoppingListItemComponent({
             €{pricePerUnit.toFixed(2)} / {product.unit}
           </span>
           {cheapestStore && !selectedStoreId && (
-            <span className="text-primary">
-              Billigst: {cheapestStore.name}
-            </span>
+            <span className="text-primary">Billigst: {cheapestStore.name}</span>
           )}
         </div>
       </div>
