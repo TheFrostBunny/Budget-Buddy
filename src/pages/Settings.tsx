@@ -87,22 +87,16 @@ const Settings = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="flex gap-2">
-          <Button
-            variant={i18n.language === "no" ? "default" : "outline"}
-            size="sm"
-            onClick={() => changeLanguage("no")}
-            className="w-24"
+          <select
+            value={i18n.language}
+            onChange={(e) => changeLanguage(e.target.value)}
+            className="w-full rounded border px-3 py-2 text-base bg-background text-foreground border-border"
           >
-            Norsk
-          </Button>
-          <Button
-            variant={i18n.language === "en" ? "default" : "outline"}
-            size="sm"
-            onClick={() => changeLanguage("en")}
-            className="w-24"
-          >
-            English
-          </Button>
+            <option value="no">Norsk</option>
+            <option value="en">English</option>
+            <option value="nn">Nynorsk</option>
+            <option value="de">Deutsch</option>
+          </select>
         </CardContent>
       </Card>
 

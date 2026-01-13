@@ -1,0 +1,127 @@
+{
+  "settings": {
+    "title": "Innstillingar",
+    "subtitle": "App-konfigurasjon",
+    "dietary": {
+      "title": "Kosthaldspreferansar",
+      "description": "Vel preferansane dine"
+    },
+    "appearance": {
+      "title": "Utsjånad",
+      "description": "Vel lyst eller mørkt tema"
+    },
+    "language": {
+      "title": "Språk"
+    },
+    "developer": {
+      "title": "Utviklarmodus",
+      "description": "Aktiver avanserte funksjonar",
+      "debugTools": "Feilsøkingsverktøy",
+      "simulateNewDay": "Simuler «Ny dag» (spar ubrukt)",
+      "simulateDescription": "Tvingar gjennom dagleg oppgjer og sparer eventuelt restbeløp.",
+      "confirmSimulation": "Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?"
+    },
+    "footer": "Budsjettapp v1.0.0"
+  },
+  "diet": {
+    "vegetar": "Vegetar",
+    "vegan": "Vegan",
+    "glutenfri": "Glutenfri",
+    "laktosefri": "Laktosefri",
+    "økologisk": "Økologisk"
+  },
+  "budget": {
+    "status": "Status for valt budsjett",
+    "dailyBudget": "Dagleg beløp",
+    "spent": "Brukt i dag",
+    "leftover": "Igjen i dag",
+    "leftovertotal": "Igjen av totalt"
+  },
+  "profile": {
+    "title": "Profil",
+    "subtitle": "Di oversikt",
+    "period": {
+      "title": "Standard budsjettperiode",
+      "weekly": "Vekentleg",
+      "monthly": "Månadleg",
+      "daily": "Dagleg"
+    },
+    "labels": {
+      "dailyFood": "Daglege matpengar (NOK)",
+      "monthlyBudget": "Månadleg budsjett (NOK)",
+      "weeklyBudget": "Vekentleg budsjett (NOK)"
+    },
+    "placeholders": {
+      "daily": "Matpengar kvar 24. time (kr)",
+      "amount": "Beløp i kroner",
+      "days": "Tal på dagar"
+    },
+    "actions": {
+      "title": "Handlingar",
+      "resetSpending": "Nullstill forbruk",
+      "resetSavings": "Slett oppspart beløp",
+      "confirmResetSavings": "Er du sikker på at du vil slette oppspart beløp?"
+    }
+  },
+  "dashboard": {
+    "title": "Budget Buddy",
+    "noBudget": "Ingen budsjett sett. Gå til innstillingar for å setje opp.",
+    "overview": {
+      "remaining": "Attverande beløp",
+      "spent": "Brukt:",
+      "total": "Totalt:",
+      "savedTotal": "Du har spart totalt:",
+      "autoSaveInfo": "Ubrukt beløp blir automatisk spart ved midnatt"
+    },
+    "addExpense": {
+      "title": "Registrer utgift",
+      "amount": "Beløp",
+      "date": "Dato",
+      "time": "Tid",
+      "saved": "Lagra!",
+      "add": "Legg til utgift"
+    },
+    "history": {
+      "title": "Utgiftshistorikk",
+      "noDescription": "Ingen skildring"
+    }
+  },
+  "nav": {
+    "home": "Heim",
+    "shoppingList": "Handleliste",
+    "stores": "Butikkar",
+    "profile": "Profil"
+  },
+  "shoppingList": {
+    "title": "Handleliste",
+    "addItem": "Legg til vare",
+    "placeholder": "Kva treng du?",
+    "searchPlaceholder": "Søk etter vare...",
+    "add": "Legg til",
+    "empty": "Handlelista er tom",
+    "emptySubtitle": "Søk og legg til varer ovanfor",
+    "removeChecked": "Fjern avkryssa",
+    "estimatedTotal": "Estimert total (billegast)",
+    "items": "varer"
+  },
+  "stores": {
+    "title": "Butikkoversikt",
+    "searchPlaceholder": "Søk etter butikkar...",
+    "yourStores": "Dine butikkar",
+    "nearby": "I nærleiken",
+    "offers": "Tilbod",
+    "distance": "km unna",
+    "addLocation": "Legg til butikkplassering",
+    "selectStore": "Vel butikk",
+    "latitude": "Breiddegrad",
+    "longitude": "Lengdegrad",
+    "address": "Adresse",
+    "searchAddress": "Søk etter adresse",
+    "searching": "Søkjer...",
+    "notFound": "Fann ikkje adresse",
+    "myLocation": "Mi plassering",
+    "locationError": "Klarte ikkje å hente plassering",
+    "add": "Legg til",
+    "coordinatesInfo": "Eller skriv inn koordinatar manuelt"
+  }
+}
