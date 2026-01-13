@@ -16,14 +16,6 @@ export interface Product {
   dietaryInfo: DietaryInfo[];
 }
 
-export interface StorePrice {
-  productId: string;
-  storeId: string;
-  price: number;
-  isOnSale?: boolean;
-  salePrice?: number;
-}
-
 export type ProductCategory = 
   | "frukt-gronnsaker"
   | "meieri"
@@ -43,7 +35,6 @@ export type DietaryInfo =
   | "laktosefri"
   | "økologisk";
 
-// Shopping list types
 export interface ShoppingListItem {
   id: string;
   productId: string;
@@ -52,7 +43,6 @@ export interface ShoppingListItem {
   note?: string;
 }
 
-// Offer types
 export interface Offer {
   id: string;
   storeId: string;
@@ -64,7 +54,6 @@ export interface Offer {
   description?: string;
 }
 
-// Budget types
 export interface Budget {
   id: string;
   amount: number;
@@ -77,6 +66,7 @@ export interface BudgetSpending {
   spent: number;
   transactions: Transaction[];
   dailyRollover?: number;
+  coveredBySavings?: number;
 }
 
 export interface Transaction {
@@ -87,7 +77,6 @@ export interface Transaction {
   description?: string;
 }
 
-// User preferences
 export interface UserPreferences {
   dietaryPreferences: DietaryInfo[];
   favoriteStores: string[];
@@ -96,7 +85,6 @@ export interface UserPreferences {
   dailyBudgetAmount?: number;
 }
 
-// Category display info
 export const CATEGORY_LABELS: Record<ProductCategory, string> = {
   "frukt-gronnsaker": "Frukt & Grønnsaker",
   "meieri": "Meieri",

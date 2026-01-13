@@ -44,33 +44,60 @@ const Dashboard = () => {
 // Komponent for å vise utgiftshistorikk
 const ExpenseHistory = () => {
   const { spending } = useBudget();
+  
   if (!spending.transactions.length) return null;
+
+  // Sorter transaksjoner nyest først
+  const sortedTransactions = [...spending.transactions].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  // Grupper per dag
+  const grouped: Record<string, typeof sortedTransactions> = {};
+  sortedTransactions.forEach(tx => {
+    const date = new Date(tx.date).toLocaleDateString("nb-NO", { 
+      weekday: 'long', 
+      day: 'numeric', 
+      month: 'long' 
+    });
+    // Capitalize first letter
+    const formattedDate = date.charAt(0).toUpperCase() + date.slice(1);
+    
+    if (!grouped[formattedDate]) grouped[formattedDate] = [];
+    grouped[formattedDate].push(tx);
+  });
+
   return (
-    <section className="mt-8">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Utgiftshistorikk</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ul className="space-y-2">
-            {spending.transactions.map((tx) => {
-              const dateObj = tx.date ? new Date(tx.date) : null;
-              const dateStr = dateObj ? dateObj.toLocaleDateString() : "";
-              const timeStr = dateObj
-                ? dateObj.toLocaleTimeString().slice(0, 5)
-                : "";
-              return (
-                <li key={tx.id} className="flex justify-between text-sm">
-                  <span>
-                    {dateStr} {timeStr}
-                  </span>
-                  <span>{tx.amount.toFixed(2)} kr</span>
-                </li>
-              );
-            })}
-          </ul>
-        </CardContent>
-      </Card>
+    <section className="mt-8 space-y-6">
+      <CardTitle className="text-xl px-1">Utgiftshistorikk</CardTitle>
+      
+      {Object.entries(grouped).map(([date, transactions]) => (
+        <div key={date}>
+           <h3 className="text-sm font-medium text-muted-foreground mb-2 px-1">{date}</h3>
+           <Card>
+            <CardContent className="p-0">
+              <ul className="divide-y">
+                {transactions.map((tx) => {
+                  const dateObj = new Date(tx.date);
+                  const timeStr = dateObj.toLocaleTimeString("nb-NO", { hour: '2-digit', minute: '2-digit' });
+                  
+                  return (
+                    <li key={tx.id} className="flex justify-between items-center p-4 hover:bg-muted/50 transition-colors">
+                      <div className="flex flex-col">
+                        <span className="font-medium text-sm">{tx.description || "Ingen beskrivelse"}</span>
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                           <Clock className="w-3 h-3" /> {timeStr}
+                        </span>
+                      </div>
+                      <span className="font-bold">{tx.amount.toFixed(0)} kr</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      ))}
     </section>
   );
 };
@@ -90,10 +117,8 @@ const AddSpentAmount = () => {
   const handleAdd = () => {
     const value = parseFloat(amount);
     if (!isNaN(value) && value > 0 && date && time) {
-      // Kombiner dato og tid til ISO-string
-      const isoDateTime = new Date(date + "T" + time).toISOString();
-      // Lagre utgift som negativt tall
-      addSpending(-value, undefined, `Utgift lagt til: ${isoDateTime}`);
+      // Lagre utgift (addSpending legger til beløpet i totalen)
+      addSpending(value, undefined, "Utgift");
       setAmount("");
       setSuccess(true);
     }
@@ -186,7 +211,7 @@ const AddSpentAmount = () => {
 };
 
 const BudgetOverview = () => {
-  const { budget, spending } = useBudget();
+  const { budget, spending, savings, completePeriod } = useBudget();
 
   if (!budget) return (
     <div className="text-center p-4 text-muted-foreground">
@@ -195,7 +220,10 @@ const BudgetOverview = () => {
   );
 
   const spent = spending.spent;
-  const remaining = budget.amount - spent;
+  const covered = spending.coveredBySavings || 0;
+  // Effective spent is what we actually count against the budget limit.
+  // Example: Budget 100. Spent 120. Covered 20. Effective = 100. Remaining = 0.
+  const remaining = budget.amount - (spent - covered);
   const percentage = Math.min((spent / budget.amount) * 100, 100);
   const isOverBudget = remaining < 0;
 
@@ -221,6 +249,19 @@ const BudgetOverview = () => {
               <span className="text-muted-foreground">Totalt: <span className="font-medium text-foreground">{budget.amount} kr</span></span>
             </div>
             <Progress value={percentage} className={`h-2 ${isOverBudget ? "bg-red-100" : ""}`} indicatorClassName={isOverBudget ? "bg-red-500" : ""} />
+            
+            {savings > 0 && (
+              <div className="mt-4 pt-4 border-t flex justify-between items-center animate-in fade-in slide-in-from-top-2">
+                <span className="text-sm font-medium text-muted-foreground">Du har spart totalt:</span>
+                <span className="text-lg font-bold text-green-600 dark:text-green-400">{savings.toFixed(0)} kr</span>
+              </div>
+            )}
+            
+            {remaining > 0 && (
+              <div className="mt-2 text-center text-xs text-muted-foreground">
+                Ubrukt beløp spares automatisk ved midnatt
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>

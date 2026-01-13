@@ -9,7 +9,7 @@ import { User, Leaf, RotateCcw } from "lucide-react";
 
 const Profile = () => {
   const { preferences, toggleDietaryPreference, setDefaultBudgetPeriod, setPreferencesState } = usePreferences();
-  const { budget, resetSpending } = useBudget();
+  const { budget, setBudget, updateBudget, resetSpending, spending, completePeriod, resetSavingsBalance } = useBudget();
 
   const [rounds, setRounds] = useState<{ amount: number }[]>([]);
   const [money, setMoney] = useState<number | null>(null);
@@ -94,12 +94,29 @@ const Profile = () => {
             Hverdag
           </Button>
           {/* Flyttet input for antall dager ned til daglig matpenger */}
+          <Button 
+            variant="outline" 
+            className="w-full mt-4 border-dashed text-muted-foreground hover:text-foreground"
+            onClick={() => {
+              if (confirm("Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?")) {
+                completePeriod();
+              }
+            }}
+          >
+             Simuler "Ny Dag" (Spar ubrukt)
+          </Button>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Daglig matpenger (NOK)</CardTitle>
+          <CardTitle className="text-base">
+            {preferences.defaultBudgetPeriod === "daily" 
+              ? "Daglig matpenger (NOK)" 
+              : preferences.defaultBudgetPeriod === "monthly" 
+                ? "Månedlig budsjett (NOK)" 
+                : "Ukentlig budsjett (NOK)"}
+          </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-2 items-start">
           <div className="flex gap-2 items-center w-full">
@@ -113,7 +130,16 @@ const Profile = () => {
                   setPreferencesState(prev => ({ ...prev, dailyBudgetAmount: amount }));
                 }
               }}
-              placeholder="Matpenger hver 24 timer (kr)"
+              onBlur={() => {
+                if (preferences.dailyBudgetAmount) {
+                  updateBudget(preferences.dailyBudgetAmount, preferences.defaultBudgetPeriod || 'weekly');
+                }
+              }}
+              placeholder={
+                preferences.defaultBudgetPeriod === "daily" 
+                  ? "Matpenger hver 24 timer (kr)" 
+                  : "Beløp i kroner"
+              }
               className="w-72 border rounded px-3 py-2 text-base"
             />
             {preferences.defaultBudgetPeriod === "daily" && (
@@ -127,23 +153,28 @@ const Profile = () => {
                     setPreferencesState(prev => ({ ...prev, dailyBudgetDays: days }));
                   }
                 }}
+                onBlur={() => {
+                  if (preferences.dailyBudgetAmount) {
+                    updateBudget(preferences.dailyBudgetAmount, preferences.defaultBudgetPeriod || 'weekly');
+                  }
+                }}
                 placeholder="Antall dager"
                 className="w-32 border rounded px-2 py-2 text-base"
                 style={{ marginLeft: 8 }}
               />
             )}
           </div>
-          {/* Prosentandel ubrukte penger */}
-          {money && duration && (
+          {budget && (
             (() => {
-              const totalReceived = money * duration;
-              const totalSpent = rounds.reduce((sum, r) => sum + (r.amount || 0), 0);
-              const unused = Math.max(totalReceived - totalSpent, 0);
-              const percent = totalReceived > 0 ? (unused / totalReceived) * 100 : 0;
+              const totalAmount = budget.amount;
+              const totalSpent = spending.spent;
+              const unused = Math.max(totalAmount - totalSpent, 0);
+              const percent = totalAmount > 0 ? (unused / totalAmount) * 100 : 0;
               return (
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-muted-foreground mt-4 p-4 bg-muted/50 rounded-lg">
+                  <p className="font-semibold text-foreground mb-1">Status nåværende budsjett:</p>
                   <span>
-                    Ubrukt: <b>{unused.toFixed(2)} kr</b> av {totalReceived.toFixed(2)} kr (<b>{percent.toFixed(1)}%</b> ubrukt)
+                    Ubrukt: <b>{unused.toFixed(0)} kr</b> av {totalAmount} kr (<b>{percent.toFixed(1)}%</b> igjen)
                   </span>
                 </div>
               );
@@ -155,14 +186,29 @@ const Profile = () => {
       {budget && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Budsjett</CardTitle>
+            <CardTitle className="text-base">Handlinger</CardTitle>
           </CardHeader>
           <CardContent>
-            <Button variant="outline" onClick={resetSpending} className="w-full">
-              <RotateCcw className="mr-2 h-4 w-4" />
-              Nullstill forbruk
-            </Button>
-          </CardContent>
+          <Button 
+            variant="outline" 
+            onClick={resetSpending} 
+            className="w-full"
+          >
+            <RotateCcw className="mr-2 h-4 w-4" />
+            Nullstill forbruk
+          </Button>
+          <Button 
+             variant="ghost" 
+             className="w-full mt-2 text-muted-foreground hover:text-destructive"
+             onClick={() => {
+                if (confirm("Er du sikker på at du vil slette oppspart beløp?")) {
+                  resetSavingsBalance();
+                }
+             }}
+          >
+            Slett oppspart beløp
+          </Button>
+        </CardContent>
         </Card>
       )}
     </div>
