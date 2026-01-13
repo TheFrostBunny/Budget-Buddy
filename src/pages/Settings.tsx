@@ -63,7 +63,6 @@ const Settings = () => {
         </CardContent>
       </Card>
 
-      {/* Utseende / Theme */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div className="space-y-1">
@@ -90,7 +89,7 @@ const Settings = () => {
           <select
             value={i18n.language}
             onChange={(e) => changeLanguage(e.target.value)}
-            className="w-full rounded border px-3 py-2 text-base bg-background text-foreground border-border"
+            className="w-full rounded border px-3 py-2 text-base bg-background text-foreground border-border dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border"
           >
             <option value="no">Norsk</option>
             <option value="en">English</option>

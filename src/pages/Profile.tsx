@@ -8,7 +8,7 @@ import { User, RotateCcw, Settings as SettingsIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const Profile = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { preferences, setDefaultBudgetPeriod, setPreferencesState } = usePreferences();
   const { budget, updateBudget, resetSpending, spending, resetSavingsBalance } = useBudget();
   const [rounds, setRounds] = useState<{ amount: number }[]>([]);
@@ -31,6 +31,14 @@ const Profile = () => {
       }
     }
   }, [preferences.dailyBudgetAmount, preferences.dailyBudgetDays]);
+
+  useEffect(() => {
+    const browserLanguage = navigator.language.split("-")[0];
+    if (!preferences.language) {
+      setPreferencesState((prev) => ({ ...prev, language: browserLanguage }));
+      i18n.changeLanguage(browserLanguage);
+    }
+  }, [preferences.language, setPreferencesState, i18n]);
 
   return (
     <div className="space-y-4 p-4 pt-6">
@@ -115,7 +123,7 @@ const Profile = () => {
                   ? t("profile.placeholders.daily")
                   : t("profile.placeholders.amount")
               }
-              className="w-72 rounded border px-3 py-2 text-base"
+              className="w-72 rounded border px-3 py-2 text-base bg-background text-foreground border-border dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border"
             />
           </div>
           {preferences.defaultBudgetPeriod === "daily" && (
@@ -139,7 +147,7 @@ const Profile = () => {
                   }
                 }}
                 placeholder={t("profile.placeholders.days")}
-                className="w-1/2 rounded border px-2 py-2 text-base"
+                className="w-1/2 rounded border px-2 py-2 text-base bg-background text-foreground border-border dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border"
                 style={{ marginLeft: 8 }}
               />
             </div>

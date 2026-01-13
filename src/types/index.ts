@@ -79,6 +79,7 @@ export interface UserPreferences {
   dailyBudgetDays?: number;
   dailyBudgetAmount?: number;
   customStoreLocations: Record<string, { lat: number; lon: number }>;
+  language?: string;
 }
 
 export const CATEGORY_LABELS: Record<ProductCategory, string> = {
