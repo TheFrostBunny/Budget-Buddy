@@ -1,16 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { usePreferences } from "@/hooks/useLocalStorage";
 import { useBudget } from "@/components/budget-provider";
 import { useEffect, useState } from "react";
-import { DIETARY_LABELS, DietaryInfo } from "@/types";
-import { User, Leaf, RotateCcw } from "lucide-react";
+import { Link } from "react-router-dom";
+import { User, RotateCcw, Settings as SettingsIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
-  const { preferences, toggleDietaryPreference, setDefaultBudgetPeriod, setPreferencesState } = usePreferences();
-  const { budget, setBudget, updateBudget, resetSpending, spending, completePeriod, resetSavingsBalance } = useBudget();
-
+  const { t } = useTranslation();
+  const { preferences, setDefaultBudgetPeriod, setPreferencesState } = usePreferences();
+  const { budget, updateBudget, resetSpending, spending, resetSavingsBalance } = useBudget();
   const [rounds, setRounds] = useState<{ amount: number }[]>([]);
   const [money, setMoney] = useState<number | null>(null);
   const [duration, setDuration] = useState<number | null>(null);
@@ -32,44 +32,27 @@ const Profile = () => {
     }
   }, [preferences.dailyBudgetAmount, preferences.dailyBudgetDays]);
 
-  const dietaryOptions: DietaryInfo[] = ["vegetar", "vegan", "glutenfri", "laktosefri", "økologisk"];
+
 
   return (
     <div className="space-y-4 p-4 pt-6">
-      <header className="flex items-center gap-3">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
-          <User className="h-7 w-7" />
+      <header className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            <User className="h-7 w-7" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold">{t('profile.title')}</h1>
+            <p className="text-muted-foreground">{t('profile.subtitle')}</p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-2xl font-bold">Profil</h1>
-          <p className="text-muted-foreground">Tilpass dine preferanser</p>
-        </div>
+        <Link to="/settings" className="p-2 text-muted-foreground hover:text-primary transition-colors">
+          <SettingsIcon className="h-6 w-6" />
+        </Link>
       </header>
-
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-base">
-            <Leaf className="h-5 w-5" />
-            Diettpreferanser
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-wrap gap-2">
-          {dietaryOptions.map((diet) => (
-            <Badge
-              key={diet}
-              variant={preferences.dietaryPreferences.includes(diet) ? "default" : "outline"}
-              className="cursor-pointer"
-              onClick={() => toggleDietaryPreference(diet)}
-            >
-              {DIETARY_LABELS[diet]}
-            </Badge>
-          ))}
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Standard budsjettperiode</CardTitle>
+          <CardTitle className="text-base">{t('profile.period.title')}</CardTitle>
         </CardHeader>
         <CardContent className="flex gap-2 items-center">
           <Button
@@ -77,33 +60,21 @@ const Profile = () => {
             onClick={() => setDefaultBudgetPeriod("weekly")}
             className="flex-1"
           >
-            Ukentlig
+            {t('profile.period.weekly')}
           </Button>
           <Button
             variant={preferences.defaultBudgetPeriod === "monthly" ? "default" : "outline"}
             onClick={() => setDefaultBudgetPeriod("monthly")}
             className="flex-1"
           >
-            Månedlig
+            {t('profile.period.monthly')}
           </Button>
           <Button
             variant={preferences.defaultBudgetPeriod === "daily" ? "default" : "outline"}
             onClick={() => setDefaultBudgetPeriod("daily")}
             className="flex-1"
           >
-            Hverdag
-          </Button>
-          {/* Flyttet input for antall dager ned til daglig matpenger */}
-          <Button 
-            variant="outline" 
-            className="w-full mt-4 border-dashed text-muted-foreground hover:text-foreground"
-            onClick={() => {
-              if (confirm("Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?")) {
-                completePeriod();
-              }
-            }}
-          >
-             Simuler "Ny Dag" (Spar ubrukt)
+            {t('profile.period.daily')}
           </Button>
         </CardContent>
       </Card>
@@ -112,10 +83,10 @@ const Profile = () => {
         <CardHeader>
           <CardTitle className="text-base">
             {preferences.defaultBudgetPeriod === "daily" 
-              ? "Daglig matpenger (NOK)" 
+              ? t('profile.labels.dailyFood')
               : preferences.defaultBudgetPeriod === "monthly" 
-                ? "Månedlig budsjett (NOK)" 
-                : "Ukentlig budsjett (NOK)"}
+                ? t('profile.labels.monthlyBudget')
+                : t('profile.labels.weeklyBudget')}
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-2 items-start">
@@ -137,8 +108,8 @@ const Profile = () => {
               }}
               placeholder={
                 preferences.defaultBudgetPeriod === "daily" 
-                  ? "Matpenger hver 24 timer (kr)" 
-                  : "Beløp i kroner"
+                  ? t('profile.placeholders.daily')
+                  : t('profile.placeholders.amount')
               }
               className="w-72 border rounded px-3 py-2 text-base"
             />
@@ -158,24 +129,54 @@ const Profile = () => {
                     updateBudget(preferences.dailyBudgetAmount, preferences.defaultBudgetPeriod || 'weekly');
                   }
                 }}
-                placeholder="Antall dager"
-                className="w-32 border rounded px-2 py-2 text-base"
+                placeholder={t('profile.placeholders.days')}
+                className="w-24 border rounded px-2 py-2 text-base"
                 style={{ marginLeft: 8 }}
               />
             )}
           </div>
           {budget && (
             (() => {
-              const totalAmount = budget.amount;
-              const totalSpent = spending.spent;
-              const unused = Math.max(totalAmount - totalSpent, 0);
-              const percent = totalAmount > 0 ? (unused / totalAmount) * 100 : 0;
+              const isDailyWithDuration = budget.period === "daily" && preferences.dailyBudgetDays && preferences.dailyBudgetDays > 0;
+              const totalAmount = isDailyWithDuration 
+                ? budget.amount * (preferences.dailyBudgetDays || 1) 
+                : budget.amount;
+              const totalSpentSinceStart = spending.transactions
+                .filter(tx => new Date(tx.date) >= new Date(budget.startDate))
+                .reduce((sum, tx) => sum + tx.amount, 0);
+
               return (
-                <div className="text-sm text-muted-foreground mt-4 p-4 bg-muted/50 rounded-lg">
-                  <p className="font-semibold text-foreground mb-1">Status nåværende budsjett:</p>
-                  <span>
-                    Ubrukt: <b>{unused.toFixed(0)} kr</b> av {totalAmount} kr (<b>{percent.toFixed(1)}%</b> igjen)
-                  </span>
+                <div className="text-sm text-muted-foreground mt-4 p-4 bg-muted/50 rounded-lg space-y-2 w-full">
+                  <p className="font-semibold text-foreground">{t(`budget.status`)}</p> 
+                  <div className="flex justify-between">
+                     <span>{t(`budget.dailyBudget`)}</span>
+                     <span className="font-medium">{budget.amount} kr</span>
+                  </div>
+                  <div className="flex justify-between text-muted-foreground text-xs">
+                     <span>{t(`budget.spent`)}</span>
+                     <span>-{spending.spent} kr</span>
+                  </div>
+                  <div className="flex justify-between font-medium border-t border-border/50 pt-1 mt-1">
+                     <span>{t(`budget.leftover`)}</span> 
+                     <span>{budget.amount - spending.spent} kr</span>
+                  </div>
+
+                  {isDailyWithDuration && (
+                    <div className="border-t border-border/50 pt-2 mt-2">
+                      <div className="flex justify-between">
+                         <span>Totalt ({preferences.dailyBudgetDays} dager):</span>
+                         <span className="font-bold text-primary">{totalAmount} kr</span>
+                      </div>
+                      <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                         <span>{t(`budget.spent`)}</span>
+                         <span className="text-destructive">-{totalSpentSinceStart.toFixed(0)} kr</span>
+                      </div>
+                      <div className="flex justify-between text-xs text-muted-foreground mt-1 font-medium">
+                         <span>{t(`budget.leftovertotal`)}</span>
+                         <span className="text-foreground">{Math.max(0, totalAmount - totalSpentSinceStart).toFixed(0)} kr</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })()
@@ -186,7 +187,7 @@ const Profile = () => {
       {budget && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Handlinger</CardTitle>
+            <CardTitle className="text-base">{t('profile.actions.title')}</CardTitle>
           </CardHeader>
           <CardContent>
           <Button 
@@ -195,18 +196,18 @@ const Profile = () => {
             className="w-full"
           >
             <RotateCcw className="mr-2 h-4 w-4" />
-            Nullstill forbruk
+            {t('profile.actions.resetSpending')}
           </Button>
           <Button 
              variant="ghost" 
              className="w-full mt-2 text-muted-foreground hover:text-destructive"
              onClick={() => {
-                if (confirm("Er du sikker på at du vil slette oppspart beløp?")) {
+                if (confirm(t('profile.actions.confirmResetSavings'))) {
                   resetSavingsBalance();
                 }
              }}
           >
-            Slett oppspart beløp
+            {t('profile.actions.resetSavings')}
           </Button>
         </CardContent>
         </Card>

@@ -5,11 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useBudget } from "@/components/budget-provider";
 import { Wallet, Calendar, Clock, Plus, Check, TrendingUp, AlertCircle } from "lucide-react";
-import { ModeToggle } from "@/components/mode-toggle";
 import { Progress } from "@/components/ui/progress";
+import { useTranslation } from "react-i18next";
 
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const { budget, spending, setBudget } = useBudget();
   const [budgetInput, setBudgetInput] = useState("");
 
@@ -25,9 +26,8 @@ const Dashboard = () => {
     <div className="space-y-6 sm:p-4 p-2 pt-4 sm:pt-6">
       <header className="flex justify-between items-center bg-card rounded-xl p-4 shadow-sm border mb-6">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold">Budget Buddy</h1>
+          <h1 className="text-2xl font-bold">{t('dashboard.title')}</h1>
         </div>
-        <ModeToggle />
       </header>
       <Card>
         <CardHeader></CardHeader>
@@ -44,6 +44,7 @@ const Dashboard = () => {
 // Komponent for å vise utgiftshistorikk
 const ExpenseHistory = () => {
   const { spending } = useBudget();
+  const { t } = useTranslation();
   
   if (!spending.transactions.length) return null;
 
@@ -69,7 +70,7 @@ const ExpenseHistory = () => {
 
   return (
     <section className="mt-8 space-y-6">
-      <CardTitle className="text-xl px-1">Utgiftshistorikk</CardTitle>
+      <CardTitle className="text-xl px-1">{t('dashboard.history.title')}</CardTitle>
       
       {Object.entries(grouped).map(([date, transactions]) => (
         <div key={date}>
@@ -84,7 +85,7 @@ const ExpenseHistory = () => {
                   return (
                     <li key={tx.id} className="flex justify-between items-center p-4 hover:bg-muted/50 transition-colors">
                       <div className="flex flex-col">
-                        <span className="font-medium text-sm">{tx.description || "Ingen beskrivelse"}</span>
+                        <span className="font-medium text-sm">{tx.description || t('dashboard.history.noDescription')}</span>
                         <span className="text-xs text-muted-foreground flex items-center gap-1">
                            <Clock className="w-3 h-3" /> {timeStr}
                         </span>
@@ -103,6 +104,7 @@ const ExpenseHistory = () => {
 };
 const AddSpentAmount = () => {
   const { addSpending } = useBudget();
+  const { t } = useTranslation();
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState(() => {
     const now = new Date();
@@ -137,13 +139,13 @@ const AddSpentAmount = () => {
         <CardHeader className="pb-2 bg-gradient-to-r from-primary/10 to-transparent">
           <CardTitle className="text-lg font-medium flex items-center gap-2 text-primary">
             <Wallet className="w-5 h-5" />
-            Registrer utgift
+            {t('dashboard.addExpense.title')}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-medium text-muted-foreground ml-1">
-              Beløp
+              {t('dashboard.addExpense.amount')}
             </label>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl font-bold text-muted-foreground">
@@ -163,7 +165,7 @@ const AddSpentAmount = () => {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="text-xs font-medium text-muted-foreground ml-1 flex items-center gap-1">
-                <Calendar className="w-3 h-3" /> Dato
+                <Calendar className="w-3 h-3" /> {t('dashboard.addExpense.date')}
               </label>
               <Input
                 type="date"
@@ -174,7 +176,7 @@ const AddSpentAmount = () => {
             </div>
             <div className="space-y-2">
               <label className="text-xs font-medium text-muted-foreground ml-1 flex items-center gap-1">
-                <Clock className="w-3 h-3" /> Tid
+                <Clock className="w-3 h-3" /> {t('dashboard.addExpense.time')}
               </label>
               <Input
                 type="time"
@@ -196,11 +198,11 @@ const AddSpentAmount = () => {
           >
             {success ? (
               <span className="flex items-center gap-2">
-                <Check className="w-6 h-6" /> Lagret!
+                <Check className="w-6 h-6" /> {t('dashboard.addExpense.saved')}
               </span>
             ) : (
               <span className="flex items-center gap-2">
-                <Plus className="w-6 h-6" /> Legg til utgift
+                <Plus className="w-6 h-6" /> {t('dashboard.addExpense.add')}
               </span>
             )}
           </Button>
@@ -212,10 +214,11 @@ const AddSpentAmount = () => {
 
 const BudgetOverview = () => {
   const { budget, spending, savings, completePeriod } = useBudget();
+  const { t } = useTranslation();
 
   if (!budget) return (
     <div className="text-center p-4 text-muted-foreground">
-      Ingen budsjett satt. Gå til innstillinger for å sette opp.
+      {t('dashboard.noBudget')}
     </div>
   );
 
@@ -233,7 +236,7 @@ const BudgetOverview = () => {
         <CardContent className="p-6">
           <div className="flex justify-between items-start mb-4">
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">Gjenstående beløp</p>
+              <p className="text-sm font-medium text-muted-foreground mb-1">{t('dashboard.overview.remaining')}</p>
               <h2 className={`text-4xl font-bold ${isOverBudget ? "text-red-500" : "text-primary"}`}>
                 {remaining.toFixed(0)} kr
               </h2>
@@ -245,21 +248,21 @@ const BudgetOverview = () => {
 
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Brukt: <span className="font-medium text-foreground">{spent.toFixed(0)} kr</span></span>
-              <span className="text-muted-foreground">Totalt: <span className="font-medium text-foreground">{budget.amount} kr</span></span>
+              <span className="text-muted-foreground">{t('dashboard.overview.spent')} <span className="font-medium text-foreground">{spent.toFixed(0)} kr</span></span>
+              <span className="text-muted-foreground">{t('dashboard.overview.total')} <span className="font-medium text-foreground">{budget.amount} kr</span></span>
             </div>
             <Progress value={percentage} className={`h-2 ${isOverBudget ? "bg-red-100" : ""}`} indicatorClassName={isOverBudget ? "bg-red-500" : ""} />
             
             {savings > 0 && (
               <div className="mt-4 pt-4 border-t flex justify-between items-center animate-in fade-in slide-in-from-top-2">
-                <span className="text-sm font-medium text-muted-foreground">Du har spart totalt:</span>
+                <span className="text-sm font-medium text-muted-foreground">{t('dashboard.overview.savedTotal')}</span>
                 <span className="text-lg font-bold text-green-600 dark:text-green-400">{savings.toFixed(0)} kr</span>
               </div>
             )}
             
             {remaining > 0 && (
               <div className="mt-2 text-center text-xs text-muted-foreground">
-                Ubrukt beløp spares automatisk ved midnatt
+                {t('dashboard.overview.autoSaveInfo')}
               </div>
             )}
           </div>

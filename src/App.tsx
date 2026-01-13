@@ -10,6 +10,7 @@ import { BudgetProvider } from "@/components/budget-provider";
 import ShoppingList from "./pages/ShoppingList";
 import Stores from "./pages/Stores";
 import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/shopping-list" element={<ShoppingList />} />
             <Route path="/stores" element={<Stores />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppLayout>

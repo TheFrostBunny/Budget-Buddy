@@ -1,0 +1,95 @@
+{
+  "settings": {
+    "title": "Settings",
+    "subtitle": "App configuration",
+    "dietary": {
+      "title": "Dietary Preferences",
+      "description": "Select your preferences"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "description": "Choose light or dark theme"
+    },
+    "language": {
+      "title": "Language"
+    },
+    "developer": {
+      "title": "Developer Mode",
+      "description": "Enable advanced features",
+      "debugTools": "Debug Tools",
+      "simulateNewDay": "Simulate 'New Day' (Save unused)",
+      "simulateDescription": "Forces daily settlement and saves any remaining amount.",
+      "confirmSimulation": "This will end the day and move unused funds to savings. Are you sure?"
+    },
+    "footer": "Budget App v1.0.0"
+  },
+  "diet": {
+    "vegetar": "Vegetarian",
+    "vegan": "Vegan",
+    "glutenfri": "Gluten-free",
+    "laktosefri": "Lactose-free",
+    "økologisk": "Organic"
+  },
+  "budget": {
+      "status": "Selected Budget Status",
+      "dailyBudget": "Daily Budget",
+      "spent": "Spent Today",
+      "leftover": "Leftover Today",
+      "leftovertotal": "Leftover Total"
+  },
+  "profile": {
+    "title": "Profile",
+    "subtitle": "Your Overview",
+    "period": {
+      "title": "Default Budget Period",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "daily": "Daily"
+    },
+    "labels": {
+      "dailyFood": "Daily Food Budget",
+      "monthlyBudget": "Monthly Budget",
+      "weeklyBudget": "Weekly Budget"
+    },
+    "placeholders": {
+      "daily": "Food money every 24h",
+      "amount": "Amount",
+      "days": "Days"
+    },
+    "actions": {
+      "title": "Actions",
+      "resetSpending": "Reset Spending",
+      "resetSavings": "Delete Savings",
+      "confirmResetSavings": "Are you sure you want to delete your savings?"
+    }
+  },
+  "dashboard": {
+    "title": "Budget Buddy",
+    "noBudget": "No budget set. Go to settings to configure.",
+    "overview": {
+      "remaining": "Remaining",
+      "spent": "Spent:",
+      "total": "Total:",
+      "savedTotal": "Total Saved:",
+      "autoSaveInfo": "Unused amount is automatically saved at midnight"
+    },
+    "addExpense": {
+      "title": "Add Expense",
+      "amount": "Amount",
+      "date": "Date",
+      "time": "Time",
+      "saved": "Saved!",
+      "add": "Add Expense"
+    },
+    "history": {
+      "title": "Expense History",
+      "noDescription": "No description"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "shoppingList": "Shopping List",
+    "stores": "Stores",
+    "profile": "Profile"
+  }
+}

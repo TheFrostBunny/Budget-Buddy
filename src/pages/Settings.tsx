@@ -1,0 +1,151 @@
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { useBudget } from "@/components/budget-provider";
+import { Settings as SettingsIcon, Languages, Laptop, Palette, Leaf } from "lucide-react";
+import { ModeToggle } from "@/components/mode-toggle";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { DIETARY_LABELS, DietaryInfo } from "@/types";
+import { usePreferences } from "@/hooks/useLocalStorage";
+import { useTranslation } from "react-i18next";
+
+const Settings = () => {
+  const { completePeriod } = useBudget();
+  const { preferences, toggleDietaryPreference } = usePreferences();
+  const [isDevMode, setIsDevMode] = useState(false);
+  const { t, i18n } = useTranslation();
+  
+  const dietaryOptions: DietaryInfo[] = ["vegetar", "vegan", "glutenfri", "laktosefri", "økologisk"];
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
+  return (
+    <div className="space-y-4 p-4 pt-6 pb-24">
+      <header className="flex items-center gap-3">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
+          <SettingsIcon className="h-7 w-7" />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold">{t('settings.title')}</h1>
+          <p className="text-muted-foreground">{t('settings.subtitle')}</p>
+        </div>
+      </header>
+
+      {/* Dietary Preferences */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-base">
+            <Leaf className="h-4 w-4" />
+            {t('settings.dietary.title')}
+          </CardTitle>
+          <CardDescription>{t('settings.dietary.description')}</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-wrap gap-2">
+          {dietaryOptions.map((diet) => (
+            <Badge
+              key={diet}
+              variant={preferences.dietaryPreferences.includes(diet) ? "default" : "outline"}
+              className="cursor-pointer"
+              onClick={() => toggleDietaryPreference(diet)}
+            >
+              {t(`diet.${diet}`)}
+            </Badge>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Utseende / Theme */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <div className="space-y-1">
+            <CardTitle className="text-base flex items-center gap-2">
+              <Palette className="h-4 w-4" />
+              {t('settings.appearance.title')}
+            </CardTitle>
+            <CardDescription>{t('settings.appearance.description')}</CardDescription>
+          </div>
+          <ModeToggle />
+        </CardHeader>
+        <CardContent>
+        </CardContent>
+      </Card>
+
+      {/* Language */}
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base flex items-center gap-2">
+            <Languages className="h-4 w-4" />
+            {t('settings.language.title')}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex gap-2">
+          <Button 
+            variant={i18n.language === 'no' ? 'default' : 'outline'} 
+            size="sm" 
+            onClick={() => changeLanguage('no')}
+            className="w-24"
+          >
+            Norsk
+          </Button>
+          <Button 
+            variant={i18n.language === 'en' ? 'default' : 'outline'} 
+            size="sm" 
+            onClick={() => changeLanguage('en')}
+            className="w-24"
+          >
+            English
+          </Button>
+        </CardContent>
+      </Card>
+
+      {/* Developer Mode */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <div className="space-y-1">
+            <CardTitle className="text-base flex items-center gap-2">
+              <Laptop className="h-4 w-4" />
+              {t('settings.developer.title')}
+            </CardTitle>
+            <CardDescription>{t('settings.developer.description')}</CardDescription>
+          </div>
+          <Switch 
+            checked={isDevMode} 
+            onCheckedChange={setIsDevMode} 
+          />
+        </CardHeader>
+        <CardContent>
+          {isDevMode && (
+            <div className="mt-4 pt-4 border-t animate-in fade-in slide-in-from-top-2">
+              <div className="flex flex-col gap-2">
+                 <p className="text-sm font-medium mb-2">{t('settings.developer.debugTools')}</p>
+                 <Button 
+                  variant="outline" 
+                  className="w-full border-dashed"
+                  onClick={() => {
+                    if (confirm(t('settings.developer.confirmSimulation'))) {
+                      completePeriod();
+                    }
+                  }}
+                >
+                   {t('settings.developer.simulateNewDay')}
+                </Button>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {t('settings.developer.simulateDescription')}
+                </p>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      <div className="text-center text-xs text-muted-foreground pt-8">
+        <p>{t('settings.footer')}</p>
+      </div>
+    </div>
+  );
+};
+
+export default Settings;

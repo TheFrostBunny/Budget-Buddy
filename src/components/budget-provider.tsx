@@ -152,7 +152,19 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
   };
 
   const resetSpending = () => {
-    setSpendingState({ budgetId: budget?.id || "", spent: 0, transactions: [], coveredBySavings: 0 });
+    // We only reset the DAILY counters (spent, coveredBySavings). 
+    // We MUST preserve transactions to show history and calculate total period spending.
+    setSpendingState(prev => ({ 
+      ...prev, 
+      spent: 0, 
+      coveredBySavings: 0,
+      // transactions are implicitly kept by spreading ...prev? 
+      // No, setSpendingState replaces the object if I don't merge.
+      // Wait, the previous line was: setSpendingState({ budgetId: ..., spent: 0, transactions: [] }) ... explicit wipe.
+      // So now:
+      budgetId: budget?.id || "",
+      transactions: prev.transactions 
+    }));
   };
 
   const completePeriod = () => {
