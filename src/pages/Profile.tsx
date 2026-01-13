@@ -117,7 +117,9 @@ const Profile = () => {
               }
               className="w-72 rounded border px-3 py-2 text-base"
             />
-            {preferences.defaultBudgetPeriod === "daily" && (
+          </div>
+          {preferences.defaultBudgetPeriod === "daily" && (
+            <div style={{ marginTop: 8, width: '100%' }}>
               <input
                 type="number"
                 min={1}
@@ -137,11 +139,11 @@ const Profile = () => {
                   }
                 }}
                 placeholder={t("profile.placeholders.days")}
-                className="w-24 rounded border px-2 py-2 text-base"
+                className="w-1/2 rounded border px-2 py-2 text-base"
                 style={{ marginLeft: 8 }}
               />
-            )}
-          </div>
+            </div>
+          )}
           {budget &&
             (() => {
               const isDailyWithDuration =
