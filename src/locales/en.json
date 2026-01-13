@@ -91,5 +91,37 @@
     "shoppingList": "Shopping List",
     "stores": "Stores",
     "profile": "Profile"
+  },
+  "shoppingList": {
+    "title": "Shopping List",
+    "addItem": "Add Item",
+    "placeholder": "What do you need?",
+    "searchPlaceholder": "Search for item...",
+    "add": "Add",
+    "empty": "Your shopping list is empty",
+    "emptySubtitle": "Search and add items above",
+    "removeChecked": "Remove checked",
+    "estimatedTotal": "Estimated total (cheapest)",
+    "items": "items"
+  },
+  "stores": {
+    "title": "Store Overview",
+    "searchPlaceholder": "Search for stores...",
+    "yourStores": "Your Stores",
+    "nearby": "Nearby",
+    "offers": "Offers",
+    "distance": "km away",
+    "addLocation": "Add Store Location",
+    "selectStore": "Select Store",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "address": "Address",
+    "searchAddress": "Search for address",
+    "searching": "Searching...",
+    "notFound": "Address not found",
+    "myLocation": "My Location",
+    "locationError": "Could not get location",
+    "add": "Add",
+    "coordinatesInfo": "Or enter coordinates manually"
   }
 }

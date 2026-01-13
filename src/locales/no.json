@@ -92,5 +92,37 @@
       "shoppingList": "Handleliste",
       "stores": "Butikker",
       "profile": "Profil"
+    },
+    "shoppingList": {
+      "title": "Handleliste",
+      "addItem": "Legg til vare",
+      "placeholder": "Hva trenger du?",
+      "searchPlaceholder": "Søk etter vare...",
+      "add": "Legg til",
+      "empty": "Handlelisten er tom",
+      "emptySubtitle": "Søk og legg til varer ovenfor",
+      "removeChecked": "Fjern avkryssede",
+      "estimatedTotal": "Estimert total (billigste)",
+      "items": "varer"
+    },
+    "stores": {
+      "title": "Butikkoversikt",
+      "searchPlaceholder": "Søk etter butikker...",
+      "yourStores": "Dine Butikker",
+      "nearby": "I nærheten",
+      "offers": "Tilbud",
+      "distance": "km unna",
+      "addLocation": "Legg til butikkplassering",
+      "selectStore": "Velg butikk",
+      "latitude": "Breddegrad",
+      "longitude": "Lengdegrad",
+      "address": "Adresse",
+      "searchAddress": "Søk etter adresse",
+      "searching": "Søker...",
+      "notFound": "Fant ikke adresse",
+      "myLocation": "Min posisjon",
+      "locationError": "Kunne ikke hente posisjon",
+      "add": "Legg til",
+      "coordinatesInfo": "Eller skriv inn koordinater manuelt"
     }
 }

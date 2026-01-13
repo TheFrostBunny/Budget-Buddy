@@ -92,6 +92,7 @@ export function usePreferences() {
           favoriteStores: [],
           defaultBudgetPeriod: "weekly",
           dailyBudgetDays: 7,
+          customStoreLocations: {},
         };
   });
 
@@ -121,11 +122,22 @@ export function usePreferences() {
     setPreferencesState((prev) => ({ ...prev, defaultBudgetPeriod: period }));
   };
 
+  const addStoreLocation = (storeId: string, lat: number, lon: number) => {
+    setPreferencesState((prev) => ({
+      ...prev,
+      customStoreLocations: {
+        ...prev.customStoreLocations,
+        [storeId]: { lat, lon },
+      },
+    }));
+  };
+
   return {
     preferences,
     toggleDietaryPreference,
     toggleFavoriteStore,
     setDefaultBudgetPeriod,
     setPreferencesState,
+    addStoreLocation,
   };
 }

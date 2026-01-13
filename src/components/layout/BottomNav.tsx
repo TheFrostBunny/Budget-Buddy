@@ -1,21 +1,23 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { Home, User, ShoppingCart, Store } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { to: "/", icon: Home, label: "Hjem" },
-  { to: "/shopping-list", icon: ShoppingCart, label: "Handleliste" },
-  { to: "/stores", icon: Store, label: "Butikker" },
-  { to: "/profile", icon: User, label: "Profil" },
+  { to: "/", icon: Home, labelKey: "nav.home" },
+  { to: "/shopping-list", icon: ShoppingCart, labelKey: "nav.shoppingList" },
+  { to: "/stores", icon: Store, labelKey: "nav.stores" },
+  { to: "/profile", icon: User, labelKey: "nav.profile" },
 ];
 
 export function BottomNav() {
   const location = useLocation();
+  const { t } = useTranslation();
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-card safe-bottom">
       <div className="flex items-center justify-around py-2">
-        {navItems.map(({ to, icon: Icon, label }) => {
+        {navItems.map(({ to, icon: Icon, labelKey }) => {
           const isActive = location.pathname === to;
           return (
             <NavLink
@@ -29,7 +31,7 @@ export function BottomNav() {
               )}
             >
               <Icon className={cn("h-5 w-5", isActive && "stroke-[2.5]")} />
-              <span>{label}</span>
+              <span>{t(labelKey)}</span>
             </NavLink>
           );
         })}

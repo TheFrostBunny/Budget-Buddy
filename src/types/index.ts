@@ -83,6 +83,7 @@ export interface UserPreferences {
   defaultBudgetPeriod: "weekly" | "monthly" | "daily";
   dailyBudgetDays?: number;
   dailyBudgetAmount?: number;
+  customStoreLocations: Record<string, { lat: number; lon: number }>;
 }
 
 export const CATEGORY_LABELS: Record<ProductCategory, string> = {
