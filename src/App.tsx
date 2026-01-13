@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import { ThemeProvider } from "@/components/theme-provider";
+import { BudgetProvider } from "@/components/budget-provider";
 import ShoppingList from "./pages/ShoppingList";
 import Stores from "./pages/Stores";
 import Profile from "./pages/Profile";
@@ -15,8 +16,9 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+    <BudgetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -30,8 +32,9 @@ const App = () => (
           </Routes>
         </AppLayout>
       </BrowserRouter>
-    </TooltipProvider>
-    </QueryClientProvider>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </BudgetProvider>
   </ThemeProvider>
 );
 

@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { usePreferences, useBudget } from "@/hooks/useLocalStorage";
+import { usePreferences } from "@/hooks/useLocalStorage";
+import { useBudget } from "@/components/budget-provider";
 import { useEffect, useState } from "react";
 import { DIETARY_LABELS, DietaryInfo } from "@/types";
 import { User, Leaf, RotateCcw } from "lucide-react";
@@ -10,7 +11,6 @@ const Profile = () => {
   const { preferences, toggleDietaryPreference, setDefaultBudgetPeriod, setPreferencesState } = usePreferences();
   const { budget, resetSpending } = useBudget();
 
-  // Hent rounds fra localStorage (samme som BudgetRounds bruker)
   const [rounds, setRounds] = useState<{ amount: number }[]>([]);
   const [money, setMoney] = useState<number | null>(null);
   const [duration, setDuration] = useState<number | null>(null);
@@ -25,7 +25,6 @@ const Profile = () => {
       setMoney(money);
       setDuration(duration);
     } else {
-      // Fallback til preferanser hvis ikke lagret fra BudgetRounds
       if (preferences.dailyBudgetAmount && preferences.dailyBudgetDays) {
         setMoney(preferences.dailyBudgetAmount);
         setDuration(preferences.dailyBudgetDays);

@@ -9,75 +9,7 @@ const STORAGE_KEYS = {
   FAVORITE_STORES: "budgetbuddy_favorite_stores",
 };
 
-// Budget hook
-export function useBudget() {
-  const [budget, setBudgetState] = useState<Budget | null>(() => {
-    const stored = localStorage.getItem(STORAGE_KEYS.BUDGET);
-    return stored ? JSON.parse(stored) : null;
-  });
-
-  const [spending, setSpendingState] = useState<BudgetSpending>(() => {
-    const stored = localStorage.getItem(STORAGE_KEYS.SPENDING);
-    return stored ? JSON.parse(stored) : { budgetId: "", spent: 0, transactions: [], dailyRollover: 0 };
-  });
-
-  useEffect(() => {
-    if (budget) {
-      localStorage.setItem(STORAGE_KEYS.BUDGET, JSON.stringify(budget));
-    }
-  }, [budget]);
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEYS.SPENDING, JSON.stringify(spending));
-  }, [spending]);
-
-  // Kalles hver dag for å rulle over ubrukte penger
-  const dailyRollover = (dailyBudgetAmount: number) => {
-    if (budget?.period === "daily") {
-      const unused = dailyBudgetAmount - spending.spent;
-      setSpendingState((prev) => ({
-        ...prev,
-        spent: 0,
-        dailyRollover: (prev.dailyRollover || 0) + (unused > 0 ? unused : 0),
-        transactions: [],
-      }));
-    }
-  };
-
-  const setBudget = (amount: number, period: "weekly" | "monthly" | "daily") => {
-    const newBudget: Budget = {
-      id: crypto.randomUUID(),
-      amount,
-      period,
-      startDate: new Date().toISOString(),
-    };
-    setBudgetState(newBudget);
-    setSpendingState({ budgetId: newBudget.id, spent: 0, transactions: [], dailyRollover: 0 });
-  };
-
-  const addSpending = (amount: number, storeId?: string, description?: string) => {
-    setSpendingState((prev) => ({
-      ...prev,
-      spent: prev.spent + amount,
-      transactions: [
-        ...prev.transactions,
-        {
-          id: crypto.randomUUID(),
-          date: new Date().toISOString(),
-          amount,
-          storeId,
-          description,
-        },
-      ],
-    }));
-  };
-
-  const resetSpending = () => {
-    setSpendingState({ budgetId: budget?.id || "", spent: 0, transactions: [] });
-  };
-
-  return { budget, spending, setBudget, addSpending, resetSpending };
-}
+// Budget hook moved to @/components/budget-provider.tsx
 
 // Shopping list hook
 export function useShoppingList() {

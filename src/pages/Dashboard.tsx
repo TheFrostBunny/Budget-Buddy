@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useBudget } from "@/hooks/useLocalStorage";
-import { Wallet, Calendar, Clock, Plus, Check } from "lucide-react";
+import { useBudget } from "@/components/budget-provider";
+import { Wallet, Calendar, Clock, Plus, Check, TrendingUp, AlertCircle } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
+import { Progress } from "@/components/ui/progress";
 
-// Komponent for å legge til utgift
 
 const Dashboard = () => {
   const { budget, spending, setBudget } = useBudget();
@@ -25,14 +25,14 @@ const Dashboard = () => {
     <div className="space-y-6 sm:p-4 p-2 pt-4 sm:pt-6">
       <header className="flex justify-between items-center bg-card rounded-xl p-4 shadow-sm border mb-6">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold">Hamburg BudgetBuddy</h1>
-          <p className="text-muted-foreground">Din smarte matbudsjett-app</p>
+          <h1 className="text-2xl font-bold">Budget Buddy</h1>
         </div>
         <ModeToggle />
       </header>
       <Card>
         <CardHeader></CardHeader>
         <CardContent className="space-y-4">
+          <BudgetOverview />
           <AddSpentAmount />
           <ExpenseHistory />
         </CardContent>
@@ -179,6 +179,49 @@ const AddSpentAmount = () => {
               </span>
             )}
           </Button>
+        </CardContent>
+      </Card>
+    </section>
+  );
+};
+
+const BudgetOverview = () => {
+  const { budget, spending } = useBudget();
+
+  if (!budget) return (
+    <div className="text-center p-4 text-muted-foreground">
+      Ingen budsjett satt. Gå til innstillinger for å sette opp.
+    </div>
+  );
+
+  const spent = spending.spent;
+  const remaining = budget.amount - spent;
+  const percentage = Math.min((spent / budget.amount) * 100, 100);
+  const isOverBudget = remaining < 0;
+
+  return (
+    <section className="mb-6">
+      <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 shadow-sm overflow-hidden">
+        <CardContent className="p-6">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground mb-1">Gjenstående beløp</p>
+              <h2 className={`text-4xl font-bold ${isOverBudget ? "text-red-500" : "text-primary"}`}>
+                {remaining.toFixed(0)} kr
+              </h2>
+            </div>
+            <div className={`p-3 rounded-full ${isOverBudget ? "bg-red-100 text-red-600 dark:bg-red-900/30" : "bg-primary/20 text-primary"}`}>
+              {isOverBudget ? <AlertCircle className="w-6 h-6" /> : <TrendingUp className="w-6 h-6" />}
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Brukt: <span className="font-medium text-foreground">{spent.toFixed(0)} kr</span></span>
+              <span className="text-muted-foreground">Totalt: <span className="font-medium text-foreground">{budget.amount} kr</span></span>
+            </div>
+            <Progress value={percentage} className={`h-2 ${isOverBudget ? "bg-red-100" : ""}`} indicatorClassName={isOverBudget ? "bg-red-500" : ""} />
+          </div>
         </CardContent>
       </Card>
     </section>
