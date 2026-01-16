@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useBudget } from "@/components/budget-provider";
 import { Wallet, Calendar, Clock, Plus, Check, TrendingUp, AlertCircle } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useTranslation } from "react-i18next";
+import { toast } from "@/hooks/use-toast";
+import { Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -41,7 +43,7 @@ const Dashboard = () => {
 };
 
 const ExpenseHistory = () => {
-  const { spending } = useBudget();
+  const { spending, removeSpending } = useBudget();
   const { t } = useTranslation();
 
   if (!spending.transactions.length) return null;
@@ -57,9 +59,7 @@ const ExpenseHistory = () => {
       day: "numeric",
       month: "long",
     });
- 
     const formattedDate = date.charAt(0).toUpperCase() + date.slice(1);
-
     if (!grouped[formattedDate]) grouped[formattedDate] = [];
     grouped[formattedDate].push(tx);
   });
@@ -67,7 +67,6 @@ const ExpenseHistory = () => {
   return (
     <section className="mt-8 space-y-6">
       <CardTitle className="px-1 text-xl">{t("dashboard.history.title")}</CardTitle>
-
       {Object.entries(grouped).map(([date, transactions]) => (
         <div key={date}>
           <h3 className="mb-2 px-1 text-sm font-medium text-muted-foreground">{date}</h3>
@@ -80,7 +79,6 @@ const ExpenseHistory = () => {
                     hour: "2-digit",
                     minute: "2-digit",
                   });
-
                   return (
                     <li
                       key={tx.id}
@@ -94,7 +92,12 @@ const ExpenseHistory = () => {
                           <Clock className="h-3 w-3" /> {timeStr}
                         </span>
                       </div>
-                      <span className="font-bold">{tx.amount.toFixed(0)} kr</span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold">{tx.amount.toFixed(0)} kr</span>
+                        <Button variant="ghost" size="icon" onClick={() => removeSpending(tx.id)} aria-label="Slett utgift" className="p-0 h-auto w-auto">
+                          <Trash2 className="h-5 w-5 text-red-500 cursor-pointer" />
+                        </Button>
+                      </div>
                     </li>
                   );
                 })}
@@ -127,6 +130,10 @@ const AddSpentAmount = () => {
       addSpending(value, undefined, "Utgift");
       setAmount("");
       setSuccess(true);
+      toast({
+        title: "Utgift lagret!",
+        description: `Du har lagt til ${value} kr.`,
+      });
     }
   };
 
