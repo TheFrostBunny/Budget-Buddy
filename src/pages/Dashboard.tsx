@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useBudget } from "@/components/budget-provider";
@@ -9,11 +8,13 @@ import { useTranslation } from "react-i18next";
 import { toast } from "@/hooks/use-toast";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ExportExcelButton } from "@/components/ExportExcelButton";
 
 const Dashboard = () => {
   const { t } = useTranslation();
   const { budget, spending, setBudget } = useBudget();
   const [budgetInput, setBudgetInput] = useState("");
+  const [betaEnabled, setBetaEnabled] = useState(false);
 
   const handleSetBudget = () => {
     const amount = parseFloat(budgetInput);
@@ -22,6 +23,13 @@ const Dashboard = () => {
       setBudgetInput("");
     }
   };
+
+  useEffect(() => {
+    setBetaEnabled(localStorage.getItem("beta_features") === "true");
+    const handler = () => setBetaEnabled(localStorage.getItem("beta_features") === "true");
+    window.addEventListener("storage", handler);
+    return () => window.removeEventListener("storage", handler);
+  }, []);
 
   return (
     <div className="space-y-6 p-2 pt-4 sm:p-4 sm:pt-6">
@@ -35,14 +43,14 @@ const Dashboard = () => {
         <CardContent className="space-y-4">
           <BudgetOverview />
           <AddSpentAmount />
-          <ExpenseHistory />
+          <ExpenseHistory betaEnabled={betaEnabled} />
         </CardContent>
       </Card>
     </div>
   );
 };
 
-const ExpenseHistory = () => {
+const ExpenseHistory = ({ betaEnabled }) => {
   const { spending, removeSpending } = useBudget();
   const { t } = useTranslation();
 
@@ -66,7 +74,21 @@ const ExpenseHistory = () => {
 
   return (
     <section className="mt-8 space-y-6">
-      <CardTitle className="px-1 text-xl">{t("dashboard.history.title")}</CardTitle>
+      <CardTitle className="px-1 text-xl flex items-center justify-between">
+        {t("dashboard.history.title")}
+        {betaEnabled && (
+          <ExportExcelButton
+            data={spending.transactions.map(tx => ({
+              Dato: new Date(tx.date).toLocaleString("nb-NO"),
+              Beløp: tx.amount,
+              Beskrivelse: tx.description || "",
+              Butikk: tx.storeId || ""
+            }))}
+            filename="utgifter.xlsx"
+            label="Eksporter til Excel"
+          />
+        )}
+      </CardTitle>
       {Object.entries(grouped).map(([date, transactions]) => (
         <div key={date}>
           <h3 className="mb-2 px-1 text-sm font-medium text-muted-foreground">{date}</h3>
