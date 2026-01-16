@@ -23,7 +23,11 @@ const App = () => {
   const checkedVersion = useRef(false);
 
   useEffect(() => {
-    if (!isMobile || checkedVersion.current) return;
+    // Sjekk om appen kjører som PWA (standalone)
+    const isPWA =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      (window.navigator as any).standalone;
+    if (!isMobile || checkedVersion.current || !isPWA) return;
     checkedVersion.current = true;
     fetch("/version.json")
       .then((res) => res.json())
