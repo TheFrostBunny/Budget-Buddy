@@ -23,7 +23,6 @@ const App = () => {
   const checkedVersion = useRef(false);
 
   useEffect(() => {
-    // Sjekk om appen kjører som PWA (standalone)
     const isPWA =
       window.matchMedia("(display-mode: standalone)").matches ||
       (window.navigator as any).standalone;
@@ -32,15 +31,18 @@ const App = () => {
     fetch("/version.json")
       .then((res) => res.json())
       .then((data) => {
-        const currentVersion = "0.0.0";
-        if (data.version !== currentVersion) {
+        const localVersion = localStorage.getItem("app_version") || "0.0.0";
+        if (data.version !== localVersion) {
           toast({
             title: "Ny oppdatering tilgjengelig!",
             description:
               "Det finnes en nyere versjon av appen. Oppdater for å få siste funksjoner.",
             action: (
               <button
-                onClick={() => window.location.reload()}
+                onClick={() => {
+                  localStorage.setItem("app_version", data.version);
+                  window.location.reload();
+                }}
                 style={{
                   background: "#2563eb",
                   color: "white",
@@ -56,6 +58,8 @@ const App = () => {
               </button>
             ),
           });
+        } else {
+          localStorage.setItem("app_version", data.version);
         }
       })
       .catch(() => {});
