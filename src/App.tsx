@@ -34,6 +34,23 @@ const App = () => {
             title: "Ny oppdatering tilgjengelig!",
             description:
               "Det finnes en nyere versjon av appen. Oppdater for å få siste funksjoner.",
+            action: (
+              <button
+                onClick={() => window.location.reload()}
+                style={{
+                  background: "#2563eb",
+                  color: "white",
+                  borderRadius: "0.375rem",
+                  padding: "0.5rem 1rem",
+                  fontWeight: "bold",
+                  marginTop: "0.5rem",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Oppdater
+              </button>
+            ),
           });
         }
       })
