@@ -13,7 +13,6 @@ export const ExportExcelButton: React.FC<ExportExcelButtonProps> = ({
   label = "Eksporter til Excel",
 }) => {
   const handleExport = () => {
-    // Hent data fra localStorage hvis tilgjengelig
     let exportData = data;
     try {
       const stored = localStorage.getItem("budgetbuddy_spending");
@@ -24,7 +23,6 @@ export const ExportExcelButton: React.FC<ExportExcelButtonProps> = ({
         }
       }
     } catch {}
-    // Hent budsjett-info fra localStorage
     let budgetInfo = {};
     try {
       const budgetRaw = localStorage.getItem("budgetbuddy_budget");
