@@ -12,7 +12,7 @@
     },
     "language": {
       "title": "Language",
-      "options": {
+      "option": {
         "no": "Norwegian",
         "en": "English",
         "nn": "Nynorsk",
