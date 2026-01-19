@@ -37,7 +37,9 @@
         "title": "Beta-funksjoner",
         "description": "Aktiver eksperimentelle funksjoner som Excel-eksport.",
         "toggleLabel": "Aktiver beta-funksjoner"
-      }
+      },
+      "exportData": "Eksporter data til JSON",
+      "importData": "Importer data fra JSON"
     }
   },
   "diet": {

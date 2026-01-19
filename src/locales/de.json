@@ -36,7 +36,9 @@
         "title": "Beta-Funktionen",
         "description": "Experimentelle Funktionen wie Excel-Export aktivieren.",
         "toggleLabel": "Beta-Funktionen aktivieren"
-      }
+      },
+      "exportData": "Daten als JSON exportieren",
+      "importData": "Daten aus JSON importieren"
     }
   },
   "diet": {

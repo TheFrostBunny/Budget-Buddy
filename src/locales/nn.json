@@ -36,7 +36,9 @@
         "title": "Beta-funksjonar",
         "description": "Slå på eksperimentelle funksjonar som eksport til Excel.",
         "toggleLabel": "Aktiver beta-funksjonar"
-    }
+    },
+      "exportData": "Eksporter data til JSON",
+      "importData": "Importer data frå JSON"
   },
   "diet": {
     "vegetar": "Vegetar",

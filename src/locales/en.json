@@ -36,7 +36,9 @@
         "title": "Beta Features",
         "description": "Enable experimental features like Excel export.",
         "toggleLabel": "Enable Beta Features"
-      }
+      },
+      "exportData": "Export Data to JSON",
+      "importData": "Import Data from JSON"
     }
   },
   "diet": {
