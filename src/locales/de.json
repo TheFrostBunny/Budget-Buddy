@@ -9,7 +9,12 @@
 
     "appearance": {
       "title": "Erscheinungsbild",
-      "description": "Wähle helles oder dunkles Design"
+      "description": "Wähle helles oder dunkles Design",
+      "option": {
+        "light": "Hell",
+        "dark": "Dunkel",
+        "system": "System"
+      }
     },
     "language": {
       "title": "Sprache",

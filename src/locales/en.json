@@ -8,7 +8,12 @@
     },
     "appearance": {
       "title": "Appearance",
-      "description": "Choose light or dark theme"
+      "description": "Choose light or dark theme",
+      "option": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+      }
     },
     "language": {
       "title": "Language",

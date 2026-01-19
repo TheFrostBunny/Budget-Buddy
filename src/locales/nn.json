@@ -8,11 +8,16 @@
     },
     "appearance": {
       "title": "Utsjånad",
-      "description": "Vel lyst eller mørkt tema"
+      "description": "Vel lyst eller mørkt tema",
+      "option": {
+        "light": "Lyst",
+        "dark": "Mørkt",
+        "system": "System"
+      }
     },
     "language": {
       "title": "Språk",
-      "options": {
+      "option": {
         "no": "Norsk",
         "en": "Engelsk",
         "nn": "Nynorsk",
