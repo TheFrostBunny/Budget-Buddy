@@ -10,6 +10,7 @@
     "appearance": {
       "title": "Erscheinungsbild",
       "description": "Wähle helles oder dunkles Design",
+      "toggletheme": "Thema wechseln",
       "option": {
         "light": "Hell",
         "dark": "Dunkel",

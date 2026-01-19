@@ -9,6 +9,7 @@
     "appearance": {
       "title": "Appearance",
       "description": "Choose light or dark theme",
+      "toggletheme" : "Toggle Theme",
       "option": {
         "light": "Light",
         "dark": "Dark",

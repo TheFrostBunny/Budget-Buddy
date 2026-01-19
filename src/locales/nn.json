@@ -9,6 +9,7 @@
     "appearance": {
       "title": "Utsjånad",
       "description": "Vel lyst eller mørkt tema",
+      "toggletheme": "Bytt tema",
       "option": {
         "light": "Lyst",
         "dark": "Mørkt",

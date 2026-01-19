@@ -10,6 +10,7 @@
     "appearance": {
       "title": "Utseende",
       "description": "Velg lyst eller mørkt tema",
+      "toggletheme": "Bytt tema",
        "option": {
         "light": "Lyst",
         "dark": "Mørkt",
