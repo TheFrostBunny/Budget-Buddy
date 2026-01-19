@@ -11,7 +11,13 @@
       "description": "Vel lyst eller mørkt tema"
     },
     "language": {
-      "title": "Språk"
+      "title": "Språk",
+      "options": {
+        "no": "Norsk",
+        "en": "Engelsk",
+        "nn": "Nynorsk",
+        "de": "Tysk"
+      }
     },
     "developer": {
       "title": "Utviklarmodus",

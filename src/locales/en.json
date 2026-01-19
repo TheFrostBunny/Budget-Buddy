@@ -11,7 +11,13 @@
       "description": "Choose light or dark theme"
     },
     "language": {
-      "title": "Language"
+      "title": "Language",
+      "options": {
+        "no": "Norwegian",
+        "en": "English",
+        "nn": "Nynorsk",
+        "de": "German"
+      }
     },
     "developer": {
       "title": "Developer Mode",

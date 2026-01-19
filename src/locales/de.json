@@ -12,7 +12,12 @@
       "description": "Wähle helles oder dunkles Design"
     },
     "language": {
-      "title": "Sprache"
+      "title": "Sprache",
+      "option": {
+        "no": "Norwegisch",
+        "en": "Englisch",
+        "nn": "Nynorsk",
+        "de": "Deutsch"}
     },
     "developer": {
       "title": "Entwicklermodus",

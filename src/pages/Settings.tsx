@@ -91,10 +91,10 @@ const Settings = () => {
             onChange={(e) => changeLanguage(e.target.value)}
             className="w-full rounded border px-3 py-2 text-base bg-background text-foreground border-border dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border"
           >
-            <option value="no">Norsk</option>
-            <option value="en">English</option>
-            <option value="nn">Nynorsk</option>
-            <option value="de">Deutsch</option>
+            <option value="no">{t("language.no")}</option>
+            <option value="en">{t("language.en")}</option>
+            <option value="nn">{t("language.nn")}</option>
+            <option value="de">{t("language.de")}</option>
           </select>
         </CardContent>
       </Card>
