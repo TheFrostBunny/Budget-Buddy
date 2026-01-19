@@ -1,0 +1,128 @@
+{
+  "settings": {
+    "title": "Einstellungen",
+    "subtitle": "App-Konfiguration",
+    "dietary": {
+      "title": "Ernährungspräferenzen",
+      "description": "Wähle deine Präferenzen"
+    },
+
+    "appearance": {
+      "title": "Erscheinungsbild",
+      "description": "Wähle helles oder dunkles Design"
+    },
+    "language": {
+      "title": "Sprache"
+    },
+    "developer": {
+      "title": "Entwicklermodus",
+      "description": "Erweiterte Funktionen aktivieren",
+      "debugTools": "Debug-Werkzeuge",
+      "simulateNewDay": "„Neuen Tag“ simulieren (Ungenutztes sparen)",
+      "simulateDescription": "Erzwingt den täglichen Abschluss und speichert gegebenenfalls den Restbetrag.",
+      "confirmSimulation": "Dies beendet den Tag und verschiebt ungenutzte Beträge in die Ersparnisse. Bist du sicher?"
+    },
+    "footer": "Budget-App v1.0.0"
+  },
+  "diet": {
+    "vegetar": "Vegetarisch",
+    "vegan": "Vegan",
+    "glutenfri": "Glutenfrei",
+    "laktosefri": "Laktosefrei",
+    "økologisk": "Bio"
+  },
+  "budget": {
+    "status": "Status des gewählten Budgets",
+    "dailyBudget": "Täglicher Betrag",
+    "spent": "Heute ausgegeben",
+    "leftover": "Heute verbleibend",
+    "leftovertotal": "Vom Gesamtbetrag verbleibend"
+  },
+  "profile": {
+    "title": "Profil",
+    "subtitle": "Deine Übersicht",
+    "period": {
+      "title": "Standard-Budgetzeitraum",
+      "weekly": "Wöchentlich",
+      "monthly": "Monatlich",
+      "daily": "Werktäglich"
+    },
+    "labels": {
+      "dailyFood": "Tägliches Essensbudget (NOK)",
+      "monthlyBudget": "Monatliches Budget (NOK)",
+      "weeklyBudget": "Wöchentliches Budget (NOK)"
+    },
+    "placeholders": {
+      "daily": "Essensgeld alle 24 Stunden (kr)",
+      "amount": "Betrag in Kronen",
+      "days": "Anzahl der Tage"
+    },
+   "actions": {
+      "title": "Aktionen",
+      "resetSpending": "Ausgaben zurücksetzen",
+      "resetSavings": "Gesparten Betrag löschen",
+      "confirmResetSavings": "Bist du sicher, dass du den gesparten Betrag löschen möchtest?"
+    }
+  },
+  "dashboard": {
+    "title": "Budget Buddy",
+    "noBudget": "Kein Budget festgelegt. Gehe zu den Einstellungen, um eines einzurichten.",
+    "overview": {
+      "remaining": "Verbleibender Betrag",
+      "spent": "Ausgegeben:",
+      "total": "Gesamt:",
+      "savedTotal": "Du hast insgesamt gespart:",
+      "autoSaveInfo": "Ungenutzte Beträge werden um Mitternacht automatisch gespart"
+    },
+    "addExpense": {
+      "title": "Ausgabe erfassen",
+      "amount": "Betrag",
+      "date": "Datum",
+      "time": "Uhrzeit",
+      "saved": "Gespeichert!",
+      "add": "Ausgabe hinzufügen"
+    },
+    "history": {
+      "title": "Ausgabenverlauf",
+      "noDescription": "Keine Beschreibung"
+    }
+  },
+  "nav": {
+    "home": "Startseite",
+    "shoppingList": "Einkaufsliste",
+    "stores": "Geschäfte",
+    "profile": "Profil"
+  },
+  "shoppingList": {
+    "title": "Einkaufsliste",
+    "addItem": "Artikel hinzufügen",
+    "placeholder": "Was brauchst du?",
+    "searchPlaceholder": "Artikel suchen …",
+    "add": "Hinzufügen",
+    "empty": "Die Einkaufsliste ist leer",
+    "emptySubtitle": "Suche und füge oben Artikel hinzu",
+    "removeChecked": "Markierte entfernen",
+    "estimatedTotal": "Geschätzte Gesamtsumme (günstigste)",
+    "items": "Artikel"
+  },
+  "stores": {
+    "title": "Geschäftsübersicht",
+    "searchPlaceholder": "Nach Geschäften suchen …",
+    "yourStores": "Deine Geschäfte",
+    "nearby": "In der Nähe",
+    "offers": "Angebote",
+    "distance": "km entfernt",
+    "addLocation": "Geschäftsstandort hinzufügen",
+    "selectStore": "Geschäft auswählen",
+    "latitude": "Breitengrad",
+    "longitude": "Längengrad",
+    "address": "Adresse",
+    "searchAddress": "Adresse suchen",
+    "searching": "Suche läuft …",
+    "notFound": "Adresse nicht gefunden",
+    "myLocation": "Mein Standort",
+    "locationError": "Standort konnte nicht abgerufen werden",
+    "add": "Hinzufügen",
+    "coordinatesInfo": "Oder Koordinaten manuell eingeben"
+  }
+}
