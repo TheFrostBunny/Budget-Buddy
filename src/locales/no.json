@@ -9,20 +9,38 @@
 
     "appearance": {
       "title": "Utseende",
-      "description": "Velg lyst eller mørkt tema"
+      "description": "Velg lyst eller mørkt tema",
+      "toggletheme": "Bytt tema",
+       "option": {
+        "light": "Lyst",
+        "dark": "Mørkt",
+        "system": "System"
+      }
     },
     "language": {
-      "title": "Språk"
+      "title": "Språk",
+      "option": {
+        "no": "Norsk",
+        "en": "Engelsk",
+        "nn": "Nynorsk",
+        "de": "Tysk"
+      }
     },
     "developer": {
       "title": "Utviklermodus",
       "description": "Aktiver avanserte funksjoner",
       "debugTools": "Debug Verktøy",
-      "simulateNewDay": "Simuler 'Ny Dag' (Spar ubrukt)",
+      "simulateNewDay": "Simuler «Ny Dag» (Spar ubrukt)",
       "simulateDescription": "Tvinger gjennom daglig oppgjør og sparer eventuelt restbeløp.",
-      "confirmSimulation": "Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?"
-    },
-    "footer": "Budsjett App v1.0.0"
+      "confirmSimulation": "Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?",
+      "beta": {
+        "title": "Beta-funksjoner",
+        "description": "Aktiver eksperimentelle funksjoner som Excel-eksport.",
+        "toggleLabel": "Aktiver beta-funksjoner"
+      },
+      "exportData": "Eksporter data til JSON",
+      "importData": "Importer data fra JSON"
+    }
   },
   "diet": {
     "vegetar": "Vegetar",
@@ -126,3 +144,4 @@
     "coordinatesInfo": "Eller skriv inn koordinater manuelt"
   }
 }
+

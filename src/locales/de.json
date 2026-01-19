@@ -9,20 +9,37 @@
 
     "appearance": {
       "title": "Erscheinungsbild",
-      "description": "Wähle helles oder dunkles Design"
+      "description": "Wähle helles oder dunkles Design",
+      "toggletheme": "Thema wechseln",
+      "option": {
+        "light": "Hell",
+        "dark": "Dunkel",
+        "system": "System"
+      }
     },
     "language": {
-      "title": "Sprache"
+      "title": "Sprache",
+      "option": {
+        "no": "Norwegisch",
+        "en": "Englisch",
+        "nn": "Nynorsk",
+        "de": "Deutsch"}
     },
     "developer": {
       "title": "Entwicklermodus",
       "description": "Erweiterte Funktionen aktivieren",
       "debugTools": "Debug-Werkzeuge",
-      "simulateNewDay": "„Neuen Tag“ simulieren (Ungenutztes sparen)",
+      "simulateNewDay": "«Neuen Tag» simulieren (Ungenutztes sparen)",
       "simulateDescription": "Erzwingt den täglichen Abschluss und speichert gegebenenfalls den Restbetrag.",
-      "confirmSimulation": "Dies beendet den Tag und verschiebt ungenutzte Beträge in die Ersparnisse. Bist du sicher?"
-    },
-    "footer": "Budget-App v1.0.0"
+      "confirmSimulation": "Dies beendet den Tag und verschiebt ungenutzte Beträge in die Ersparnisse. Bist du sicher?",
+       "beta": {
+        "title": "Beta-Funktionen",
+        "description": "Experimentelle Funktionen wie Excel-Export aktivieren.",
+        "toggleLabel": "Beta-Funktionen aktivieren"
+      },
+      "exportData": "Daten als JSON exportieren",
+      "importData": "Daten aus JSON importieren"
+    }
   },
   "diet": {
     "vegetar": "Vegetarisch",

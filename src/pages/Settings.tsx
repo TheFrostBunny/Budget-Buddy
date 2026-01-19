@@ -4,15 +4,29 @@ import { Switch } from "@/components/ui/switch";
 import { useBudget } from "@/components/budget-provider";
 import { Settings as SettingsIcon, Languages, Laptop, Palette, Leaf } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { DIETARY_LABELS, DietaryInfo } from "@/types";
 import { usePreferences } from "@/hooks/useLocalStorage";
 import { useTranslation } from "react-i18next";
+import { UserPreferences } from "@/types";
+import { exportDataToJson, importDataFromJson } from "@/lib/dataTransfer";
 
 const Settings = () => {
-  const { completePeriod } = useBudget();
-  const { preferences, toggleDietaryPreference } = usePreferences();
+  const { preferences, setPreferencesState, toggleDietaryPreference } = usePreferences();
+  const budget = useBudget();
+
+  const handleImport = (data: { preferences?: UserPreferences; budget?: { amount: number; period: "weekly" | "monthly" | "daily" } }) => {
+    if (data.preferences) {
+      setPreferencesState(data.preferences);
+    }
+    if (data.budget) {
+      const validPeriods: Array<"weekly" | "monthly" | "daily"> = ["weekly", "monthly", "daily"];
+      const period = validPeriods.includes(data.budget.period) ? data.budget.period : "weekly";
+      budget.setBudget(data.budget.amount, period);
+    }
+  };
+
   const [isDevMode, setIsDevMode] = useState(false);
   const [betaEnabled, setBetaEnabled] = useState(() => localStorage.getItem("beta_features") === "true");
   const { t, i18n } = useTranslation();
@@ -40,8 +54,6 @@ const Settings = () => {
           <p className="text-muted-foreground">{t("settings.subtitle")}</p>
         </div>
       </header>
-
-      {/* Dietary Preferences */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
@@ -78,13 +90,10 @@ const Settings = () => {
         <CardContent></CardContent>
       </Card>
 
-      {/* Language */}
       <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-base">
-            <Languages className="h-4 w-4" />
-            {t("settings.language.title")}
-          </CardTitle>
+        <CardHeader className="flex items-center gap-2 text-base">
+          <Languages className="h-4 w-4" />
+          {t("settings.language.title")}
         </CardHeader>
         <CardContent className="flex gap-2">
           <select
@@ -92,40 +101,14 @@ const Settings = () => {
             onChange={(e) => changeLanguage(e.target.value)}
             className="w-full rounded border px-3 py-2 text-base bg-background text-foreground border-border dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border"
           >
-            <option value="no">Norsk</option>
-            <option value="en">English</option>
-            <option value="nn">Nynorsk</option>
-            <option value="de">Deutsch</option>
+            <option value="no">{t("settings.language.option.no")}</option>
+            <option value="en">{t("settings.language.option.en")}</option>
+            <option value="nn">{t("settings.language.option.nn")}</option>
+            <option value="de">{t("settings.language.option.de")}</option>
           </select>
         </CardContent>
       </Card>
 
-     {/* Beta Features */}
-      <Card className="mb-4 border-2 border-dashed border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-yellow-700 dark:text-yellow-300">
-            <Leaf className="h-5 w-5" />
-            {t("settings.beta.title", "Beta-funksjoner")}
-          </CardTitle>
-          <CardDescription className="text-yellow-700 dark:text-yellow-300">
-            {t("settings.beta.description", "Slå på eksperimentelle funksjoner som eksport til Excel.")}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-4">
-            <span className="text-yellow-700 dark:text-yellow-300">{t("settings.beta.toggleLabel", "Aktiver beta-funksjoner")}</span>
-            <Switch
-              checked={betaEnabled}
-              onCheckedChange={checked => {
-                setBetaEnabled(checked);
-                localStorage.setItem("beta_features", checked ? "true" : "false");
-              }}
-            />
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Developer Mode */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div className="space-y-1">
@@ -147,7 +130,7 @@ const Settings = () => {
                   className="w-full border-dashed"
                   onClick={() => {
                     if (confirm(t("settings.developer.confirmSimulation"))) {
-                      completePeriod();
+                      budget.completePeriod();
                     }
                   }}
                 >
@@ -156,14 +139,54 @@ const Settings = () => {
                 <p className="mt-1 text-xs text-muted-foreground">
                   {t("settings.developer.simulateDescription")}
                 </p>
+                {/* Export Data Feature */}
+                <Button
+                  variant="outline"
+                  className="w-full border-dashed"
+                  onClick={() => exportDataToJson({ preferences, budget })}
+                >
+                  {t("settings.developer.exportData", "Export Data to JSON")}
+                </Button>
+                {/* Import Data Feature */}
+                <Button
+                  variant="outline"
+                  className="w-full border-dashed"
+                  onClick={() => importDataFromJson(handleImport)}
+                >
+                  {t("settings.developer.importData", "Import Data from JSON")}
+                </Button>
               </div>
+              {/* Beta Features */}
+              <Card className="mt-4 border-2 border-dashed border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-yellow-700 dark:text-yellow-300">
+                    <Leaf className="h-5 w-5" />
+                    {t("settings.developer.beta.title", "Beta-funksjoner")}
+                  </CardTitle>
+                  <CardDescription className="text-yellow-700 dark:text-yellow-300">
+                    {t("settings.developer.beta.description", "Slå på eksperimentelle funksjoner som eksport til Excel.")}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center gap-4">
+                    <span className="text-yellow-700 dark:text-yellow-300">{t("settings.developer.beta.toggleLabel", "Aktiver beta-funksjoner")}</span>
+                    <Switch
+                      checked={betaEnabled}
+                      onCheckedChange={checked => {
+                        setBetaEnabled(checked);
+                        localStorage.setItem("beta_features", checked ? "true" : "false");
+                      }}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           )}
         </CardContent>
       </Card>
 
       <div className="pt-8 text-center text-xs text-muted-foreground">
-        <p>{t("settings.footer")}</p>
+        <p>Budget Buddy V1.1.0</p>
       </div>
     </div>
   );

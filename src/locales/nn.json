@@ -8,10 +8,22 @@
     },
     "appearance": {
       "title": "Utsjånad",
-      "description": "Vel lyst eller mørkt tema"
+      "description": "Vel lyst eller mørkt tema",
+      "toggletheme": "Bytt tema",
+      "option": {
+        "light": "Lyst",
+        "dark": "Mørkt",
+        "system": "System"
+      }
     },
     "language": {
-      "title": "Språk"
+      "title": "Språk",
+      "option": {
+        "no": "Norsk",
+        "en": "Engelsk",
+        "nn": "Nynorsk",
+        "de": "Tysk"
+      }
     },
     "developer": {
       "title": "Utviklarmodus",
@@ -19,9 +31,14 @@
       "debugTools": "Feilsøkingsverktøy",
       "simulateNewDay": "Simuler «Ny dag» (spar ubrukt)",
       "simulateDescription": "Tvingar gjennom dagleg oppgjer og sparer eventuelt restbeløp.",
-      "confirmSimulation": "Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?"
+      "confirmSimulation": "Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?",
+      "beta": {
+        "title": "Beta-funksjonar",
+        "description": "Slå på eksperimentelle funksjonar som eksport til Excel.",
+        "toggleLabel": "Aktiver beta-funksjonar"
     },
-    "footer": "Budsjettapp v1.0.0"
+      "exportData": "Eksporter data til JSON",
+      "importData": "Importer data frå JSON"
   },
   "diet": {
     "vegetar": "Vegetar",
@@ -124,4 +141,5 @@
     "add": "Legg til",
     "coordinatesInfo": "Eller skriv inn koordinatar manuelt"
   }
+}
 }
