@@ -29,7 +29,7 @@
       "title": "Developer Mode",
       "description": "Enable advanced features",
       "debugTools": "Debug Tools",
-      "simulateNewDay": "Simulate 'New Day' (Save unused)",
+      "simulateNewDay": "Simulate «New Day» (Save unused)",
       "simulateDescription": "Forces daily settlement and saves any remaining amount.",
       "confirmSimulation": "This will end the day and move unused funds to savings. Are you sure?"
     }

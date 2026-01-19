@@ -30,7 +30,7 @@
       "title": "Utviklermodus",
       "description": "Aktiver avanserte funksjoner",
       "debugTools": "Debug Verktøy",
-      "simulateNewDay": "Simuler 'Ny Dag' (Spar ubrukt)",
+      "simulateNewDay": "Simuler «Ny Dag» (Spar ubrukt)",
       "simulateDescription": "Tvinger gjennom daglig oppgjør og sparer eventuelt restbeløp.",
       "confirmSimulation": "Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?"
     }

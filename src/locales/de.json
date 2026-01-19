@@ -29,7 +29,7 @@
       "title": "Entwicklermodus",
       "description": "Erweiterte Funktionen aktivieren",
       "debugTools": "Debug-Werkzeuge",
-      "simulateNewDay": "„Neuen Tag“ simulieren (Ungenutztes sparen)",
+      "simulateNewDay": "«Neuen Tag» simulieren (Ungenutztes sparen)",
       "simulateDescription": "Erzwingt den täglichen Abschluss und speichert gegebenenfalls den Restbetrag.",
       "confirmSimulation": "Dies beendet den Tag und verschiebt ungenutzte Beträge in die Ersparnisse. Bist du sicher?"
     }

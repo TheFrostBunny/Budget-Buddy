@@ -8,6 +8,7 @@ const urlsToCache = [
 ];
 
 self.addEventListener("install", (event) => {
+  self.skipWaiting(); // Activate the new service worker immediately
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(urlsToCache);
@@ -36,4 +37,37 @@ self.addEventListener("activate", (event) => {
       );
     })
   );
+  self.clients.claim(); // Take control of all open clients
+});
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+// Check for app version updates
+async function checkAppVersion() {
+  const cache = await caches.open(CACHE_NAME);
+  const response = await cache.match("/manifest.json");
+  if (response) {
+    const manifest = await response.json();
+    const currentVersion = manifest.version;
+
+    // Fetch the latest manifest.json
+    const latestResponse = await fetch("/manifest.json");
+    const latestManifest = await latestResponse.json();
+    const latestVersion = latestManifest.version;
+
+    if (currentVersion !== latestVersion) {
+      self.registration.showNotification("Ny versjon tilgjengelig", {
+        body: `Versjon ${latestVersion} er tilgjengelig. Oppdater appen!`,
+        icon: "/icons/icon-192x192.png",
+      });
+    }
+  }
+}
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(checkAppVersion());
 });
