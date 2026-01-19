@@ -40,8 +40,6 @@ const Settings = () => {
           <p className="text-muted-foreground">{t("settings.subtitle")}</p>
         </div>
       </header>
-
-      {/* Dietary Preferences */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
@@ -78,7 +76,6 @@ const Settings = () => {
         <CardContent></CardContent>
       </Card>
 
-      {/* Language */}
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2 text-base">
@@ -92,40 +89,14 @@ const Settings = () => {
             onChange={(e) => changeLanguage(e.target.value)}
             className="w-full rounded border px-3 py-2 text-base bg-background text-foreground border-border dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border"
           >
-            <option value="no">Norsk</option>
-            <option value="en">English</option>
-            <option value="nn">Nynorsk</option>
-            <option value="de">Deutsch</option>
+            <option value="no">{t("settings.language.option.no")}</option>
+            <option value="en">{t("settings.language.option.en")}</option>
+            <option value="nn">{t("settings.language.option.nn")}</option>
+            <option value="de">{t("settings.language.option.de")}</option>
           </select>
         </CardContent>
       </Card>
 
-     {/* Beta Features */}
-      <Card className="mb-4 border-2 border-dashed border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-yellow-700 dark:text-yellow-300">
-            <Leaf className="h-5 w-5" />
-            {t("settings.beta.title", "Beta-funksjoner")}
-          </CardTitle>
-          <CardDescription className="text-yellow-700 dark:text-yellow-300">
-            {t("settings.beta.description", "Slå på eksperimentelle funksjoner som eksport til Excel.")}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-4">
-            <span className="text-yellow-700 dark:text-yellow-300">{t("settings.beta.toggleLabel", "Aktiver beta-funksjoner")}</span>
-            <Switch
-              checked={betaEnabled}
-              onCheckedChange={checked => {
-                setBetaEnabled(checked);
-                localStorage.setItem("beta_features", checked ? "true" : "false");
-              }}
-            />
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Developer Mode */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div className="space-y-1">
@@ -157,13 +128,37 @@ const Settings = () => {
                   {t("settings.developer.simulateDescription")}
                 </p>
               </div>
+              {/* Beta Features */}
+              <Card className="mt-4 border-2 border-dashed border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-yellow-700 dark:text-yellow-300">
+                    <Leaf className="h-5 w-5" />
+                    {t("settings.developer.beta.title", "Beta-funksjoner")}
+                  </CardTitle>
+                  <CardDescription className="text-yellow-700 dark:text-yellow-300">
+                    {t("settings.developer.beta.description", "Slå på eksperimentelle funksjoner som eksport til Excel.")}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center gap-4">
+                    <span className="text-yellow-700 dark:text-yellow-300">{t("settings.developer.beta.toggleLabel", "Aktiver beta-funksjoner")}</span>
+                    <Switch
+                      checked={betaEnabled}
+                      onCheckedChange={checked => {
+                        setBetaEnabled(checked);
+                        localStorage.setItem("beta_features", checked ? "true" : "false");
+                      }}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           )}
         </CardContent>
       </Card>
 
       <div className="pt-8 text-center text-xs text-muted-foreground">
-        <p>{t("settings.footer")}</p>
+        <p>Budget Buddy V1.1.0</p>
       </div>
     </div>
   );

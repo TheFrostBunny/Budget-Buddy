@@ -8,20 +8,36 @@
     },
     "appearance": {
       "title": "Appearance",
-      "description": "Choose light or dark theme"
+      "description": "Choose light or dark theme",
+      "toggletheme" : "Toggle Theme",
+      "option": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+      }
     },
     "language": {
-      "title": "Language"
+      "title": "Language",
+      "option": {
+        "no": "Norwegian",
+        "en": "English",
+        "nn": "Nynorsk",
+        "de": "German"
+      }
     },
     "developer": {
       "title": "Developer Mode",
       "description": "Enable advanced features",
       "debugTools": "Debug Tools",
-      "simulateNewDay": "Simulate 'New Day' (Save unused)",
+      "simulateNewDay": "Simulate «New Day» (Save unused)",
       "simulateDescription": "Forces daily settlement and saves any remaining amount.",
-      "confirmSimulation": "This will end the day and move unused funds to savings. Are you sure?"
-    },
-    "footer": "Budget App v1.0.0"
+      "confirmSimulation": "This will end the day and move unused funds to savings. Are you sure?",
+      "beta": {
+        "title": "Beta Features",
+        "description": "Enable experimental features like Excel export.",
+        "toggleLabel": "Enable Beta Features"
+      }
+    }
   },
   "diet": {
     "vegetar": "Vegetarian",
