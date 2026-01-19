@@ -34,7 +34,6 @@
 ## Development Plan
 
 ### Phase 1: Core Enhancements
-- Implement export/import functionality.
 - Add recurring expenses and savings goals.
 - Improve localization with additional languages.
 

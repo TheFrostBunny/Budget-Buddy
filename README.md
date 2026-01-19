@@ -30,46 +30,33 @@ The Budsjett App is a budgeting application designed to help users manage their 
 
 ## Installation
 
-### Prerequisites
-- Node.js (v16 or higher)
-- pnpm (Package Manager)
-
-### Steps
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd Budsjett-app
-   ```
-3. Install dependencies:
-   ```bash
-   pnpm install
-   ```
-4. Start the development server:
-   ```bash
-   pnpm dev
-   ```
-5. Open the app in your browser at `http://localhost:3000`.
-
-## Folder Structure
-
+### Using `pnpm`
+```bash
+pnpm install
+pnpm dev
 ```
-Budsjett-app/
-├── public/          # Static assets
-├── src/             # Source code
-│   ├── components/  # Reusable components
-│   ├── pages/       # Application pages
-│   ├── hooks/       # Custom hooks
-│   ├── lib/         # Utility functions
-│   ├── locales/     # Translation files
-│   ├── data/        # Mock data
-│   └── types/       # TypeScript types
-├── README.md        # Project overview
-├── DOCUMENTATION.md # Detailed documentation
-├── package.json     # Project metadata
-└── vite.config.ts   # Vite configuration
+
+### Using `npm`
+```bash
+npm install
+npm run dev
+```
+
+## Scripts
+- `dev`: Start the development server.
+- `build`: Build the app for production.
+- `start`: Serve the production build.
+- `test`: Run tests.
+
+## Project Structure
+```
+public/         # Static assets
+src/            # Source code
+  components/   # Reusable UI components
+  pages/        # Application pages
+  hooks/        # Custom React hooks
+  lib/          # Utility functions
+  locales/      # Localization files
 ```
 
 ## Key Files
@@ -79,20 +66,10 @@ Budsjett-app/
 - **src/components/ui/**: Contains reusable UI components like buttons, cards, etc.
 
 ## Contributing
-
 1. Fork the repository.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add your message here"
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
+2. Create a new branch for your feature: `git checkout -b feature-name`.
+3. Commit your changes: `git commit -m 'Add new feature'`.
+4. Push to the branch: `git push origin feature-name`.
 5. Open a pull request.
 
 ## License
