@@ -14,6 +14,7 @@ interface BudgetContextType {
   setBudget: (amount: number, period: "weekly" | "monthly" | "daily") => void;
   updateBudget: (amount: number, period?: "weekly" | "monthly" | "daily") => void;
   addSpending: (amount: number, storeId?: string, description?: string) => void;
+  removeSpending: (id: string) => void;
   resetSpending: () => void;
   completePeriod: () => void;
   resetSavingsBalance: () => void;
@@ -187,6 +188,14 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
     setSavings(0);
   };
 
+  const removeSpending = (id: string) => {
+    setSpendingState((prev) => ({
+      ...prev,
+      transactions: prev.transactions.filter((tx) => tx.id !== id),
+      spent: prev.transactions.filter((tx) => tx.id !== id).reduce((sum, tx) => sum + tx.amount, 0),
+    }));
+  };
+
   return (
     <BudgetContext.Provider
       value={{
@@ -196,6 +205,7 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
         setBudget,
         updateBudget,
         addSpending,
+        removeSpending,
         resetSpending,
         completePeriod,
         resetSavingsBalance,

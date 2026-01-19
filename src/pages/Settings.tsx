@@ -14,6 +14,7 @@ const Settings = () => {
   const { completePeriod } = useBudget();
   const { preferences, toggleDietaryPreference } = usePreferences();
   const [isDevMode, setIsDevMode] = useState(false);
+  const [betaEnabled, setBetaEnabled] = useState(() => localStorage.getItem("beta_features") === "true");
   const { t, i18n } = useTranslation();
 
   const dietaryOptions: DietaryInfo[] = [
@@ -95,6 +96,33 @@ const Settings = () => {
           </select>
         </CardContent>
       </Card>
+
+     {/* Beta Features */}
+      <Card className="mb-4 border-2 border-dashed border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-yellow-700 dark:text-yellow-300">
+            <Leaf className="h-5 w-5" />
+            {t("settings.beta.title", "Beta-funksjoner")}
+          </CardTitle>
+          <CardDescription className="text-yellow-700 dark:text-yellow-300">
+            {t("settings.beta.description", "Slå på eksperimentelle funksjoner som eksport til Excel.")}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center gap-4">
+            <span className="text-yellow-700 dark:text-yellow-300">{t("settings.beta.toggleLabel", "Aktiver beta-funksjoner")}</span>
+            <Switch
+              checked={betaEnabled}
+              onCheckedChange={checked => {
+                setBetaEnabled(checked);
+                localStorage.setItem("beta_features", checked ? "true" : "false");
+              }}
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Developer Mode */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div className="space-y-1">
