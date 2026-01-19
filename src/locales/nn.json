@@ -13,6 +13,11 @@
     "language": {
       "title": "Språk"
     },
+    "beta": {
+      "title": "Beta-funksjonar",
+      "description": "Slå på eksperimentelle funksjonar som eksport til Excel.",
+      "toggleLabel": "Aktiver beta-funksjonar"
+    },
     "developer": {
       "title": "Utviklarmodus",
       "description": "Aktiver avanserte funksjonar",

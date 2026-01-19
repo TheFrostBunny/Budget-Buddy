@@ -125,15 +125,15 @@ const Settings = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-yellow-700 dark:text-yellow-300">
             <Leaf className="h-5 w-5" />
-            {t("settings.beta.title", "Beta-funksjoner")}
+            {t("settings.beta.title")}
           </CardTitle>
           <CardDescription className="text-yellow-700 dark:text-yellow-300">
-            {t("settings.beta.description", "Slå på eksperimentelle funksjoner som eksport til Excel.")}
+            {t("settings.beta.description")}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-4">
-            <span className="text-yellow-700 dark:text-yellow-300">{t("settings.beta.toggleLabel", "Aktiver beta-funksjoner")}</span>
+            <span className="text-yellow-700 dark:text-yellow-300">{t("settings.beta.toggleLabel")}</span>
             <Switch
               checked={betaEnabled}
               onCheckedChange={checked => {
