@@ -32,8 +32,7 @@
       "simulateNewDay": "Simuler «Ny dag» (spar ubrukt)",
       "simulateDescription": "Tvingar gjennom dagleg oppgjer og sparer eventuelt restbeløp.",
       "confirmSimulation": "Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?"
-    },
-    "footer": "Budsjettapp v1.0.0"
+    }
   },
   "diet": {
     "vegetar": "Vegetar",

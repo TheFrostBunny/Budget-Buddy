@@ -39,8 +39,6 @@ const Settings = () => {
           <p className="text-muted-foreground">{t("settings.subtitle")}</p>
         </div>
       </header>
-
-      {/* Dietary Preferences */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
@@ -77,7 +75,6 @@ const Settings = () => {
         <CardContent></CardContent>
       </Card>
 
-      {/* Language */}
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2 text-base">
@@ -98,8 +95,6 @@ const Settings = () => {
           </select>
         </CardContent>
       </Card>
-
-      {/* Developer Mode */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div className="space-y-1">
@@ -137,7 +132,7 @@ const Settings = () => {
       </Card>
 
       <div className="pt-8 text-center text-xs text-muted-foreground">
-        <p>{t("settings.footer")}</p>
+        <p>Budget Buddy V1.1.0</p>
       </div>
     </div>
   );

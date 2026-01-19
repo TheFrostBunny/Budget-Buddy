@@ -32,8 +32,7 @@
       "simulateNewDay": "Simulate 'New Day' (Save unused)",
       "simulateDescription": "Forces daily settlement and saves any remaining amount.",
       "confirmSimulation": "This will end the day and move unused funds to savings. Are you sure?"
-    },
-    "footer": "Budget App v1.0.0"
+    }
   },
   "diet": {
     "vegetar": "Vegetarian",
