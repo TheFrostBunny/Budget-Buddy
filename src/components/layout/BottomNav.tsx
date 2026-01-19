@@ -15,7 +15,7 @@ export function BottomNav() {
   const { t } = useTranslation();
 
   return (
-    <nav className="safe-bottom fixed bottom-0 left-0 right-0 z-50 border-t bg-card">
+    <nav className="safe-bottom fixed bottom-0 left-0 right-0 z-50 border-t bg-card" data-tour="navigation">
       <div className="flex items-center justify-around py-2">
         {navItems.map(({ to, icon: Icon, labelKey }) => {
           const isActive = location.pathname === to;

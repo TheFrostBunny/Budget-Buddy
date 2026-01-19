@@ -15,7 +15,7 @@ export function BudgetCard({ budget, spent, period }: BudgetCardProps) {
   const isNearLimit = percentageSpent > 80 && !isOverBudget;
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden" data-tour="budget">
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center justify-between text-lg">
           <span>

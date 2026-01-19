@@ -13,6 +13,11 @@
     "language": {
       "title": "Language"
     },
+    "beta": {
+      "title": "Beta Features",
+      "description": "Enable experimental features like Excel export.",
+      "toggleLabel": "Enable beta features"
+    },
     "developer": {
       "title": "Developer Mode",
       "description": "Enable advanced features",

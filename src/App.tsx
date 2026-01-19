@@ -15,8 +15,41 @@ import NotFound from "./pages/NotFound";
 import { useEffect, useRef } from "react";
 import { toast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { TourProvider } from "@reactour/tour";
+import Onboarding from "./components/Onboarding";
 
 const queryClient = new QueryClient();
+
+// Onboarding steps
+const tourSteps = [
+  {
+    selector: '[data-tour="navigation"]',
+    content: (
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2">Navigasjon</h3>
+        <p>Dette er navigasjonsmenyen. Bruk den til å navigere mellom forskjellige sider i appen.</p>
+      </div>
+    ),
+  },
+  {
+    selector: '[data-tour="budget"]',
+    content: (
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2">Budsjett</h3>
+        <p>Her kan du se og administrere budsjettet ditt. Hold oversikt over inntekter og utgifter.</p>
+      </div>
+    ),
+  },
+  {
+    selector: '[data-tour="shopping"]',
+    content: (
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2">Handleliste</h3>
+        <p>Dette er handlelisten din. Legg til og fjern varer, og hold oversikt over hva du trenger å handle.</p>
+      </div>
+    ),
+  },
+];
 
 const App = () => {
   const isMobile = useIsMobile();

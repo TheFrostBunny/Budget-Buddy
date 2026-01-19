@@ -2,13 +2,15 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useBudget } from "@/components/budget-provider";
-import { Settings as SettingsIcon, Languages, Laptop, Palette, Leaf } from "lucide-react";
+import { Settings as SettingsIcon, Languages, Laptop, Palette, Leaf, PlayCircle } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { DIETARY_LABELS, DietaryInfo } from "@/types";
 import { usePreferences } from "@/hooks/useLocalStorage";
 import { useTranslation } from "react-i18next";
+import { useTour } from "@reactour/tour";
+import { toast } from "@/hooks/use-toast";
 
 const Settings = () => {
   const { completePeriod } = useBudget();
@@ -16,6 +18,7 @@ const Settings = () => {
   const [isDevMode, setIsDevMode] = useState(false);
   const [betaEnabled, setBetaEnabled] = useState(() => localStorage.getItem("beta_features") === "true");
   const { t, i18n } = useTranslation();
+  const { setIsOpen, setCurrentStep } = useTour();
 
   const dietaryOptions: DietaryInfo[] = [
     "vegetar",
@@ -27,6 +30,23 @@ const Settings = () => {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+  };
+
+  const resetOnboarding = () => {
+    localStorage.removeItem("onboarding_completed");
+    toast({
+      title: "Onboarding tilbakestilt",
+      description: "Du vil se onboarding-guiden neste gang du laster siden på nytt.",
+    });
+  };
+
+  const startOnboarding = () => {
+    setCurrentStep(0);
+    setIsOpen(true);
+    toast({
+      title: "Onboarding startet",
+      description: "Følg guiden for å lære hvordan appen fungerer.",
+    });
   };
 
   return (
@@ -121,6 +141,39 @@ const Settings = () => {
                 localStorage.setItem("beta_features", checked ? "true" : "false");
               }}
             />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Onboarding Test */}
+      <Card className="border-2 border-dashed border-blue-400 bg-blue-50 dark:bg-blue-900/20">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+            <PlayCircle className="h-5 w-5" />
+            Test Onboarding
+          </CardTitle>
+          <CardDescription className="text-blue-700 dark:text-blue-300">
+            Test onboarding-funksjonen som nye brukere vil se
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <div className="flex flex-col gap-2">
+            <Button 
+              onClick={startOnboarding}
+              variant="outline"
+              className="w-full border-blue-400 text-blue-700 hover:bg-blue-100 dark:text-blue-300 dark:hover:bg-blue-900/40"
+            >
+              <PlayCircle className="mr-2 h-4 w-4" />
+              Start onboarding nå
+            </Button>
+            <Button 
+              onClick={resetOnboarding}
+              variant="outline"
+              size="sm"
+              className="w-full border-blue-400 text-blue-700 hover:bg-blue-100 dark:text-blue-300 dark:hover:bg-blue-900/40"
+            >
+              Tilbakestill som ny bruker
+            </Button>
           </div>
         </CardContent>
       </Card>

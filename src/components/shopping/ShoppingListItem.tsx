@@ -38,6 +38,7 @@ export function ShoppingListItemComponent({
         "flex items-center gap-3 rounded-lg border bg-card p-3 transition-opacity",
         item.isChecked && "opacity-60",
       )}
+      data-tour="shopping"
     >
       <Checkbox
         checked={item.isChecked}
