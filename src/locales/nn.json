@@ -31,7 +31,11 @@
       "debugTools": "Feilsøkingsverktøy",
       "simulateNewDay": "Simuler «Ny dag» (spar ubrukt)",
       "simulateDescription": "Tvingar gjennom dagleg oppgjer og sparer eventuelt restbeløp.",
-      "confirmSimulation": "Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?"
+      "confirmSimulation": "Dette vil avslutte dagen og flytte ubrukt beløp til sparing. Er du sikker?",
+      "beta": {
+        "title": "Beta-funksjonar",
+        "description": "Slå på eksperimentelle funksjonar som eksport til Excel.",
+        "toggleLabel": "Aktiver beta-funksjonar"
     }
   },
   "diet": {
@@ -135,4 +139,5 @@
     "add": "Legg til",
     "coordinatesInfo": "Eller skriv inn koordinatar manuelt"
   }
+}
 }

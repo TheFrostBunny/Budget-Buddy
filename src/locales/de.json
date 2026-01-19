@@ -31,7 +31,12 @@
       "debugTools": "Debug-Werkzeuge",
       "simulateNewDay": "«Neuen Tag» simulieren (Ungenutztes sparen)",
       "simulateDescription": "Erzwingt den täglichen Abschluss und speichert gegebenenfalls den Restbetrag.",
-      "confirmSimulation": "Dies beendet den Tag und verschiebt ungenutzte Beträge in die Ersparnisse. Bist du sicher?"
+      "confirmSimulation": "Dies beendet den Tag und verschiebt ungenutzte Beträge in die Ersparnisse. Bist du sicher?",
+       "beta": {
+        "title": "Beta-Funktionen",
+        "description": "Experimentelle Funktionen wie Excel-Export aktivieren.",
+        "toggleLabel": "Beta-Funktionen aktivieren"
+      }
     }
   },
   "diet": {
