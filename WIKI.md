@@ -94,21 +94,6 @@ need to stay on top of your financial goals.
 
 ---
 
-## For brukere: Prosedyrer og krav
-
-Denne seksjonen gir en oversikt over hvordan du bruker appen, samt eventuelle krav til maskinvare og operativsystem.
-
-### Krav til maskinvare og operativsystem
-
-- **Operativsystem:**
-   - Web: Moderne nettleser (Chrome, Firefox, Edge, Safari) på Windows, macOS, Linux, Android eller iOS.
-   - Frittstående app (PWA): Kan installeres på de fleste enheter som støtter Progressive Web Apps.
-- **Maskinvare:**
-   - Ingen spesielle krav. Appen fungerer på både mobil, nettbrett og PC.
-   - Minimum 1 GB RAM anbefales for optimal ytelse.
-
----
-
 ## For users: Procedures and requirements
 
 This section provides an overview of how to use the app, as well as any hardware and operating system requirements.
