@@ -3,36 +3,6 @@
 Welcome to the **Budsjett App** Wiki! This documentation hub is designed to provide comprehensive
 information about the app, including its features, setup instructions, and development guidelines.
 
----
-
-## For brukere: Prosedyrer og krav
-
-Denne seksjonen gir en oversikt over hvordan du bruker appen, samt eventuelle krav til maskinvare og operativsystem.
-
-### Krav til maskinvare og operativsystem
-
-- **Operativsystem:**
-   - Web: Moderne nettleser (Chrome, Firefox, Edge, Safari) på Windows, macOS, Linux, Android eller iOS.
-   - Frittstående app (PWA): Kan installeres på de fleste enheter som støtter Progressive Web Apps.
-- **Maskinvare:**
-   - Ingen spesielle krav. Appen fungerer på både mobil, nettbrett og PC.
-   - Minimum 1 GB RAM anbefales for optimal ytelse.
-
----
-
-## For users: Procedures and requirements
-
-This section provides an overview of how to use the app, as well as any hardware and operating system requirements.
-
-### Hardware and operating system requirements
-
-- **Operating system:**
-   - Web: Modern browser (Chrome, Firefox, Edge, Safari) on Windows, macOS, Linux, Android, or iOS.
-   - Standalone app (PWA): Can be installed on most devices that support Progressive Web Apps.
-- **Hardware:**
-   - No special requirements. The app works on mobile, tablet, and PC.
-   - Minimum 1 GB RAM is recommended for optimal performance.
-
 ## Table of Contents
 
 1. [Overview](#overview)
@@ -123,6 +93,34 @@ need to stay on top of your financial goals.
 - pnpm (Package Manager)
 
 ---
+
+## For brukere: Prosedyrer og krav
+
+Denne seksjonen gir en oversikt over hvordan du bruker appen, samt eventuelle krav til maskinvare og operativsystem.
+
+### Krav til maskinvare og operativsystem
+
+- **Operativsystem:**
+   - Web: Moderne nettleser (Chrome, Firefox, Edge, Safari) på Windows, macOS, Linux, Android eller iOS.
+   - Frittstående app (PWA): Kan installeres på de fleste enheter som støtter Progressive Web Apps.
+- **Maskinvare:**
+   - Ingen spesielle krav. Appen fungerer på både mobil, nettbrett og PC.
+   - Minimum 1 GB RAM anbefales for optimal ytelse.
+
+---
+
+## For users: Procedures and requirements
+
+This section provides an overview of how to use the app, as well as any hardware and operating system requirements.
+
+### Hardware and operating system requirements
+
+- **Operating system:**
+   - Web: Modern browser (Chrome, Firefox, Edge, Safari) on Windows, macOS, Linux, Android, or iOS.
+   - Standalone app (PWA): Can be installed on most devices that support Progressive Web Apps.
+- **Hardware:**
+   - No special requirements. The app works on mobile, tablet, and PC.
+   - Minimum 1 GB RAM is recommended for optimal performance.
 
 ## Usage Guide
 
