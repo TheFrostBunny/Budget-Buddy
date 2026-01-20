@@ -226,14 +226,8 @@ All data is stored locally in the browser using LocalStorage. No personal data i
 
 ---
 
-## Contact
-
-For questions, suggestions, or bug reports, please open an issue on GitHub or contact the maintainer at: [your-email@example.com]
-
----
-
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/your-repo/license) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/TheFrostBunny/Budget-Buddy/blob/Added-Wiki/LICENSE) file for details.
 
 ---
