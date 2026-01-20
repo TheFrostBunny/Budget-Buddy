@@ -101,7 +101,8 @@
     },
     "history": {
       "title": "Expense History",
-      "noDescription": "No description"
+      "noDescription": "No description",
+      "noExpenses": "No expenses recorded yet."
     },
     "graph": {
       "daily": "Daily",

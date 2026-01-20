@@ -100,7 +100,8 @@
       },
       "history": {
         "title": "Utgiftshistorikk",
-        "noDescription": "Ingen skildring"
+        "noDescription": "Ingen skildring",
+        "noExpenses": "Ingen utgifter registrert enda."
       },
       "graph": {
         "daily": "Dagleg",

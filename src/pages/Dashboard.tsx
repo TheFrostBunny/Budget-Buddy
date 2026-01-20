@@ -56,7 +56,13 @@ const ExpenseHistory = ({ betaEnabled }) => {
   const { spending, removeSpending } = useBudget();
   const { t } = useTranslation();
 
-  if (!spending.transactions.length) return null;
+  if (!spending.transactions.length) {
+    return (
+      <div className="p-4 text-center text-muted-foreground">
+        {t('dashboard.history.noExpenses', 'Ingen utgifter registrert enda.')}
+      </div>
+    );
+  }
 
   const sortedTransactions = [...spending.transactions].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
