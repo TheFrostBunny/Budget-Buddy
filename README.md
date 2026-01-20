@@ -1,4 +1,7 @@
+
 # Budget Buddy Documentation
+
+[📖 Se prosjektets Wiki](./WIKI.md)
 
 ## Overview
 The Budsjett App is a budgeting application designed to help users manage their finances effectively. It provides features such as budget tracking, spending analysis, and language customization to cater to a diverse user base.
