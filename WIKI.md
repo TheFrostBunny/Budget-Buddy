@@ -228,6 +228,6 @@ All data is stored locally in the browser using LocalStorage. No personal data i
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/TheFrostBunny/Budget-Buddy/blob/Added-Wiki/LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/TheFrostBunny/Budget-Buddy/LICENSE) file for details.
 
 ---
