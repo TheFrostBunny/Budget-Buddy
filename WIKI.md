@@ -100,6 +100,7 @@ The Budsjett App is a modern budgeting tool that helps users manage their financ
 
 ---
 
+
 ## Usage Guide
 
 ### Setting Up Your Budget
@@ -112,9 +113,9 @@ The Budsjett App is a modern budgeting tool that helps users manage their financ
 
 ### Customizing Preferences
 - Go to the **Settings** page to:
-  - Change the app's language.
-  - Toggle dark mode.
-  - Enable or disable expense categorization.
+	- Change the app's language.
+	- Toggle dark mode.
+	- Enable or disable expense categorization.
 
 ### Changing Language
 - Navigate to the **Settings** page.
@@ -133,6 +134,23 @@ The Budsjett App is a modern budgeting tool that helps users manage their financ
 - Enter the expense amount, date, and time.
 - If categorization is enabled, select a category from the dropdown menu.
 - Click the **Add Expense** button to save the expense.
+
+### Importing and Exporting Data (.json)
+
+You can move your budgets and expenses between different versions of the Budsjett App by importing and exporting data as .json files.
+
+#### Exporting Data
+1. Go to the **Settings** or **Dashboard** page (depending on app version).
+2. Click the **Export to JSON** button.
+3. A `.json` file containing your data will be downloaded to your device.
+
+#### Importing Data
+1. Go to the **Settings** page.
+2. Click the **Import from JSON** button.
+3. Select your previously exported `.json` file.
+4. The app will load your budgets and expenses from the file.
+
+**Note:** Import/export features may only be available in developer mode or certain app versions. Always back up your data before importing.
 
 ---
 

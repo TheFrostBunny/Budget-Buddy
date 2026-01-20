@@ -3,7 +3,7 @@
 ## Features to Add
 
 ### 1. **User Data Management**
-- **Export/Import Data**: Allow users to export their data to a file and import it back.
+- **Export/Import Data**: Allow users to export their data to a file and import it back. *(Feature available under developer mode: users can export/import .json files for moving data between app versions.)*
 - **Cloud Sync**: Integrate cloud storage (e.g., Google Drive, Dropbox) for automatic backups.
 
 ### 2. **Advanced Budgeting Tools**
