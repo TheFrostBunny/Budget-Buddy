@@ -1,5 +1,6 @@
 import * as XLSX from 'xlsx';
 import React from 'react';
+import { Download } from 'lucide-react';
 
 interface ExportExcelButtonProps {
   data: any[];
@@ -64,9 +65,11 @@ export const ExportExcelButton: React.FC<ExportExcelButtonProps> = ({
   return (
     <button
       onClick={handleExport}
-      className="ml-2 rounded bg-primary px-3 py-1 text-sm font-medium text-white hover:bg-primary/80"
+      className="ml-2 rounded-full p-2 bg-primary text-white hover:bg-primary/80 flex items-center justify-center"
+      aria-label={label}
+      title={label}
     >
-      {label}
+      <Download className="h-5 w-5" />
     </button>
   );
 };
