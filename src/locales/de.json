@@ -103,6 +103,16 @@
     "history": {
       "title": "Ausgabenverlauf",
       "noDescription": "Keine Beschreibung"
+    },
+    "graph": {
+      "daily": "Täglich",
+      "weekly": "Wöchentlich",
+      "monthly": "Monatlich",
+      "line": "Linie",
+      "bar": "Balken",
+      "pie": "Kreis",
+      "remaining": "Verbleibend",
+      "spent": "Ausgegeben"
     }
   },
   "nav": {

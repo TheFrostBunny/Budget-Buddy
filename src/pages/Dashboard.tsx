@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import BudgetAnalysisGraph from '@/components/budget/BudgetAnalysisGraph';
+import { ChartPie } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useBudget } from '@/components/budget-provider';
+import { useBudget } from '@/components/budget/budget-provider';
 import { Wallet, Calendar, Clock, Plus, Check, TrendingUp, AlertCircle } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { useTranslation } from 'react-i18next';
 import { toast } from '@/hooks/use-toast';
 import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ExportExcelButton } from '@/components/ExportExcelButton';
+import { ExportExcelButton } from '@/components/budget/ExportExcelButton';
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -72,23 +74,40 @@ const ExpenseHistory = ({ betaEnabled }) => {
     grouped[formattedDate].push(tx);
   });
 
+  const [showGraph, setShowGraph] = useState(false);
   return (
     <section className="mt-8 space-y-6">
       <CardTitle className="flex items-center justify-between px-1 text-xl">
-        {t('dashboard.history.title')}
-        {betaEnabled && (
-          <ExportExcelButton
-            data={spending.transactions.map((tx) => ({
-              Dato: new Date(tx.date).toLocaleString('nb-NO'),
-              Beløp: tx.amount,
-              Beskrivelse: tx.description || '',
-              Butikk: tx.storeId || '',
-            }))}
-            filename="utgifter.xlsx"
-            label="Eksporter til Excel"
-          />
-        )}
+        <span className="flex items-center gap-2">
+          {t('dashboard.history.title')}
+        </span>
+        <div className="flex items-center gap-2">
+          <button
+            aria-label="Vis budsjettanalyse-graf"
+            className="rounded-full p-2 hover:bg-muted transition-colors ml-2"
+            onClick={() => setShowGraph((v) => !v)}
+          >
+            <ChartPie className="h-6 w-6 text-primary" />
+          </button>
+          {betaEnabled && (
+            <ExportExcelButton
+              data={spending.transactions.map((tx) => ({
+                Dato: new Date(tx.date).toLocaleString('nb-NO'),
+                Beløp: tx.amount,
+                Beskrivelse: tx.description || '',
+                Butikk: tx.storeId || '',
+              }))}
+              filename="utgifter.xlsx"
+              label="Eksporter til Excel"
+            />
+          )}
+        </div>
       </CardTitle>
+      {showGraph && (
+        <div className="mb-4">
+          <BudgetAnalysisGraph />
+        </div>
+      )}
       {Object.entries(grouped).map(([date, transactions]) => (
         <div key={date}>
           <h3 className="mb-2 px-1 text-sm font-medium text-muted-foreground">{date}</h3>
@@ -137,6 +156,7 @@ const ExpenseHistory = ({ betaEnabled }) => {
     </section>
   );
 };
+
 const AddSpentAmount = () => {
   const { addSpending } = useBudget();
   const { t } = useTranslation();
@@ -154,7 +174,6 @@ const AddSpentAmount = () => {
   const handleAdd = () => {
     const value = parseFloat(amount);
     if (!isNaN(value) && value > 0 && date && time) {
-      // Lagre utgift (addSpending legger til beløpet i totalen)
       addSpending(value, undefined, 'Utgift');
       setAmount('');
       setSuccess(true);

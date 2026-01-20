@@ -101,6 +101,16 @@
       "history": {
         "title": "Utgiftshistorikk",
         "noDescription": "Ingen skildring"
+      },
+      "graph": {
+        "daily": "Dagleg",
+        "weekly": "Vekentleg",
+        "monthly": "Månadleg",
+        "line": "Linje",
+        "bar": "Søyle",
+        "pie": "Pai",
+        "remaining": "Attverande",
+        "spent": "Brukt"
       }
     },
     "nav": {

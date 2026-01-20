@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { usePreferences } from '@/hooks/useLocalStorage';
-import { useBudget } from '@/components/budget-provider';
+import { useBudget } from '@/components/budget/budget-provider';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { User, RotateCcw, Settings as SettingsIcon } from 'lucide-react';

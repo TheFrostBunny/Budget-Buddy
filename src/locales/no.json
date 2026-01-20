@@ -63,7 +63,7 @@
       "title": "Standard budsjettperiode",
       "weekly": "Ukentlig",
       "monthly": "Månedlig",
-      "daily": "Hverdag"
+      "daily": "Daglig"
     },
     "labels": {
       "dailyFood": "Daglig matpenger (NOK)",
@@ -103,6 +103,16 @@
     "history": {
       "title": "Utgiftshistorikk",
       "noDescription": "Ingen beskrivelse"
+    },
+    "graph": {
+      "daily": "Daglig",
+      "weekly": "Ukentlig",
+      "monthly": "Månedlig",
+      "line": "Linje",
+      "bar": "Søyle",
+      "pie": "Pai",
+      "remaining": "Gjenstående",
+      "spent": "Brukt"
     }
   },
   "nav": {

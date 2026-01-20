@@ -102,6 +102,16 @@
     "history": {
       "title": "Expense History",
       "noDescription": "No description"
+    },
+    "graph": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "line": "Line",
+      "bar": "Bar",
+      "pie": "Pie",
+      "remaining": "Remaining",
+      "spent": "Spent"
     }
   },
   "nav": {

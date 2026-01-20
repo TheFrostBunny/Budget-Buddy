@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppLayout } from '@/components/layout/AppLayout';
 import Dashboard from './pages/Dashboard';
 import { ThemeProvider } from '@/components/theme-provider';
-import { BudgetProvider } from '@/components/budget-provider';
+import { BudgetProvider } from '@/components/budget/budget-provider';
 import ShoppingList from './pages/ShoppingList';
 import Stores from './pages/Stores';
 import Profile from './pages/Profile';
