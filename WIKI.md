@@ -1,3 +1,20 @@
+## Importing and Exporting Data (.json)
+
+You can move your budgets and expenses between different versions of the Budsjett App by importing and exporting data as .json files.
+
+### Exporting Data
+1. Go to the **Settings** or **Dashboard** page (depending on app version).
+2. Click the **Export to JSON** button.
+3. A `.json` file containing your data will be downloaded to your device.
+
+### Importing Data
+1. Go to the **Settings** page.
+2. Click the **Import from JSON** button.
+3. Select your previously exported `.json` file.
+4. The app will load your budgets and expenses from the file.
+
+**Note:** Import/export features may only be available in developer mode or certain app versions. Always back up your data before importing.
+
 
 # Budsjett App Wiki
 
@@ -151,6 +168,67 @@ Yes, the app uses LocalStorage for data persistence, allowing offline usage.
 
 ### How do I reset my budget?
 Navigate to the **Profile** page and use the reset options provided.
+
+---
+
+## Architecture
+
+The Budsjett App is structured as a modern React application using functional components and hooks. State management is handled locally or via context providers. Styling is managed with Tailwind CSS for rapid UI development.
+
+**Main folders:**
+- `src/components/` – Reusable UI and logic components
+- `src/pages/` – Main application pages (Dashboard, Profile, Settings, etc.)
+- `src/hooks/` – Custom React hooks
+- `src/lib/` – Utility functions and helpers
+- `src/locales/` – Language files for i18n
+
+---
+
+## Examples
+
+### Example: Adding a New Expense
+1. Go to the **Dashboard** page.
+2. Enter the amount, date, and category (if enabled).
+3. Click **Add Expense**. The expense will appear in your list and update your budget.
+
+### Example: Exporting Data (Developer Mode)
+1. Enable developer mode in **Settings**.
+2. Go to the **Dashboard** and click **Export to Excel** to download your data.
+
+---
+
+## Accessibility
+
+The app aims to be accessible for all users:
+- Keyboard navigation is supported throughout the UI.
+- Sufficient color contrast for text and UI elements.
+- Responsive design for both desktop and mobile devices.
+
+---
+
+## Security
+
+All data is stored locally in the browser using LocalStorage. No personal data is sent to external servers. For best security, use the app on trusted devices.
+
+---
+
+## Common Issues & Troubleshooting
+
+**App does not start:**
+- Ensure Node.js and pnpm/npm are installed and up to date.
+- Run `pnpm install` or `npm install` to install dependencies.
+
+**Language does not change:**
+- Refresh the page after changing language in settings.
+
+**Data is missing after refresh:**
+- Data is stored in LocalStorage. If you clear browser data, your budgets and expenses will be lost.
+
+---
+
+## Contact
+
+For questions, suggestions, or bug reports, please open an issue on GitHub or contact the maintainer at: [your-email@example.com]
 
 ---
 

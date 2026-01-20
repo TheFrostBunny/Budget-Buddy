@@ -42,15 +42,11 @@
 - Add budget analysis tools.
 - Begin work on cloud sync.
 
-### Phase 3: External Integrations
-- Implement bank integration.
-- Link shopping list with external services.
-
-### Phase 4: UI/UX Improvements
+### Phase 3: UI/UX Improvements
 - Enhance dark mode.
 - Add dashboard customization.
 
-### Phase 5: Beta Testing and Feedback
+### Phase 4: Beta Testing and Feedback
 - Release experimental tools.
 - Collect user feedback and iterate on features.
 
