@@ -55,13 +55,10 @@ const Dashboard = () => {
 const ExpenseHistory = ({ betaEnabled }) => {
   const { spending, removeSpending } = useBudget();
   const { t } = useTranslation();
+  const [showGraph, setShowGraph] = useState(false);
 
-  if (!spending.transactions.length) {
-    return (
-      <div className="p-4 text-center text-muted-foreground">
-        {t('dashboard.history.noExpenses', 'Ingen utgifter registrert enda.')}
-      </div>
-    );
+  if (!spending.transactions || !Array.isArray(spending.transactions) || !spending.transactions.length) {
+    return null;
   }
 
   const sortedTransactions = [...spending.transactions].sort(
@@ -79,8 +76,6 @@ const ExpenseHistory = ({ betaEnabled }) => {
     if (!grouped[formattedDate]) grouped[formattedDate] = [];
     grouped[formattedDate].push(tx);
   });
-
-  const [showGraph, setShowGraph] = useState(false);
   return (
     <section className="mt-8 space-y-6">
       <CardTitle className="flex items-center justify-between px-1 text-xl">
@@ -164,7 +159,7 @@ const ExpenseHistory = ({ betaEnabled }) => {
 };
 
 const AddSpentAmount = () => {
-  const { addSpending } = useBudget();
+  const { addSpending, budget } = useBudget();
   const { t } = useTranslation();
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState(() => {
@@ -180,6 +175,14 @@ const AddSpentAmount = () => {
   const handleAdd = () => {
     const value = parseFloat(amount);
     if (!isNaN(value) && value > 0 && date && time) {
+      if (!budget) {
+        toast({
+          title: 'Ingen budsjett funnet',
+          description: 'Du må opprette et budsjett før du kan legge til utgifter.',
+          variant: 'destructive',
+        });
+        return;
+      }
       addSpending(value, undefined, 'Utgift');
       setAmount('');
       setSuccess(true);
