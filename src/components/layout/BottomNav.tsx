@@ -1,13 +1,13 @@
-import { NavLink, useLocation } from "react-router-dom";
-import { Home, User, ShoppingCart, Store } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import { cn } from "@/lib/utils";
+import { NavLink, useLocation } from 'react-router-dom';
+import { Home, User, ShoppingCart, Store } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { cn } from '@/lib/utils';
 
 const navItems = [
-  { to: "/", icon: Home, labelKey: "nav.home" },
-  { to: "/shopping-list", icon: ShoppingCart, labelKey: "nav.shoppingList" },
-  { to: "/stores", icon: Store, labelKey: "nav.stores" },
-  { to: "/profile", icon: User, labelKey: "nav.profile" },
+  { to: '/', icon: Home, labelKey: 'nav.home' },
+  { to: '/shopping-list', icon: ShoppingCart, labelKey: 'nav.shoppingList' },
+  { to: '/stores', icon: Store, labelKey: 'nav.stores' },
+  { to: '/profile', icon: User, labelKey: 'nav.profile' },
 ];
 
 export function BottomNav() {
@@ -24,11 +24,11 @@ export function BottomNav() {
               key={to}
               to={to}
               className={cn(
-                "flex flex-col items-center gap-1 px-3 py-2 text-xs font-medium transition-colors",
-                isActive ? "text-primary" : "text-muted-foreground hover:text-foreground",
+                'flex flex-col items-center gap-1 px-3 py-2 text-xs font-medium transition-colors',
+                isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
               )}
             >
-              <Icon className={cn("h-5 w-5", isActive && "stroke-[2.5]")} />
+              <Icon className={cn('h-5 w-5', isActive && 'stroke-[2.5]')} />
               <span>{t(labelKey)}</span>
             </NavLink>
           );

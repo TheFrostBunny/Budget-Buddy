@@ -17,18 +17,18 @@ export interface Product {
 }
 
 export type ProductCategory =
-  | "frukt-gronnsaker"
-  | "meieri"
-  | "kjott-fisk"
-  | "bakevarer"
-  | "hermetikk"
-  | "frossen"
-  | "drikke"
-  | "snacks"
-  | "husholdning"
-  | "annet";
+  | 'frukt-gronnsaker'
+  | 'meieri'
+  | 'kjott-fisk'
+  | 'bakevarer'
+  | 'hermetikk'
+  | 'frossen'
+  | 'drikke'
+  | 'snacks'
+  | 'husholdning'
+  | 'annet';
 
-export type DietaryInfo = "vegetar" | "vegan" | "glutenfri" | "laktosefri" | "økologisk";
+export type DietaryInfo = 'vegetar' | 'vegan' | 'glutenfri' | 'laktosefri' | 'økologisk';
 
 export interface ShoppingListItem {
   id: string;
@@ -52,7 +52,7 @@ export interface Offer {
 export interface Budget {
   id: string;
   amount: number;
-  period: "weekly" | "monthly" | "daily";
+  period: 'weekly' | 'monthly' | 'daily';
   startDate: string;
 }
 
@@ -75,7 +75,7 @@ export interface Transaction {
 export interface UserPreferences {
   dietaryPreferences: DietaryInfo[];
   favoriteStores: string[];
-  defaultBudgetPeriod: "weekly" | "monthly" | "daily";
+  defaultBudgetPeriod: 'weekly' | 'monthly' | 'daily';
   dailyBudgetDays?: number;
   dailyBudgetAmount?: number;
   customStoreLocations: Record<string, { lat: number; lon: number }>;
@@ -83,22 +83,22 @@ export interface UserPreferences {
 }
 
 export const CATEGORY_LABELS: Record<ProductCategory, string> = {
-  "frukt-gronnsaker": "Frukt & Grønnsaker",
-  meieri: "Meieri",
-  "kjott-fisk": "Kjøtt & Fisk",
-  bakevarer: "Bakevarer",
-  hermetikk: "Hermetikk",
-  frossen: "Frossen mat",
-  drikke: "Drikke",
-  snacks: "Snacks",
-  husholdning: "Husholdning",
-  annet: "Annet",
+  'frukt-gronnsaker': 'Frukt & Grønnsaker',
+  meieri: 'Meieri',
+  'kjott-fisk': 'Kjøtt & Fisk',
+  bakevarer: 'Bakevarer',
+  hermetikk: 'Hermetikk',
+  frossen: 'Frossen mat',
+  drikke: 'Drikke',
+  snacks: 'Snacks',
+  husholdning: 'Husholdning',
+  annet: 'Annet',
 };
 
 export const DIETARY_LABELS: Record<DietaryInfo, string> = {
-  vegetar: "Vegetar",
-  vegan: "Vegan",
-  glutenfri: "Glutenfri",
-  laktosefri: "Laktosefri",
-  økologisk: "Økologisk",
+  vegetar: 'Vegetar',
+  vegan: 'Vegan',
+  glutenfri: 'Glutenfri',
+  laktosefri: 'Laktosefri',
+  økologisk: 'Økologisk',
 };

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
-const LOCAL_STORAGE_KEY = "customProducts";
+const LOCAL_STORAGE_KEY = 'customProducts';
 
 export interface CustomProduct {
   id: string;
@@ -13,8 +13,8 @@ export interface CustomProduct {
 
 export function ProductManager() {
   const [products, setProducts] = useState<CustomProduct[]>([]);
-  const [name, setName] = useState("");
-  const [unit, setUnit] = useState("");
+  const [name, setName] = useState('');
+  const [unit, setUnit] = useState('');
 
   useEffect(() => {
     const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -33,8 +33,8 @@ export function ProductManager() {
         ...products,
         { id: Date.now().toString(), name: name.trim(), unit: unit.trim() },
       ]);
-      setName("");
-      setUnit("");
+      setName('');
+      setUnit('');
     }
   }
 

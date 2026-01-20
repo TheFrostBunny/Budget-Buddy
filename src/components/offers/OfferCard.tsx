@@ -1,7 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Offer } from "@/types";
-import { getProductById, getStoreById } from "@/data/mockData";
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Offer } from '@/types';
+import { getProductById, getStoreById } from '@/data/mockData';
 
 interface OfferCardProps {
   offer: Offer;
@@ -51,11 +51,11 @@ export function OfferCard({ offer }: OfferCardProps) {
         </div>
         <div className="mt-3 flex items-center justify-between border-t pt-3">
           <span className="text-xs text-muted-foreground">
-            Gyldig til {validTo.toLocaleDateString("de-DE")}
+            Gyldig til {validTo.toLocaleDateString('de-DE')}
           </span>
           {daysLeft <= 3 && (
             <Badge variant="outline" className="border-warning text-warning">
-              {daysLeft === 1 ? "Siste dag!" : `${daysLeft} dager igjen`}
+              {daysLeft === 1 ? 'Siste dag!' : `${daysLeft} dager igjen`}
             </Badge>
           )}
         </div>

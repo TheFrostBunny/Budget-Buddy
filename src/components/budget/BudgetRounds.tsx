@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { BudgetCard } from "./BudgetCard";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ChartContainer } from "@/components/ui/chart";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import React, { useState, useEffect } from 'react';
+import { BudgetCard } from './BudgetCard';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { ChartContainer } from '@/components/ui/chart';
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
 interface Round {
   id: number;
@@ -11,14 +11,14 @@ interface Round {
   date: string;
 }
 
-const LOCAL_STORAGE_KEY = "foodBudgetRounds";
-const MONEY_STORAGE_KEY = "foodBudgetMoney";
+const LOCAL_STORAGE_KEY = 'foodBudgetRounds';
+const MONEY_STORAGE_KEY = 'foodBudgetMoney';
 
 export function BudgetRounds() {
   const [rounds, setRounds] = useState<Round[]>([]);
-  const [input, setInput] = useState("");
-  const [moneyInput, setMoneyInput] = useState("");
-  const [durationInput, setDurationInput] = useState("");
+  const [input, setInput] = useState('');
+  const [moneyInput, setMoneyInput] = useState('');
+  const [durationInput, setDurationInput] = useState('');
   const [money, setMoney] = useState<number | null>(null);
   const [duration, setDuration] = useState<number | null>(null);
 
@@ -47,7 +47,7 @@ export function BudgetRounds() {
     const amount = parseFloat(input);
     if (!isNaN(amount) && amount > 0) {
       setRounds([...rounds, { id: Date.now(), amount, date: new Date().toLocaleDateString() }]);
-      setInput("");
+      setInput('');
     }
   }
 
@@ -57,8 +57,8 @@ export function BudgetRounds() {
     if (!isNaN(m) && m > 0 && !isNaN(d) && d > 0) {
       setMoney(m);
       setDuration(d);
-      setMoneyInput("");
-      setDurationInput("");
+      setMoneyInput('');
+      setDurationInput('');
     }
   }
 
@@ -73,14 +73,14 @@ export function BudgetRounds() {
 
   // Farger for kakediagram
   const COLORS = [
-    "#0088FE",
-    "#00C49F",
-    "#FFBB28",
-    "#FF8042",
-    "#A28BFE",
-    "#FF6699",
-    "#33CC99",
-    "#FF6666",
+    '#0088FE',
+    '#00C49F',
+    '#FFBB28',
+    '#FF8042',
+    '#A28BFE',
+    '#FF6699',
+    '#33CC99',
+    '#FF6666',
   ];
 
   return (

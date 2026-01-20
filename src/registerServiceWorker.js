@@ -1,6 +1,7 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker
+      .register('/service-worker.js')
       .then((registration) => {
         console.log('Service Worker registered with scope:', registration.scope);
 
@@ -18,7 +19,8 @@ if ('serviceWorker' in navigator) {
                 updateNotification.style.padding = '10px';
                 updateNotification.style.borderRadius = '5px';
                 updateNotification.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
-                updateNotification.innerText = 'En ny versjon er tilgjengelig. Klikk for å oppdatere!';
+                updateNotification.innerText =
+                  'En ny versjon er tilgjengelig. Klikk for å oppdatere!';
                 updateNotification.style.cursor = 'pointer';
 
                 updateNotification.addEventListener('click', () => {

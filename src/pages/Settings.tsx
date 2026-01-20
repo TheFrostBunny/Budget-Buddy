@@ -1,42 +1,47 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { useBudget } from "@/components/budget-provider";
-import { Settings as SettingsIcon, Languages, Laptop, Palette, Leaf } from "lucide-react";
-import { ModeToggle } from "@/components/mode-toggle";
-import { useState, useEffect } from "react";
-import { Badge } from "@/components/ui/badge";
-import { DIETARY_LABELS, DietaryInfo } from "@/types";
-import { usePreferences } from "@/hooks/useLocalStorage";
-import { useTranslation } from "react-i18next";
-import { UserPreferences } from "@/types";
-import { exportDataToJson, importDataFromJson } from "@/lib/dataTransfer";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { useBudget } from '@/components/budget-provider';
+import { Settings as SettingsIcon, Languages, Laptop, Palette, Leaf } from 'lucide-react';
+import { ModeToggle } from '@/components/mode-toggle';
+import { useState, useEffect } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { DIETARY_LABELS, DietaryInfo } from '@/types';
+import { usePreferences } from '@/hooks/useLocalStorage';
+import { useTranslation } from 'react-i18next';
+import { UserPreferences } from '@/types';
+import { exportDataToJson, importDataFromJson } from '@/lib/dataTransfer';
 
 const Settings = () => {
   const { preferences, setPreferencesState, toggleDietaryPreference } = usePreferences();
   const budget = useBudget();
 
-  const handleImport = (data: { preferences?: UserPreferences; budget?: { amount: number; period: "weekly" | "monthly" | "daily" } }) => {
+  const handleImport = (data: {
+    preferences?: UserPreferences;
+    budget?: { amount: number; period: 'weekly' | 'monthly' | 'daily' };
+  }) => {
     if (data.preferences) {
       setPreferencesState(data.preferences);
     }
     if (data.budget) {
-      const validPeriods: Array<"weekly" | "monthly" | "daily"> = ["weekly", "monthly", "daily"];
-      const period = validPeriods.includes(data.budget.period) ? data.budget.period : "weekly";
+      const validPeriods: Array<'weekly' | 'monthly' | 'daily'> = ['weekly', 'monthly', 'daily'];
+      const period = validPeriods.includes(data.budget.period) ? data.budget.period : 'weekly';
       budget.setBudget(data.budget.amount, period);
     }
   };
 
   const [isDevMode, setIsDevMode] = useState(false);
-  const [betaEnabled, setBetaEnabled] = useState(() => localStorage.getItem("beta_features") === "true");
+  const [betaEnabled, setBetaEnabled] = useState(
+    () => localStorage.getItem('beta_features') === 'true',
+  );
   const { t, i18n } = useTranslation();
 
   const dietaryOptions: DietaryInfo[] = [
-    "vegetar",
-    "vegan",
-    "glutenfri",
-    "laktosefri",
-    "økologisk",
+    'vegetar',
+    'vegan',
+    'glutenfri',
+    'laktosefri',
+    'økologisk',
   ];
 
   const changeLanguage = (lng: string) => {
@@ -50,23 +55,23 @@ const Settings = () => {
           <SettingsIcon className="h-7 w-7" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold">{t("settings.title")}</h1>
-          <p className="text-muted-foreground">{t("settings.subtitle")}</p>
+          <h1 className="text-2xl font-bold">{t('settings.title')}</h1>
+          <p className="text-muted-foreground">{t('settings.subtitle')}</p>
         </div>
       </header>
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
             <Leaf className="h-4 w-4" />
-            {t("settings.dietary.title")}
+            {t('settings.dietary.title')}
           </CardTitle>
-          <CardDescription>{t("settings.dietary.description")}</CardDescription>
+          <CardDescription>{t('settings.dietary.description')}</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2">
           {dietaryOptions.map((diet) => (
             <Badge
               key={diet}
-              variant={preferences.dietaryPreferences.includes(diet) ? "default" : "outline"}
+              variant={preferences.dietaryPreferences.includes(diet) ? 'default' : 'outline'}
               className="cursor-pointer"
               onClick={() => toggleDietaryPreference(diet)}
             >
@@ -81,9 +86,9 @@ const Settings = () => {
           <div className="space-y-1">
             <CardTitle className="flex items-center gap-2 text-base">
               <Palette className="h-4 w-4" />
-              {t("settings.appearance.title")}
+              {t('settings.appearance.title')}
             </CardTitle>
-            <CardDescription>{t("settings.appearance.description")}</CardDescription>
+            <CardDescription>{t('settings.appearance.description')}</CardDescription>
           </div>
           <ModeToggle />
         </CardHeader>
@@ -93,18 +98,18 @@ const Settings = () => {
       <Card>
         <CardHeader className="flex items-center gap-2 text-base">
           <Languages className="h-4 w-4" />
-          {t("settings.language.title")}
+          {t('settings.language.title')}
         </CardHeader>
         <CardContent className="flex gap-2">
           <select
             value={i18n.language}
             onChange={(e) => changeLanguage(e.target.value)}
-            className="w-full rounded border px-3 py-2 text-base bg-background text-foreground border-border dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border"
+            className="dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border w-full rounded border border-border bg-background px-3 py-2 text-base text-foreground"
           >
-            <option value="no">{t("settings.language.option.no")}</option>
-            <option value="en">{t("settings.language.option.en")}</option>
-            <option value="nn">{t("settings.language.option.nn")}</option>
-            <option value="de">{t("settings.language.option.de")}</option>
+            <option value="no">{t('settings.language.option.no')}</option>
+            <option value="en">{t('settings.language.option.en')}</option>
+            <option value="nn">{t('settings.language.option.nn')}</option>
+            <option value="de">{t('settings.language.option.de')}</option>
           </select>
         </CardContent>
       </Card>
@@ -114,9 +119,9 @@ const Settings = () => {
           <div className="space-y-1">
             <CardTitle className="flex items-center gap-2 text-base">
               <Laptop className="h-4 w-4" />
-              {t("settings.developer.title")}
+              {t('settings.developer.title')}
             </CardTitle>
-            <CardDescription>{t("settings.developer.description")}</CardDescription>
+            <CardDescription>{t('settings.developer.description')}</CardDescription>
           </div>
           <Switch checked={isDevMode} onCheckedChange={setIsDevMode} />
         </CardHeader>
@@ -124,20 +129,20 @@ const Settings = () => {
           {isDevMode && (
             <div className="mt-4 border-t pt-4 animate-in fade-in slide-in-from-top-2">
               <div className="flex flex-col gap-2">
-                <p className="mb-2 text-sm font-medium">{t("settings.developer.debugTools")}</p>
+                <p className="mb-2 text-sm font-medium">{t('settings.developer.debugTools')}</p>
                 <Button
                   variant="outline"
                   className="w-full border-dashed"
                   onClick={() => {
-                    if (confirm(t("settings.developer.confirmSimulation"))) {
+                    if (confirm(t('settings.developer.confirmSimulation'))) {
                       budget.completePeriod();
                     }
                   }}
                 >
-                  {t("settings.developer.simulateNewDay")}
+                  {t('settings.developer.simulateNewDay')}
                 </Button>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  {t("settings.developer.simulateDescription")}
+                  {t('settings.developer.simulateDescription')}
                 </p>
                 {/* Export Data Feature */}
                 <Button
@@ -145,7 +150,7 @@ const Settings = () => {
                   className="w-full border-dashed"
                   onClick={() => exportDataToJson({ preferences, budget })}
                 >
-                  {t("settings.developer.exportData", "Export Data to JSON")}
+                  {t('settings.developer.exportData', 'Export Data to JSON')}
                 </Button>
                 {/* Import Data Feature */}
                 <Button
@@ -153,7 +158,7 @@ const Settings = () => {
                   className="w-full border-dashed"
                   onClick={() => importDataFromJson(handleImport)}
                 >
-                  {t("settings.developer.importData", "Import Data from JSON")}
+                  {t('settings.developer.importData', 'Import Data from JSON')}
                 </Button>
               </div>
               {/* Beta Features */}
@@ -161,20 +166,25 @@ const Settings = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-yellow-700 dark:text-yellow-300">
                     <Leaf className="h-5 w-5" />
-                    {t("settings.developer.beta.title", "Beta-funksjoner")}
+                    {t('settings.developer.beta.title', 'Beta-funksjoner')}
                   </CardTitle>
                   <CardDescription className="text-yellow-700 dark:text-yellow-300">
-                    {t("settings.developer.beta.description", "Slå på eksperimentelle funksjoner som eksport til Excel.")}
+                    {t(
+                      'settings.developer.beta.description',
+                      'Slå på eksperimentelle funksjoner som eksport til Excel.',
+                    )}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-4">
-                    <span className="text-yellow-700 dark:text-yellow-300">{t("settings.developer.beta.toggleLabel", "Aktiver beta-funksjoner")}</span>
+                    <span className="text-yellow-700 dark:text-yellow-300">
+                      {t('settings.developer.beta.toggleLabel', 'Aktiver beta-funksjoner')}
+                    </span>
                     <Switch
                       checked={betaEnabled}
-                      onCheckedChange={checked => {
+                      onCheckedChange={(checked) => {
                         setBetaEnabled(checked);
-                        localStorage.setItem("beta_features", checked ? "true" : "false");
+                        localStorage.setItem('beta_features', checked ? 'true' : 'false');
                       }}
                     />
                   </div>

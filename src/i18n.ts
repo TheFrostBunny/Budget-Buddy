@@ -1,11 +1,11 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
-import no from "./locales/no.json";
-import en from "./locales/en.json";
-import nn from "./locales/nn.json";
-import de from "./locales/de.json";
+import no from './locales/no.json';
+import en from './locales/en.json';
+import nn from './locales/nn.json';
+import de from './locales/de.json';
 
 i18n
   .use(LanguageDetector)
@@ -15,9 +15,9 @@ i18n
       no: { translation: no },
       en: { translation: en },
       nn: { translation: nn },
-      de: { translation: de },  
+      de: { translation: de },
     },
-    fallbackLng: "en",
+    fallbackLng: 'en',
     debug: import.meta.env.DEV,
     interpolation: {
       escapeValue: false,

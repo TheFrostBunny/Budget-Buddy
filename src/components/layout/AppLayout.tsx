@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { BottomNav } from "./BottomNav";
+import { ReactNode } from 'react';
+import { BottomNav } from './BottomNav';
 
 interface AppLayoutProps {
   children: ReactNode;

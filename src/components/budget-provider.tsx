@@ -1,18 +1,18 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { Budget, BudgetSpending } from "@/types";
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { Budget, BudgetSpending } from '@/types';
 
 const STORAGE_KEYS = {
-  BUDGET: "budgetbuddy_budget",
-  SPENDING: "budgetbuddy_spending",
-  SAVINGS: "budgetbuddy_savings",
+  BUDGET: 'budgetbuddy_budget',
+  SPENDING: 'budgetbuddy_spending',
+  SAVINGS: 'budgetbuddy_savings',
 };
 
 interface BudgetContextType {
   budget: Budget | null;
   spending: BudgetSpending;
   savings: number;
-  setBudget: (amount: number, period: "weekly" | "monthly" | "daily") => void;
-  updateBudget: (amount: number, period?: "weekly" | "monthly" | "daily") => void;
+  setBudget: (amount: number, period: 'weekly' | 'monthly' | 'daily') => void;
+  updateBudget: (amount: number, period?: 'weekly' | 'monthly' | 'daily') => void;
   addSpending: (amount: number, storeId?: string, description?: string) => void;
   removeSpending: (id: string) => void;
   resetSpending: () => void;
@@ -32,7 +32,7 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
     const stored = localStorage.getItem(STORAGE_KEYS.SPENDING);
     return stored
       ? JSON.parse(stored)
-      : { budgetId: "", spent: 0, transactions: [], dailyRollover: 0 };
+      : { budgetId: '', spent: 0, transactions: [], dailyRollover: 0 };
   });
 
   const [savings, setSavings] = useState<number>(() => {
@@ -62,17 +62,17 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
     const checkRollover = () => {
       if (!budget) return;
 
-      const lastCheck = localStorage.getItem("budgetbuddy_last_check");
+      const lastCheck = localStorage.getItem('budgetbuddy_last_check');
       // Use local time for date check, not ISO (UTC)
       // en-CA format is YYYY-MM-DD
-      const today = new Date().toLocaleDateString("en-CA");
+      const today = new Date().toLocaleDateString('en-CA');
 
       if (lastCheck !== today) {
         // It's a new day!
-        if (budget.period === "daily") {
+        if (budget.period === 'daily') {
           completePeriod(); // This saves remaining and resets spending
         }
-        localStorage.setItem("budgetbuddy_last_check", today);
+        localStorage.setItem('budgetbuddy_last_check', today);
       }
     };
 
@@ -82,7 +82,7 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
     return () => clearInterval(interval);
   }, [budget, spending.spent]);
 
-  const setBudget = (amount: number, period: "weekly" | "monthly" | "daily") => {
+  const setBudget = (amount: number, period: 'weekly' | 'monthly' | 'daily') => {
     const newBudget: Budget = {
       id: crypto.randomUUID(),
       amount,
@@ -94,14 +94,14 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(STORAGE_KEYS.BUDGET, JSON.stringify(newBudget));
   };
 
-  const updateBudget = (amount: number, period?: "weekly" | "monthly" | "daily") => {
+  const updateBudget = (amount: number, period?: 'weekly' | 'monthly' | 'daily') => {
     if (budget) {
       const updated = { ...budget, amount, period: period || budget.period };
       setBudgetState(updated);
       localStorage.setItem(STORAGE_KEYS.BUDGET, JSON.stringify(updated));
     } else {
       // If no budget exists, create one
-      setBudget(amount, period || "weekly");
+      setBudget(amount, period || 'weekly');
     }
   };
 
@@ -165,7 +165,7 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
       // No, setSpendingState replaces the object if I don't merge.
       // Wait, the previous line was: setSpendingState({ budgetId: ..., spent: 0, transactions: [] }) ... explicit wipe.
       // So now:
-      budgetId: budget?.id || "",
+      budgetId: budget?.id || '',
       transactions: prev.transactions,
     }));
   };
@@ -219,7 +219,7 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
 export const useBudget = () => {
   const context = useContext(BudgetContext);
   if (context === undefined) {
-    throw new Error("useBudget must be used within a BudgetProvider");
+    throw new Error('useBudget must be used within a BudgetProvider');
   }
   return context;
 };

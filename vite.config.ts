@@ -1,58 +1,58 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import path from "path";
-import { componentTagger } from "lovable-tagger";
-import { VitePWA } from "vite-plugin-pwa";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import path from 'path';
+import { componentTagger } from 'lovable-tagger';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
+    host: '::',
     port: 8080,
   },
   plugins: [
     react(),
-    mode === "development" && componentTagger(),
+    mode === 'development' && componentTagger(),
     VitePWA({
-      registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png"],
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
       manifest: {
-        name: "Hamburg BudgetBuddy",
-        short_name: "BudgetBuddy",
-        description: "Din smarte matbudsjett-app for Hamburg",
-        theme_color: "#2a9d8f",
-        background_color: "#fafafa",
-        display: "standalone",
-        orientation: "portrait",
-        scope: "/",
-        start_url: "/",
+        name: 'Hamburg BudgetBuddy',
+        short_name: 'BudgetBuddy',
+        description: 'Din smarte matbudsjett-app for Hamburg',
+        theme_color: '#2a9d8f',
+        background_color: '#fafafa',
+        display: 'standalone',
+        orientation: 'portrait',
+        scope: '/',
+        start_url: '/',
         icons: [
           {
-            src: "/pwa-192x192.png",
-            sizes: "192x192",
-            type: "image/png",
+            src: '/pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
           },
           {
-            src: "/pwa-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
+            src: '/pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
           },
           {
-            src: "/pwa-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "any maskable",
+            src: '/pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable',
           },
         ],
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-            handler: "CacheFirst",
+            handler: 'CacheFirst',
             options: {
-              cacheName: "google-fonts-cache",
+              cacheName: 'google-fonts-cache',
               expiration: {
                 maxEntries: 10,
                 maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
@@ -68,7 +68,7 @@ export default defineConfig(({ mode }) => ({
   ].filter(Boolean),
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
 }));

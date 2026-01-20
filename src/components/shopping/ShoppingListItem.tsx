@@ -1,9 +1,9 @@
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
-import { Minus, Plus, Trash2 } from "lucide-react";
-import { ShoppingListItem as ShoppingListItemType } from "@/types";
-import { getProductById, getCheapestStore, getStoreById } from "@/data/mockData";
-import { cn } from "@/lib/utils";
+import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
+import { Minus, Plus, Trash2 } from 'lucide-react';
+import { ShoppingListItem as ShoppingListItemType } from '@/types';
+import { getProductById, getCheapestStore, getStoreById } from '@/data/mockData';
+import { cn } from '@/lib/utils';
 
 interface ShoppingListItemProps {
   item: ShoppingListItemType;
@@ -35,8 +35,8 @@ export function ShoppingListItemComponent({
   return (
     <div
       className={cn(
-        "flex items-center gap-3 rounded-lg border bg-card p-3 transition-opacity",
-        item.isChecked && "opacity-60",
+        'flex items-center gap-3 rounded-lg border bg-card p-3 transition-opacity',
+        item.isChecked && 'opacity-60',
       )}
     >
       <Checkbox
@@ -47,8 +47,8 @@ export function ShoppingListItemComponent({
       <div className="min-w-0 flex-1">
         <p
           className={cn(
-            "truncate font-medium",
-            item.isChecked && "text-muted-foreground line-through",
+            'truncate font-medium',
+            item.isChecked && 'text-muted-foreground line-through',
           )}
         >
           {product.name}

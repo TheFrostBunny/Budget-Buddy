@@ -11,7 +11,7 @@
       "title": "Utseende",
       "description": "Velg lyst eller mørkt tema",
       "toggletheme": "Bytt tema",
-       "option": {
+      "option": {
         "light": "Lyst",
         "dark": "Mørkt",
         "system": "System"
@@ -144,4 +144,3 @@
     "coordinatesInfo": "Eller skriv inn koordinater manuelt"
   }
 }
-

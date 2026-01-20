@@ -1,27 +1,27 @@
-import { usePreferences } from "@/hooks/useLocalStorage";
-import { stores } from "@/data/mockData";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { usePreferences } from '@/hooks/useLocalStorage';
+import { stores } from '@/data/mockData';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Plus, MapPin, Search, Loader2, Locate } from "lucide-react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Plus, MapPin, Search, Loader2, Locate } from 'lucide-react';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from '@/components/ui/select';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 const defaultStoreLocations = {
   rewe: { lat: 53.5522093, lon: 10.0028928 },
@@ -39,10 +39,10 @@ const Stores = () => {
 
   // Form state
   const [isOpen, setIsOpen] = useState(false);
-  const [newStoreId, setNewStoreId] = useState("");
-  const [newLat, setNewLat] = useState("");
-  const [newLon, setNewLon] = useState("");
-  const [address, setAddress] = useState("");
+  const [newStoreId, setNewStoreId] = useState('');
+  const [newLat, setNewLat] = useState('');
+  const [newLon, setNewLon] = useState('');
+  const [address, setAddress] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
 
@@ -66,10 +66,10 @@ const Stores = () => {
         setNewLat(data[0].lat);
         setNewLon(data[0].lon);
       } else {
-        alert(t("stores.notFound"));
+        alert(t('stores.notFound'));
       }
     } catch (error) {
-      console.error("Geocoding error", error);
+      console.error('Geocoding error', error);
     } finally {
       setIsSearching(false);
     }
@@ -79,16 +79,16 @@ const Stores = () => {
     if (newStoreId && newLat && newLon) {
       addStoreLocation(newStoreId, parseFloat(newLat), parseFloat(newLon));
       setIsOpen(false);
-      setNewLat("");
-      setNewLon("");
-      setNewStoreId("");
-      setAddress("");
+      setNewLat('');
+      setNewLon('');
+      setNewStoreId('');
+      setAddress('');
     }
   };
 
   const allLocations = { ...defaultStoreLocations, ...preferences.customStoreLocations };
 
-  const [mapBbox, setMapBbox] = useState("9.8,53.5,10.2,53.7");
+  const [mapBbox, setMapBbox] = useState('9.8,53.5,10.2,53.7');
 
   const handleLocationClick = (lat: number, lon: number) => {
     const buffer = 0.01;
@@ -97,7 +97,7 @@ const Stores = () => {
   };
 
   const handleGetUserLocation = () => {
-    if ("geolocation" in navigator) {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
@@ -108,12 +108,12 @@ const Stores = () => {
           );
         },
         (error) => {
-          console.error("Error getting location", error);
-          alert(t("stores.locationError"));
+          console.error('Error getting location', error);
+          alert(t('stores.locationError'));
         },
       );
     } else {
-      alert(t("stores.locationError"));
+      alert(t('stores.locationError'));
     }
   };
 
@@ -121,7 +121,7 @@ const Stores = () => {
     <div className="space-y-4 p-4 pt-6">
       <header className="flex items-start justify-between">
         <div className="flex items-center gap-2">
-          <h1 className="text-2xl font-bold">{t("stores.title")}</h1>
+          <h1 className="text-2xl font-bold">{t('stores.title')}</h1>
           <Badge variant="secondary" className="text-xs">
             Beta
           </Badge>
@@ -134,14 +134,14 @@ const Stores = () => {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>{t("stores.addLocation")}</DialogTitle>
+              <DialogTitle>{t('stores.addLocation')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="space-y-2">
-                <Label>{t("stores.selectStore")}</Label>
+                <Label>{t('stores.selectStore')}</Label>
                 <Select value={newStoreId} onValueChange={setNewStoreId}>
                   <SelectTrigger>
-                    <SelectValue placeholder={t("stores.selectStore")} />
+                    <SelectValue placeholder={t('stores.selectStore')} />
                   </SelectTrigger>
                   <SelectContent>
                     {stores.map((store) => (
@@ -154,13 +154,13 @@ const Stores = () => {
               </div>
 
               <div className="space-y-2">
-                <Label>{t("stores.address")}</Label>
+                <Label>{t('stores.address')}</Label>
                 <div className="flex gap-2">
                   <Input
                     placeholder="Mönckebergstraße 1"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleSearchAddress()}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearchAddress()}
                   />
                   <Button
                     variant="outline"
@@ -182,14 +182,14 @@ const Stores = () => {
                     className="w-full gap-2 text-xs text-muted-foreground"
                   >
                     <Locate className="h-4 w-4" />
-                    {t("stores.myLocation")}
+                    {t('stores.myLocation')}
                   </Button>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>{t("stores.latitude")}</Label>
+                  <Label>{t('stores.latitude')}</Label>
                   <Input
                     type="number"
                     step="any"
@@ -199,7 +199,7 @@ const Stores = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label>{t("stores.longitude")}</Label>
+                  <Label>{t('stores.longitude')}</Label>
                   <Input
                     type="number"
                     step="any"
@@ -209,13 +209,13 @@ const Stores = () => {
                   />
                 </div>
               </div>
-              <p className="text-xs text-muted-foreground">{t("stores.coordinatesInfo")}</p>
+              <p className="text-xs text-muted-foreground">{t('stores.coordinatesInfo')}</p>
               <Button
                 onClick={handleAddLocation}
                 disabled={!newStoreId || !newLat || !newLon}
                 className="w-full"
               >
-                {t("stores.add")}
+                {t('stores.add')}
               </Button>
             </div>
           </DialogContent>
@@ -226,7 +226,7 @@ const Stores = () => {
         <CardContent className="p-0">
           <iframe
             title="Hamburg Supermarkets Map"
-            src={`https://www.openstreetmap.org/export/embed.html?bbox=${mapBbox}&layer=mapnik${userLocation ? `&marker=${userLocation.lat},${userLocation.lon}` : ""}`}
+            src={`https://www.openstreetmap.org/export/embed.html?bbox=${mapBbox}&layer=mapnik${userLocation ? `&marker=${userLocation.lat},${userLocation.lon}` : ''}`}
             className="h-64 w-full border-none"
             loading="lazy"
           />

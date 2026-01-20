@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { Budget, BudgetSpending, ShoppingListItem, UserPreferences, DietaryInfo } from "@/types";
+import { useState, useEffect } from 'react';
+import { Budget, BudgetSpending, ShoppingListItem, UserPreferences, DietaryInfo } from '@/types';
 
 const STORAGE_KEYS = {
-  BUDGET: "budgetbuddy_budget",
-  SPENDING: "budgetbuddy_spending",
-  SHOPPING_LIST: "budgetbuddy_shopping_list",
-  PREFERENCES: "budgetbuddy_preferences",
-  FAVORITE_STORES: "budgetbuddy_favorite_stores",
+  BUDGET: 'budgetbuddy_budget',
+  SPENDING: 'budgetbuddy_spending',
+  SHOPPING_LIST: 'budgetbuddy_shopping_list',
+  PREFERENCES: 'budgetbuddy_preferences',
+  FAVORITE_STORES: 'budgetbuddy_favorite_stores',
 };
 
 // Budget hook moved to @/components/budget-provider.tsx
@@ -84,7 +84,7 @@ export function usePreferences() {
       : {
           dietaryPreferences: [],
           favoriteStores: [],
-          defaultBudgetPeriod: "weekly",
+          defaultBudgetPeriod: 'weekly',
           dailyBudgetDays: 7,
           customStoreLocations: {},
         };
@@ -112,7 +112,7 @@ export function usePreferences() {
     }));
   };
 
-  const setDefaultBudgetPeriod = (period: "weekly" | "monthly" | "daily") => {
+  const setDefaultBudgetPeriod = (period: 'weekly' | 'monthly' | 'daily') => {
     setPreferencesState((prev) => ({ ...prev, defaultBudgetPeriod: period }));
   };
 

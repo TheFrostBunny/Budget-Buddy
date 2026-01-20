@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { products as defaultProducts } from "@/data/mockData";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from 'react';
+import { products as defaultProducts } from '@/data/mockData';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
-const PRICE_STORAGE_KEY = "customProductPrices";
-const PRODUCT_STORAGE_KEY = "customProducts";
+const PRICE_STORAGE_KEY = 'customProductPrices';
+const PRODUCT_STORAGE_KEY = 'customProducts';
 
 export function ProductPriceEditor() {
   const [customPrices, setCustomPrices] = useState<Record<string, number>>({});
   const [products, setProducts] = useState<Array<any>>([...defaultProducts]);
-  const [name, setName] = useState("");
-  const [unit, setUnit] = useState("");
-  const defaultCategory = "annet";
+  const [name, setName] = useState('');
+  const [unit, setUnit] = useState('');
+  const defaultCategory = 'annet';
   const defaultDietaryInfo: any[] = [];
-  const unitOptions = ["kg", "stk", "pk", "L", "g", "ml", "boks", "pose", "annet"];
+  const unitOptions = ['kg', 'stk', 'pk', 'L', 'g', 'ml', 'boks', 'pose', 'annet'];
 
   useEffect(() => {
     const storedPrices = localStorage.getItem(PRICE_STORAGE_KEY);
@@ -54,8 +54,8 @@ export function ProductPriceEditor() {
           dietaryInfo: defaultDietaryInfo,
         },
       ]);
-      setName("");
-      setUnit("");
+      setName('');
+      setUnit('');
     }
   }
 
@@ -101,7 +101,7 @@ export function ProductPriceEditor() {
               type="number"
               min="0"
               step="0.01"
-              value={customPrices[product.id]?.toString() ?? ""}
+              value={customPrices[product.id]?.toString() ?? ''}
               onChange={(e) => handlePriceChange(product.id, e.target.value)}
               placeholder="Pris (€)"
               className="w-24"

@@ -23,7 +23,8 @@
         "no": "Norwegisch",
         "en": "Englisch",
         "nn": "Nynorsk",
-        "de": "Deutsch"}
+        "de": "Deutsch"
+      }
     },
     "developer": {
       "title": "Entwicklermodus",
@@ -32,7 +33,7 @@
       "simulateNewDay": "«Neuen Tag» simulieren (Ungenutztes sparen)",
       "simulateDescription": "Erzwingt den täglichen Abschluss und speichert gegebenenfalls den Restbetrag.",
       "confirmSimulation": "Dies beendet den Tag und verschiebt ungenutzte Beträge in die Ersparnisse. Bist du sicher?",
-       "beta": {
+      "beta": {
         "title": "Beta-Funktionen",
         "description": "Experimentelle Funktionen wie Excel-Export aktivieren.",
         "toggleLabel": "Beta-Funktionen aktivieren"
@@ -74,7 +75,7 @@
       "amount": "Betrag in Kronen",
       "days": "Anzahl der Tage"
     },
-   "actions": {
+    "actions": {
       "title": "Aktionen",
       "resetSpending": "Ausgaben zurücksetzen",
       "resetSavings": "Gesparten Betrag löschen",
