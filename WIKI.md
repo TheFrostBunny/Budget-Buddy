@@ -1,21 +1,3 @@
-## Importing and Exporting Data (.json)
-
-You can move your budgets and expenses between different versions of the Budsjett App by importing and exporting data as .json files.
-
-### Exporting Data
-1. Go to the **Settings** or **Dashboard** page (depending on app version).
-2. Click the **Export to JSON** button.
-3. A `.json` file containing your data will be downloaded to your device.
-
-### Importing Data
-1. Go to the **Settings** page.
-2. Click the **Import from JSON** button.
-3. Select your previously exported `.json` file.
-4. The app will load your budgets and expenses from the file.
-
-**Note:** Import/export features may only be available in developer mode or certain app versions. Always back up your data before importing.
-
-
 # Budsjett App Wiki
 
 Welcome to the **Budsjett App** Wiki! This documentation hub is designed to provide comprehensive information about the app, including its features, setup instructions, and development guidelines.
