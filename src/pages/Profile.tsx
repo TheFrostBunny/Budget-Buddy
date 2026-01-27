@@ -86,29 +86,6 @@ const Profile = () => {
 
   return (
     <div>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base" lang="no">Valutakurser</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {Object.keys(customRates).length === 0 && (
-            <div className="text-muted-foreground">Ingen lagrede valutakurser.</div>
-          )}
-          {Object.entries(customRates).map(([key, value]) => (
-            <div key={key} className="flex items-center gap-2 mb-2">
-              <span className="w-32">{key.replace('_', ' → ')}</span>
-              <input
-                type="text"
-                value={editRates[key] ?? value}
-                onChange={e => handleRateChange(key, e.target.value)}
-                className="w-20 border rounded px-2 py-1"
-              />
-              <Button size="sm" onClick={() => handleRateSave(key)}>Lagre</Button>
-              <Button size="sm" variant="destructive" onClick={() => handleRateDelete(key)}>Slett</Button>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
       <div className="space-y-4 p-4 pt-6">
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-3">
