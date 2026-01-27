@@ -65,7 +65,9 @@ export function CurrencyConverter() {
 
   const handleSaveCustomRate = (e: React.FormEvent) => {
     e.preventDefault();
-    const rate = parseFloat(customRate);
+    // Tillat både punktum og komma som desimaltegn
+    const normalized = customRate.replace(',', '.');
+    const rate = parseFloat(normalized);
     if (!rate || rate <= 0) {
       setError("Skriv inn en gyldig kurs.");
       return;
