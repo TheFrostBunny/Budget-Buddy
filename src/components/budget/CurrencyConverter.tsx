@@ -130,7 +130,7 @@ export function CurrencyConverter() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {CURRENCIES.map(cur => (
+                  {CURRENCIES.filter(cur => cur !== to).map(cur => (
                     <SelectItem key={cur} value={cur}>{cur}</SelectItem>
                   ))}
                 </SelectContent>
@@ -141,9 +141,12 @@ export function CurrencyConverter() {
               aria-label="Bytt valutaer"
               className="mx-1 rounded-full bg-muted p-2 hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-primary transition"
               onClick={() => {
-                setFrom(to);
-                setTo(from);
+                if (from !== to) {
+                  setFrom(to);
+                  setTo(from);
+                }
               }}
+              disabled={from === to}
             >
               <span className="text-xl">⇄</span>
             </button>
@@ -154,7 +157,7 @@ export function CurrencyConverter() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {CURRENCIES.map(cur => (
+                  {CURRENCIES.filter(cur => cur !== from).map(cur => (
                     <SelectItem key={cur} value={cur}>{cur}</SelectItem>
                   ))}
                 </SelectContent>
