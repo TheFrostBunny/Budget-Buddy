@@ -78,7 +78,11 @@
       "title": "Actions",
       "resetSpending": "Reset Spending",
       "resetSavings": "Delete Savings",
-      "confirmResetSavings": "Are you sure you want to delete your savings?"
+      "confirmResetSavings": "Are you sure you want to delete your savings?",
+        "currencyRates": "Currency rates",
+        "noRates": "No saved currency rates.",
+        "save": "Save",
+        "delete": "Delete"
     }
   },
   "dashboard": {

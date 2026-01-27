@@ -79,7 +79,11 @@
       "title": "Handlinger",
       "resetSpending": "Nullstill forbruk",
       "resetSavings": "Slett oppspart beløp",
-      "confirmResetSavings": "Er du sikker på at du vil slette oppspart beløp?"
+      "confirmResetSavings": "Er du sikker på at du vil slette oppspart beløp?",
+      "currencyRates": "Valutakurser",
+      "noRates": "Ingen lagrede valutakurser.",
+      "save": "Lagre",
+      "delete": "Slett"
     }
   },
   "dashboard": {

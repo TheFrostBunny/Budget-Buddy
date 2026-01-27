@@ -79,9 +79,12 @@
       "title": "Aktionen",
       "resetSpending": "Ausgaben zurücksetzen",
       "resetSavings": "Gesparten Betrag löschen",
-      "confirmResetSavings": "Bist du sicher, dass du den gesparten Betrag löschen möchtest?"
-    }
-  },
+      "confirmResetSavings": "Bist du sicher, dass du den gesparten Betrag löschen möchtest?",
+      "currencyRates": "Wechselkurse",
+      "noRates": "Keine gespeicherten Wechselkurse.",
+      "save": "Speichern",
+      "delete": "Löschen"
+    },
   "dashboard": {
     "title": "Budget Buddy",
     "noBudget": "Kein Budget festgelegt. Gehe zu den Einstellungen, um eines einzurichten.",
@@ -154,4 +157,5 @@
     "add": "Hinzufügen",
     "coordinatesInfo": "Oder Koordinaten manuell eingeben"
   }
+ }
 }

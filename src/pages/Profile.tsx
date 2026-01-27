@@ -26,10 +26,22 @@ const Profile = () => {
       const normalized = editRates[key].replace(',', '.');
       const rate = parseFloat(normalized);
       if (!rate || rate <= 0) return;
-      const updated = { ...customRates, [key]: rate };
-      setCustomRates(updated);
-      localStorage.setItem("customRates", JSON.stringify(updated));
+      const updatedRates = { ...customRates, [key]: rate };
+      setCustomRates(updatedRates);
+      localStorage.setItem("customRates", JSON.stringify(updatedRates));
       setEditRates(prev => ({ ...prev, [key]: '' }));
+    };
+
+    const handleRateDelete = (key: string) => {
+      const updatedRates = { ...customRates };
+      delete updatedRates[key];
+      setCustomRates(updatedRates);
+      localStorage.setItem("customRates", JSON.stringify(updatedRates));
+      setEditRates(prev => {
+        const copy = { ...prev };
+        delete copy[key];
+        return copy;
+      });
     };
 
     useEffect(() => {
@@ -92,6 +104,7 @@ const Profile = () => {
                 className="w-20 border rounded px-2 py-1"
               />
               <Button size="sm" onClick={() => handleRateSave(key)}>Lagre</Button>
+              <Button size="sm" variant="destructive" onClick={() => handleRateDelete(key)}>Slett</Button>
             </div>
           ))}
         </CardContent>
@@ -285,6 +298,27 @@ const Profile = () => {
               >
                 <span lang="no">{t('profile.actions.resetSavings')}</span>
               </Button>
+
+              {/* Valutakurser handlinger */}
+              <div className="mt-6">
+                <h3 className="text-base font-semibold mb-2">{t('profile.actions.currencyRates', 'Valutakurser')}</h3>
+                {Object.keys(customRates).length === 0 && (
+                  <div className="text-muted-foreground">{t('profile.actions.noRates', 'Ingen lagrede valutakurser.')}</div>
+                )}
+                {Object.entries(customRates).map(([key, value]) => (
+                  <div key={key} className="flex items-center gap-2 mb-2">
+                    <span className="w-32">{key.replace('_', ' → ')}</span>
+                    <input
+                      type="text"
+                      value={editRates[key] ?? value}
+                      onChange={e => handleRateChange(key, e.target.value)}
+                      className="w-20 border rounded px-2 py-1"
+                    />
+                    <Button size="sm" onClick={() => handleRateSave(key)}>{t('profile.actions.save', 'Lagre')}</Button>
+                    <Button size="sm" variant="destructive" onClick={() => handleRateDelete(key)}>{t('profile.actions.delete', 'Slett')}</Button>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         )}
