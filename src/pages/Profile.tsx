@@ -289,7 +289,7 @@ const Profile = () => {
                       type="text"
                       value={editRates[key] ?? value}
                       onChange={e => handleRateChange(key, e.target.value)}
-                      className="w-20 border rounded px-2 py-1"
+                      className="w-20 border rounded px-2 py-1 bg-background text-foreground border-border dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border"
                     />
                     <Button size="sm" onClick={() => handleRateSave(key)}>{t('profile.actions.save', 'Lagre')}</Button>
                     <Button size="sm" variant="destructive" onClick={() => handleRateDelete(key)}>{t('profile.actions.delete', 'Slett')}</Button>

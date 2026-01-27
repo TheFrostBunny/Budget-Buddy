@@ -25,7 +25,7 @@ const Settings = () => {
       <DeveloperCard />
 
       <div className="pt-8 text-center text-xs text-muted-foreground">
-        <p>Budget Buddy V1.4.1.4</p>
+        <p>Budget Buddy V1.4.9</p>
       </div>
     </div>
   );
