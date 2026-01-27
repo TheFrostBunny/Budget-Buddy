@@ -1,6 +1,6 @@
 {
-  "name": "Budsjett App",
-  "short_name": "Budsjett",
+  "name": "Budget Buddy",
+  "short_name": "BudgetBuddy",
   "description": "A budgeting app to manage your finances efficiently.",
   "start_url": "/",
   "display": "standalone",

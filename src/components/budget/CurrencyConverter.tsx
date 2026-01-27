@@ -12,8 +12,6 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 
-const CURRENCY_API = "https://api.exchangerate.host/latest";
-
 const CURRENCIES = ["EUR", "USD", "NOK", "SEK", "GBP"];
 
 
