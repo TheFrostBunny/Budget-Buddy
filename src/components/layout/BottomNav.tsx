@@ -3,10 +3,11 @@ import { Home, User, ShoppingCart, Store } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 
+import { DollarSign } from 'lucide-react';
 const navItems = [
   { to: '/', icon: Home, labelKey: 'nav.home' },
   { to: '/shopping-list', icon: ShoppingCart, labelKey: 'nav.shoppingList' },
-  { to: '/stores', icon: Store, labelKey: 'nav.stores' },
+   { to: '/stores', icon: Store, labelKey: 'nav.stores' },
   { to: '/profile', icon: User, labelKey: 'nav.profile' },
 ];
 

@@ -7,14 +7,17 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import Dashboard from './pages/Dashboard';
 import { ThemeProvider } from '@/components/theme-provider';
 import { BudgetProvider } from '@/components/budget/budget-provider';
+import { useEffect, useRef } from 'react';
+import { toast } from '@/hooks/use-toast';
+import { useIsMobile } from '@/hooks/use-mobile';
+
 import ShoppingList from './pages/ShoppingList';
 import Stores from './pages/Stores';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
-import { useEffect, useRef } from 'react';
-import { toast } from '@/hooks/use-toast';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { CurrencyConverter } from './components/budget/CurrencyConverter';
+
 
 const queryClient = new QueryClient();
 
@@ -80,6 +83,7 @@ const App = () => {
                   <Route path="/stores" element={<Stores />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/settings" element={<Settings />} />
+                  <Route path="/currency-converter" element={<CurrencyConverter />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </AppLayout>

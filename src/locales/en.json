@@ -119,7 +119,8 @@
     "home": "Home",
     "shoppingList": "Shopping List",
     "stores": "Stores",
-    "profile": "Profile"
+    "profile": "Profile",
+    "currencyConverter": "Currency Converter"
   },
   "shoppingList": {
     "title": "Shopping List",
