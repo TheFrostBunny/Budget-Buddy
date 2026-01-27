@@ -120,7 +120,8 @@
     "home": "Hjem",
     "shoppingList": "Handleliste",
     "stores": "Butikker",
-    "profile": "Profil"
+    "profile": "Profil",
+    "currencyConverter": "Valutakalkulator"
   },
   "shoppingList": {
     "title": "Handleliste",

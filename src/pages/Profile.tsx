@@ -6,6 +6,15 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { User, RotateCcw, Settings as SettingsIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from '@/components/ui/select';
+
+const CURRENCIES = ["NOK", "EUR", "USD", "SEK", "GBP"];
 
 const Profile = () => {
   const { t, i18n } = useTranslation();
@@ -14,6 +23,8 @@ const Profile = () => {
   const [rounds, setRounds] = useState<{ amount: number }[]>([]);
   const [money, setMoney] = useState<number | null>(null);
   const [duration, setDuration] = useState<number | null>(null);
+  const [currency, setCurrency] = useState(() => localStorage.getItem('profileCurrency') || 'NOK');
+
   useEffect(() => {
     const storedRounds = localStorage.getItem('foodBudgetRounds');
     if (storedRounds) {
@@ -40,6 +51,10 @@ const Profile = () => {
     }
   }, [preferences.language, setPreferencesState, i18n]);
 
+  useEffect(() => {
+    localStorage.setItem('profileCurrency', currency);
+  }, [currency]);
+
   return (
     <div className="space-y-4 p-4 pt-6">
       <header className="flex items-center justify-between">
@@ -59,6 +74,19 @@ const Profile = () => {
           <SettingsIcon className="h-6 w-6" />
         </Link>
       </header>
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-sm text-muted-foreground">Vis i valuta:</span>
+        <Select value={currency} onValueChange={setCurrency}>
+          <SelectTrigger className="w-28">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {CURRENCIES.map(cur => (
+              <SelectItem key={cur} value={cur}>{cur}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
       <Card>
         <CardHeader>
           <CardTitle className="text-base">{t('profile.period.title')}</CardTitle>
