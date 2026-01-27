@@ -176,20 +176,20 @@ export function CurrencyConverter() {
         )}
 
         {showCustomRate && (
-          <form onSubmit={handleSaveCustomRate} className="flex flex-col gap-2 mt-2">
+          <div className="flex flex-col gap-2 mt-2">
             <Label htmlFor="customRate">Egen valutakurs ({from} → {to})</Label>
             <Input
               id="customRate"
-              type="number"
+              type="text"
               step="any"
               min="0"
               value={customRate}
               onChange={e => setCustomRate(e.target.value)}
-              placeholder="F.eks. 0.095"
+              placeholder="F.eks. 0,095 eller 0.095"
               required
             />
-            <Button type="submit" className="w-full">Lagre og bruk</Button>
-          </form>
+            <Button className="w-full" onClick={handleSaveCustomRate}>Lagre og bruk</Button>
+          </div>
         )}
         {result !== null && (
           <div className="mt-2 text-green-700 dark:text-green-400 text-center">
