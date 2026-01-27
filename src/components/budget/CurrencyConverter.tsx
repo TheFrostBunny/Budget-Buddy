@@ -30,6 +30,16 @@ export function CurrencyConverter() {
       return {};
     }
   });
+
+  // Oppdater customRates fra localStorage når valutapar endres
+  React.useEffect(() => {
+    try {
+      const saved = localStorage.getItem("customRates");
+      setCustomRates(saved ? JSON.parse(saved) : {});
+    } catch {
+      setCustomRates({});
+    }
+  }, [from, to]);
   const [showCustomRate, setShowCustomRate] = useState(false);
   const [customRate, setCustomRate] = useState("");
 
