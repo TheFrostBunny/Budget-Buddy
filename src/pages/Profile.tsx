@@ -49,7 +49,7 @@ const Profile = () => {
           </div>
           <div>
             <h1 className="text-2xl font-bold">{t('profile.title')}</h1>
-            <p className="text-muted-foreground">{t('profile.subtitle')}</p>
+            <p className="text-muted-foreground" >{t('profile.subtitle')}</p>
           </div>
         </div>
         <Link
@@ -61,7 +61,7 @@ const Profile = () => {
       </header>
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">{t('profile.period.title')}</CardTitle>
+          <CardTitle className="text-base" lang="no">{t('profile.period.title')}</CardTitle>
         </CardHeader>
         <CardContent className="flex items-center gap-2">
           <Button
@@ -69,28 +69,28 @@ const Profile = () => {
             onClick={() => setDefaultBudgetPeriod('weekly')}
             className="flex-1"
           >
-            {t('profile.period.weekly')}
+            <span lang="no">{t('profile.period.weekly')}</span>
           </Button>
           <Button
             variant={preferences.defaultBudgetPeriod === 'monthly' ? 'default' : 'outline'}
             onClick={() => setDefaultBudgetPeriod('monthly')}
             className="flex-1"
           >
-            {t('profile.period.monthly')}
+            <span lang="no">{t('profile.period.monthly')}</span>
           </Button>
           <Button
             variant={preferences.defaultBudgetPeriod === 'daily' ? 'default' : 'outline'}
             onClick={() => setDefaultBudgetPeriod('daily')}
             className="flex-1"
           >
-            {t('profile.period.daily')}
+            <span lang="no">{t('profile.period.daily')}</span>
           </Button>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">
+          <CardTitle className="text-base" lang="no">
             {preferences.defaultBudgetPeriod === 'daily'
               ? t('profile.labels.dailyFood')
               : preferences.defaultBudgetPeriod === 'monthly'
@@ -123,6 +123,7 @@ const Profile = () => {
                   ? t('profile.placeholders.daily')
                   : t('profile.placeholders.amount')
               }
+              lang="no"
               className="dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border w-72 rounded border border-border bg-background px-3 py-2 text-base text-foreground"
             />
           </div>
@@ -147,6 +148,7 @@ const Profile = () => {
                   }
                 }}
                 placeholder={t('profile.placeholders.days')}
+                lang="no"
                 className="dark:bg-dark-background dark:text-dark-foreground dark:border-dark-border w-1/2 rounded border border-border bg-background px-2 py-2 text-base text-foreground"
                 style={{ marginLeft: 8 }}
               />
@@ -167,17 +169,17 @@ const Profile = () => {
 
               return (
                 <div className="mt-4 w-full space-y-2 rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
-                  <p className="font-semibold text-foreground">{t(`budget.status`)}</p>
+                  <p className="font-semibold text-foreground" lang="no">{t(`budget.status`)}</p>
                   <div className="flex justify-between">
-                    <span>{t(`budget.dailyBudget`)}</span>
+                    <span lang="no">{t(`budget.dailyBudget`)}</span>
                     <span className="font-medium">{budget.amount} kr</span>
                   </div>
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>{t(`budget.spent`)}</span>
+                    <span lang="no">{t(`budget.spent`)}</span>
                     <span>-{spending.spent} kr</span>
                   </div>
                   <div className="mt-1 flex justify-between border-t border-border/50 pt-1 font-medium">
-                    <span>{t(`budget.leftover`)}</span>
+                    <span lang="no">{t(`budget.leftover`)}</span>
                     <span>{budget.amount - spending.spent} kr</span>
                   </div>
 
@@ -188,13 +190,13 @@ const Profile = () => {
                         <span className="font-bold text-primary">{totalAmount} kr</span>
                       </div>
                       <div className="mt-1 flex justify-between text-xs text-muted-foreground">
-                        <span>{t(`budget.spent`)}</span>
+                        <span lang="no">{t(`budget.spent`)}</span>
                         <span className="text-destructive">
                           -{totalSpentSinceStart.toFixed(0)} kr
                         </span>
                       </div>
                       <div className="mt-1 flex justify-between text-xs font-medium text-muted-foreground">
-                        <span>{t(`budget.leftovertotal`)}</span>
+                        <span lang="no">{t(`budget.leftovertotal`)}</span>
                         <span className="text-foreground">
                           {Math.max(0, totalAmount - totalSpentSinceStart).toFixed(0)} kr
                         </span>
@@ -210,12 +212,12 @@ const Profile = () => {
       {budget && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">{t('profile.actions.title')}</CardTitle>
+            <CardTitle className="text-base" lang="no">{t('profile.actions.title')}</CardTitle>
           </CardHeader>
           <CardContent>
             <Button variant="outline" onClick={resetSpending} className="w-full">
               <RotateCcw className="mr-2 h-4 w-4" />
-              {t('profile.actions.resetSpending')}
+              <span lang="no">{t('profile.actions.resetSpending')}</span>
             </Button>
             <Button
               variant="ghost"
@@ -226,7 +228,7 @@ const Profile = () => {
                 }
               }}
             >
-              {t('profile.actions.resetSavings')}
+              <span lang="no">{t('profile.actions.resetSavings')}</span>
             </Button>
           </CardContent>
         </Card>
