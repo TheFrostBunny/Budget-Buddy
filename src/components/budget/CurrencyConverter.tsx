@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 const CURRENCIES = ["EUR", "USD", "NOK", "SEK", "GBP"];
 
 
-export function CurrencyConverter() {
+const CurrencyConverter = () => {
   const [amount, setAmount] = useState(1);
   const [from, setFrom] = useState("EUR");
   const [to, setTo] = useState("USD");
@@ -206,4 +206,5 @@ export function CurrencyConverter() {
       </form>
     </Card>
   );
-}
+};
+export default CurrencyConverter;

@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useBudget } from '@/components/budget/budget-provider';
+import { usePreferences } from '@/hooks/useLocalStorage';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Wallet, Calendar, Clock, Plus, Check } from 'lucide-react';
@@ -7,10 +8,38 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 
-const AddSpentAmount = ({ currency, convert }) => {
+export interface AddSpentAmountProps {
+  currency: string;
+  convert: (amount: number) => number;
+  betaEnabled: boolean;
+}
+const AddSpentAmount: React.FC<AddSpentAmountProps> = React.memo(({ currency, convert, betaEnabled }) => {
   const { addSpending, budget } = useBudget();
+  const { inputCurrency } = usePreferences();
   const { t } = useTranslation();
   const [amount, setAmount] = useState('');
+  const [eurAmount, setEurAmount] = useState('');
+  const [eurToNokRate, setEurToNokRate] = useState(() => {
+    // Prøv å hente fra localStorage (samme som CurrencyConverter)
+    try {
+      const saved = localStorage.getItem('customRates');
+      if (saved) {
+        const rates = JSON.parse(saved);
+        if (rates['EUR_NOK']) return rates['EUR_NOK'];
+      }
+    } catch {}
+    return 0;
+  });
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('customRates');
+      if (saved) {
+        const rates = JSON.parse(saved);
+        if (rates['EUR_NOK']) setEurToNokRate(rates['EUR_NOK']);
+      }
+    } catch {}
+  }, []);
   const [date, setDate] = useState(() => {
     const now = new Date();
     return now.toISOString().slice(0, 10);
@@ -29,6 +58,7 @@ const AddSpentAmount = ({ currency, convert }) => {
       }
       addSpending(value, undefined, 'Utgift');
       setAmount('');
+      setEurAmount('');
       setSuccess(true);
       toast({
         title: 'Utgift lagret!',
@@ -36,6 +66,14 @@ const AddSpentAmount = ({ currency, convert }) => {
       });
     }
   };
+
+  // Når eurofeltet endres, oppdater NOK-feltet automatisk
+  useEffect(() => {
+    if (eurAmount && eurToNokRate > 0) {
+      const nok = parseFloat(eurAmount.replace(',', '.')) * eurToNokRate;
+      if (!isNaN(nok)) setAmount(nok.toFixed(2));
+    }
+  }, [eurAmount, eurToNokRate]);
 
   useEffect(() => {
     if (success) {
@@ -64,19 +102,61 @@ const AddSpentAmount = ({ currency, convert }) => {
             <label className="ml-1 text-sm font-medium text-muted-foreground">
               {t('dashboard.addExpense.amount')}
             </label>
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl font-bold text-muted-foreground">
-                kr
-              </span>
-              <Input
-                type="number"
-                min={0}
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                placeholder="0"
-                className="h-14 border-muted-foreground/20 pl-12 text-2xl font-bold focus-visible:ring-primary/30 sm:h-16 sm:text-3xl"
-              />
-            </div>
+            {inputCurrency === 'NOK' && (
+              <div className="relative mb-2">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl font-bold text-muted-foreground">
+                  kr
+                </span>
+                <Input
+                  type="number"
+                  min={0}
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder="0"
+                  className="h-14 border-muted-foreground/20 pl-12 text-2xl font-bold focus-visible:ring-primary/30 sm:h-16 sm:text-3xl"
+                />
+              </div>
+            )}
+            {inputCurrency === 'EUR' && betaEnabled && (
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base font-bold text-muted-foreground">
+                  €
+                </span>
+                <Input
+                  type="number"
+                  min={0}
+                  value={eurAmount}
+                  onChange={e => setEurAmount(e.target.value)}
+                  placeholder="F.eks. 10 for å legge til 10 euro"
+                  className="h-10 border-muted-foreground/20 pl-10 text-base font-medium focus-visible:ring-primary/30 sm:h-12 sm:text-lg"
+                  step="any"
+                  aria-label="Legg til i euro, blir automatisk NOK"
+                />
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">
+                  {eurToNokRate > 0
+                    ? `Bruker kurs: 1 € = ${eurToNokRate} kr`
+                    : 'Sett valutakurs i valutakalkulatoren'}
+                </span>
+                {eurAmount === '' && (
+                  <div className="text-xs text-red-600 mt-1">
+                    Skriv inn euro-beløp for å konvertere til norske kroner.
+                  </div>
+                )}
+              </div>
+            )}
+            {inputCurrency === 'EUR' && !betaEnabled && (
+              <div className="text-xs text-yellow-700 mt-1">
+                Euro-funksjonen er i beta. Aktiver beta-funksjoner i innstillinger for å bruke denne.
+              </div>
+            )}
+            {inputCurrency === 'OTHER' && (
+              <ul className="list-disc pl-6 text-xs text-muted-foreground mt-1">
+                <li>Du har valgt "Annet" som valuta i profilen.</li>
+                <li>Utgiftsregistrering i andre valutaer enn NOK og EUR støttes ikke ennå.</li>
+                <li>Bytt til NOK eller EUR i profilen for å legge inn utgifter.</li>
+                <li>Støtte for flere valutaer kommer i en fremtidig oppdatering.</li>
+              </ul>
+            )}
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -126,6 +206,5 @@ const AddSpentAmount = ({ currency, convert }) => {
       </Card>
     </section>
   );
-};
-
+});
 export default AddSpentAmount;

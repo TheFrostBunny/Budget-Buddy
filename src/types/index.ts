@@ -80,6 +80,7 @@ export interface UserPreferences {
   dailyBudgetAmount?: number;
   customStoreLocations: Record<string, { lat: number; lon: number }>;
   language?: string;
+  inputCurrency?: 'NOK' | 'EUR' | 'OTHER';
 }
 
 export const CATEGORY_LABELS: Record<ProductCategory, string> = {

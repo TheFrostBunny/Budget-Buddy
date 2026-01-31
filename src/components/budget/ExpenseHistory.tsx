@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+// Legg til denne importen for å sikre at JSX-elementer gjenkjennes
+import type {} from 'react/jsx-runtime';
 import { useBudget } from '@/components/budget/budget-provider';
 import { useTranslation } from 'react-i18next';
 import { CardTitle } from '@/components/ui/card';
@@ -8,7 +10,12 @@ import { Button } from '@/components/ui/button';
 import { Trash2, Clock } from 'lucide-react';
 import BudgetAnalysisGraph from '@/components/budget/BudgetAnalysisGraph';
 
-const ExpenseHistory = ({ betaEnabled, currency, convert }) => {
+export interface ExpenseHistoryProps {
+  betaEnabled: boolean;
+  currency: string;
+  convert: (amount: number) => number;
+}
+const ExpenseHistory: React.FC<ExpenseHistoryProps> = React.memo(({ betaEnabled, currency, convert }) => {
   const { spending, removeSpending } = useBudget();
   const { t } = useTranslation();
   const [showGraph, setShowGraph] = useState(false);
@@ -117,6 +124,5 @@ const ExpenseHistory = ({ betaEnabled, currency, convert }) => {
       ))}
     </section>
   );
-};
-
+});
 export default ExpenseHistory;

@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { usePreferences } from '@/hooks/useLocalStorage';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
+import { usePreferences, currencyOptions } from '@/hooks/useLocalStorage';
 import { useBudget } from '@/components/budget/budget-provider';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -54,6 +56,8 @@ const Profile = () => {
     }, []);
   const { t, i18n } = useTranslation();
   const { preferences, setDefaultBudgetPeriod, setPreferencesState } = usePreferences();
+  // Bruk sentral valuta fra hook
+  const { inputCurrency, setInputCurrency } = usePreferences();
   const { budget, updateBudget, resetSpending, spending, resetSavingsBalance } = useBudget();
   const [rounds, setRounds] = useState<{ amount: number }[]>([]);
   const [money, setMoney] = useState<number | null>(null);

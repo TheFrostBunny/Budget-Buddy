@@ -3,8 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { AlertCircle, TrendingUp } from 'lucide-react';
-
-const BudgetOverview = ({ currency, convert, loadingRates }) => {
+import React from 'react';
+import type {} from 'react/jsx-runtime';
+export interface BudgetOverviewProps {
+  currency: string;
+  convert: (amount: number) => number;
+  loadingRates: boolean;
+}
+const BudgetOverview: React.FC<BudgetOverviewProps> = React.memo(({ currency, convert, loadingRates }) => {
   const { budget, spending, savings, completePeriod } = useBudget();
   const { t } = useTranslation();
 
@@ -81,6 +87,5 @@ const BudgetOverview = ({ currency, convert, loadingRates }) => {
       </Card>
     </section>
   );
-};
-
+});
 export default BudgetOverview;

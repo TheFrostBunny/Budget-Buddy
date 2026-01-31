@@ -10,13 +10,14 @@ import { BudgetProvider } from '@/components/budget/budget-provider';
 import { useEffect, useRef } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
+import Onboarding from '@/components/Onboarding';
 
 import ShoppingList from './pages/ShoppingList';
 import Stores from './pages/Stores';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
-import { CurrencyConverter } from './components/budget/CurrencyConverter';
+import CurrencyConverter from './components/budget/CurrencyConverter';
 
 
 const queryClient = new QueryClient();
@@ -75,6 +76,7 @@ const App = () => {
           <TooltipProvider>
             <Toaster />
             <Sonner />
+            <Onboarding onFinish={() => {}} />
             <BrowserRouter>
               <AppLayout>
                 <Routes>

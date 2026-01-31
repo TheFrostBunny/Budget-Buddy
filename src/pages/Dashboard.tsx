@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo, Suspense, lazy } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useBudget } from '@/components/budget/budget-provider';
 import { Wallet } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { CurrencyConverter } from '@/components/budget/CurrencyConverter';
-import ExpenseHistory from '@/components/budget/ExpenseHistory';
-import AddSpentAmount from '@/components/budget/AddSpentAmount';
-import BudgetOverview from '@/components/budget/BudgetOverview';
+const CurrencyConverter = lazy(() => import('@/components/budget/CurrencyConverter'));
+const ExpenseHistory = lazy(() => import('@/components/budget/ExpenseHistory'));
+const AddSpentAmount = lazy(() => import('@/components/budget/AddSpentAmount'));
+const BudgetOverview = lazy(() => import('@/components/budget/BudgetOverview'));
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -57,11 +57,11 @@ const Dashboard = () => {
       .finally(() => setLoadingRates(false));
   }, [currency]);
 
-  const convert = (amount) => {
+  const convert = useCallback((amount) => {
     if (currency === baseCurrency) return amount;
     if (rates[currency]) return amount * rates[currency];
     return amount;
-  };
+  }, [currency, baseCurrency, rates]);
 
   const [selectedView, setSelectedView] = useState<'converter' | 'add'>('add');
 
@@ -94,20 +94,22 @@ const Dashboard = () => {
           </div>
         </div>
       </header>
-      
-          {selectedView !== 'converter' && (
-            <BudgetOverview currency={currency} convert={convert} loadingRates={loadingRates} />
-          )}
-      <div className="mb-4">
-        {selectedView === 'converter' ? <CurrencyConverter /> : <AddSpentAmount currency={currency} convert={convert} />}
-      </div>
-      {selectedView === 'add' && spending.transactions && Array.isArray(spending.transactions) && spending.transactions.length > 0 && (
-        <Card>
-          <CardContent className="space-y-4">
-            <ExpenseHistory betaEnabled={betaEnabled} currency={currency} convert={convert} />
-          </CardContent>
-        </Card>
-      )}
+
+      <Suspense fallback={<div>Laster...</div>}>
+        {selectedView !== 'converter' && (
+          <BudgetOverview currency={currency} convert={convert} loadingRates={loadingRates} />
+        )}
+        <div className="mb-4">
+          {selectedView === 'converter' ? <CurrencyConverter /> : <AddSpentAmount currency={currency} convert={convert} betaEnabled={betaEnabled} />}
+        </div>
+        {selectedView === 'add' && spending.transactions && Array.isArray(spending.transactions) && spending.transactions.length > 0 && (
+          <Card>
+            <CardContent className="space-y-4">
+              <ExpenseHistory betaEnabled={betaEnabled} currency={currency} convert={convert} />
+            </CardContent>
+          </Card>
+        )}
+      </Suspense>
     </div>
   );
 };

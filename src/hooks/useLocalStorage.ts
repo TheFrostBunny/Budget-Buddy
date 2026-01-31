@@ -1,3 +1,10 @@
+// Valuta for input (NOK, EUR, annet)
+export const currencyOptions = [
+  { value: 'NOK', label: 'Norske kroner (NOK)' },
+  { value: 'EUR', label: 'Euro (EUR)' },
+  { value: 'OTHER', label: 'Annet' },
+];
+
 import { useState, useEffect } from 'react';
 import { Budget, BudgetSpending, ShoppingListItem, UserPreferences, DietaryInfo } from '@/types';
 
@@ -126,6 +133,10 @@ export function usePreferences() {
     }));
   };
 
+  // Hent og sett inputCurrency
+  const inputCurrency = preferences.inputCurrency || 'NOK';
+  const setInputCurrency = (val: 'NOK' | 'EUR' | 'OTHER') => setPreferencesState((prev) => ({ ...prev, inputCurrency: val }));
+
   return {
     preferences,
     toggleDietaryPreference,
@@ -133,5 +144,7 @@ export function usePreferences() {
     setDefaultBudgetPeriod,
     setPreferencesState,
     addStoreLocation,
+    inputCurrency,
+    setInputCurrency,
   };
 }
