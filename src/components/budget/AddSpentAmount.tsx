@@ -13,14 +13,23 @@ export interface AddSpentAmountProps {
   convert: (amount: number) => number;
   betaEnabled: boolean;
 }
+const categories = [
+  'Mat',
+  'Transport',
+  'Underholdning',
+  'Helse',
+  'Shopping',
+  'Bolig',
+  'Annet',
+];
 const AddSpentAmount: React.FC<AddSpentAmountProps> = React.memo(({ currency, convert, betaEnabled }) => {
   const { addSpending, budget } = useBudget();
   const { inputCurrency } = usePreferences();
   const { t } = useTranslation();
   const [amount, setAmount] = useState('');
   const [eurAmount, setEurAmount] = useState('');
+  const [category, setCategory] = useState(categories[0]);
   const [eurToNokRate, setEurToNokRate] = useState(() => {
-    // Prøv å hente fra localStorage (samme som CurrencyConverter)
     try {
       const saved = localStorage.getItem('customRates');
       if (saved) {
@@ -56,18 +65,17 @@ const AddSpentAmount: React.FC<AddSpentAmountProps> = React.memo(({ currency, co
       if (!budget) {
         return;
       }
-      addSpending(value, undefined, 'Utgift');
+      // Send kategori som både description og category
+      addSpending(value, undefined, category, category);
       setAmount('');
       setEurAmount('');
       setSuccess(true);
       toast({
         title: 'Utgift lagret!',
-        description: `Du har lagt til ${value} kr.`,
+        description: `Du har lagt til ${value} kr i kategorien "${category}".`,
       });
     }
   };
-
-  // Når eurofeltet endres, oppdater NOK-feltet automatisk
   useEffect(() => {
     if (eurAmount && eurToNokRate > 0) {
       const nok = parseFloat(eurAmount.replace(',', '.')) * eurToNokRate;
@@ -160,6 +168,18 @@ const AddSpentAmount: React.FC<AddSpentAmountProps> = React.memo(({ currency, co
           </div>
 
           <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2 col-span-2">
+              <label className="ml-1 text-xs font-medium text-muted-foreground">Kategori</label>
+              <select
+                value={category}
+                onChange={e => setCategory(e.target.value)}
+                className="w-full rounded border border-border bg-background px-3 py-2 text-base text-foreground"
+              >
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+            </div>
             <div className="space-y-2">
               <label className="ml-1 flex items-center gap-1 text-xs font-medium text-muted-foreground">
                 <Calendar className="h-3 w-3" /> {t('dashboard.addExpense.date')}

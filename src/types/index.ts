@@ -70,6 +70,7 @@ export interface Transaction {
   amount: number;
   storeId?: string;
   description?: string;
+  category?: string;
 }
 
 export interface UserPreferences {

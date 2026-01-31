@@ -15,6 +15,7 @@ export const ExportExcelButton: React.FC<ExportExcelButtonProps> = ({
 }) => {
   const handleExport = () => {
     let exportData = data;
+    let budgetInfo = {};
     try {
       const stored = localStorage.getItem('budgetbuddy_spending');
       if (stored) {
@@ -24,15 +25,14 @@ export const ExportExcelButton: React.FC<ExportExcelButtonProps> = ({
         }
       }
     } catch {}
-    let budgetInfo = {};
     try {
       const budgetRaw = localStorage.getItem('budgetbuddy_budget');
       if (budgetRaw) {
         const budget = JSON.parse(budgetRaw);
         budgetInfo = {
-          Budsjett: budget.amount,
-          Type: budget.period,
-          Startdato: budget.startDate ? new Date(budget.startDate).toLocaleString('nb-NO') : '',
+          'Budsjettbeløp': budget.amount,
+          'Periode': budget.period === 'weekly' ? 'Uke' : budget.period === 'monthly' ? 'Måned' : 'Dag',
+          'Startdato': budget.startDate ? new Date(budget.startDate).toLocaleString('nb-NO') : '',
         };
       }
     } catch {}
@@ -48,28 +48,32 @@ export const ExportExcelButton: React.FC<ExportExcelButtonProps> = ({
           dato = isNaN(d.getTime()) ? '' : d.toLocaleString('nb-NO');
         }
         return {
-          Dato: dato,
-          Beløp: tx.amount,
-          Beskrivelse: tx.description || '',
-          Butikk: tx.storeId || '',
+          'Dato': dato,
+          'Beløp (kr)': tx.amount,
+          'Beskrivelse': tx.description || '',
+          'Butikk': tx.storeId || '',
+          'Kategori': tx.category || '',
         };
       });
-    // Legg til budsjett-info som første rad
-    const excelData = [budgetInfo, ...cleanData];
-    const ws = XLSX.utils.json_to_sheet(excelData);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Utgifter');
+    // Budsjett-info på eget ark
+    const wsBudget = XLSX.utils.json_to_sheet([budgetInfo]);
+    XLSX.utils.book_append_sheet(wb, wsBudget, 'Budsjett');
+    // Transaksjoner på eget ark
+    const wsTrans = XLSX.utils.json_to_sheet(cleanData);
+    XLSX.utils.book_append_sheet(wb, wsTrans, 'Utgifter');
     XLSX.writeFile(wb, filename);
   };
 
   return (
     <button
       onClick={handleExport}
-      className="ml-2 rounded-full p-2 bg-primary text-white hover:bg-primary/80 flex items-center justify-center"
+      className="ml-2 rounded-full px-4 py-2 bg-primary text-white hover:bg-primary/80 flex items-center gap-2 justify-center"
       aria-label={label}
       title={label}
     >
       <Download className="h-5 w-5" />
+      <span className="hidden sm:inline">{label}</span>
     </button>
   );
 };

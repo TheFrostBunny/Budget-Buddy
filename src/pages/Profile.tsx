@@ -1,84 +1,27 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
 import { usePreferences, currencyOptions } from '@/hooks/useLocalStorage';
+import { useCustomRates } from '@/hooks/useCustomRates';
 import { useBudget } from '@/components/budget/budget-provider';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { User, RotateCcw, Settings as SettingsIcon } from 'lucide-react';
+import { useEffect } from 'react';
+import { useStoredRoundsAndMoney } from '@/hooks/useStoredRoundsAndMoney';
+import { RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import ProfileHeader from '@/components/profile/ProfileHeader';
+import BudgetPeriodSelector from '@/components/profile/BudgetPeriodSelector';
+import BudgetStatusCard from '@/components/profile/BudgetStatusCard';
 
 const Profile = () => {
-    const [customRates, setCustomRates] = useState<{ [key: string]: number }>(() => {
-      try {
-        const saved = localStorage.getItem("customRates");
-        return saved ? JSON.parse(saved) : {};
-      } catch {
-        return {};
-      }
-    });
-    const [editRates, setEditRates] = useState<{ [key: string]: string }>({});
-
-    const handleRateChange = (key: string, value: string) => {
-      setEditRates(prev => ({ ...prev, [key]: value }));
-    };
-
-    const handleRateSave = (key: string) => {
-      const normalized = editRates[key].replace(',', '.');
-      const rate = parseFloat(normalized);
-      if (!rate || rate <= 0) return;
-      const updatedRates = { ...customRates, [key]: rate };
-      setCustomRates(updatedRates);
-      localStorage.setItem("customRates", JSON.stringify(updatedRates));
-      setEditRates(prev => ({ ...prev, [key]: '' }));
-    };
-
-    const handleRateDelete = (key: string) => {
-      const updatedRates = { ...customRates };
-      delete updatedRates[key];
-      setCustomRates(updatedRates);
-      localStorage.setItem("customRates", JSON.stringify(updatedRates));
-      setEditRates(prev => {
-        const copy = { ...prev };
-        delete copy[key];
-        return copy;
-      });
-    };
-
-    useEffect(() => {
-      try {
-        const saved = localStorage.getItem("customRates");
-        setCustomRates(saved ? JSON.parse(saved) : {});
-      } catch {
-        setCustomRates({});
-      }
-    }, []);
+    const {
+      customRates,
+      editRates,
+      handleRateChange,
+      handleRateSave,
+      handleRateDelete,
+    } = useCustomRates();
   const { t, i18n } = useTranslation();
   const { preferences, setDefaultBudgetPeriod, setPreferencesState } = usePreferences();
-  // Bruk sentral valuta fra hook
-  const { inputCurrency, setInputCurrency } = usePreferences();
   const { budget, updateBudget, resetSpending, spending, resetSavingsBalance } = useBudget();
-  const [rounds, setRounds] = useState<{ amount: number }[]>([]);
-  const [money, setMoney] = useState<number | null>(null);
-  const [duration, setDuration] = useState<number | null>(null);
-  useEffect(() => {
-    const storedRounds = localStorage.getItem('foodBudgetRounds');
-    if (storedRounds) {
-      setRounds(JSON.parse(storedRounds));
-    }
-    const storedMoney = localStorage.getItem('foodBudgetMoney');
-    if (storedMoney) {
-      const { money, duration } = JSON.parse(storedMoney);
-      setMoney(money);
-      setDuration(duration);
-    } else {
-      if (preferences.dailyBudgetAmount && preferences.dailyBudgetDays) {
-        setMoney(preferences.dailyBudgetAmount);
-        setDuration(preferences.dailyBudgetDays);
-      }
-    }
-  }, [preferences.dailyBudgetAmount, preferences.dailyBudgetDays]);
 
   useEffect(() => {
     const browserLanguage = navigator.language.split('-')[0];
@@ -91,51 +34,11 @@ const Profile = () => {
   return (
     <div>
       <div className="space-y-4 p-4 pt-6">
-        <header className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <User className="h-7 w-7" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold">{t('profile.title')}</h1>
-              <p className="text-muted-foreground" >{t('profile.subtitle')}</p>
-            </div>
-          </div>
-          <Link
-            to="/settings"
-            className="p-2 text-muted-foreground transition-colors hover:text-primary"
-          >
-            <SettingsIcon className="h-6 w-6" />
-          </Link>
-        </header>
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base" lang="no">{t('profile.period.title')}</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center gap-2">
-            <Button
-              variant={preferences.defaultBudgetPeriod === 'weekly' ? 'default' : 'outline'}
-              onClick={() => setDefaultBudgetPeriod('weekly')}
-              className="flex-1"
-            >
-              <span lang="no">{t('profile.period.weekly')}</span>
-            </Button>
-            <Button
-              variant={preferences.defaultBudgetPeriod === 'monthly' ? 'default' : 'outline'}
-              onClick={() => setDefaultBudgetPeriod('monthly')}
-              className="flex-1"
-            >
-              <span lang="no">{t('profile.period.monthly')}</span>
-            </Button>
-            <Button
-              variant={preferences.defaultBudgetPeriod === 'daily' ? 'default' : 'outline'}
-              onClick={() => setDefaultBudgetPeriod('daily')}
-              className="flex-1"
-            >
-              <span lang="no">{t('profile.period.daily')}</span>
-            </Button>
-          </CardContent>
-        </Card>
+        <ProfileHeader />
+        <BudgetPeriodSelector
+          value={preferences.defaultBudgetPeriod || 'weekly'}
+          onChange={setDefaultBudgetPeriod}
+        />
 
         <Card>
           <CardHeader>
@@ -203,58 +106,14 @@ const Profile = () => {
                 />
               </div>
             )}
-            {budget &&
-              (() => {
-                const isDailyWithDuration =
-                  budget.period === 'daily' &&
-                  preferences.dailyBudgetDays &&
-                  preferences.dailyBudgetDays > 0;
-                const totalAmount = isDailyWithDuration
-                  ? budget.amount * (preferences.dailyBudgetDays || 1)
-                  : budget.amount;
-                const totalSpentSinceStart = spending.transactions
-                  .filter((tx) => new Date(tx.date) >= new Date(budget.startDate))
-                  .reduce((sum, tx) => sum + tx.amount, 0);
-
-                return (
-                  <div className="mt-4 w-full space-y-2 rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
-                    <p className="font-semibold text-foreground" lang="no">{t(`budget.status`)}</p>
-                    <div className="flex justify-between">
-                      <span lang="no">{t(`budget.dailyBudget`)}</span>
-                      <span className="font-medium">{budget.amount} kr</span>
-                    </div>
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                      <span lang="no">{t(`budget.spent`)}</span>
-                      <span>-{spending.spent} kr</span>
-                    </div>
-                    <div className="mt-1 flex justify-between border-t border-border/50 pt-1 font-medium">
-                      <span lang="no">{t(`budget.leftover`)}</span>
-                      <span>{budget.amount - spending.spent} kr</span>
-                    </div>
-
-                    {isDailyWithDuration && (
-                      <div className="mt-2 border-t border-border/50 pt-2">
-                        <div className="flex justify-between">
-                          <span>Totalt ({preferences.dailyBudgetDays} dager):</span>
-                          <span className="font-bold text-primary">{totalAmount} kr</span>
-                        </div>
-                        <div className="mt-1 flex justify-between text-xs text-muted-foreground">
-                          <span lang="no">{t(`budget.spent`)}</span>
-                          <span className="text-destructive">
-                            -{totalSpentSinceStart.toFixed(0)} kr
-                          </span>
-                        </div>
-                        <div className="mt-1 flex justify-between text-xs font-medium text-muted-foreground">
-                          <span lang="no">{t(`budget.leftovertotal`)}</span>
-                          <span className="text-foreground">
-                            {Math.max(0, totalAmount - totalSpentSinceStart).toFixed(0)} kr
-                          </span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })()}
+            {budget && (
+              <BudgetStatusCard
+                budget={budget}
+                spending={spending}
+                preferences={preferences}
+                t={t}
+              />
+            )}
           </CardContent>
         </Card>
 

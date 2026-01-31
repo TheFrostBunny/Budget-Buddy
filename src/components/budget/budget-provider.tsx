@@ -13,7 +13,7 @@ interface BudgetContextType {
   savings: number;
   setBudget: (amount: number, period: 'weekly' | 'monthly' | 'daily') => void;
   updateBudget: (amount: number, period?: 'weekly' | 'monthly' | 'daily') => void;
-  addSpending: (amount: number, storeId?: string, description?: string) => void;
+  addSpending: (amount: number, storeId?: string, description?: string, category?: string) => void;
   removeSpending: (id: string) => void;
   resetSpending: () => void;
   completePeriod: () => void;
@@ -105,7 +105,7 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const addSpending = (amount: number, storeId?: string, description?: string) => {
+  const addSpending = (amount: number, storeId?: string, description?: string, category?: string) => {
     let coveredBySavings = 0;
 
     if (budget) {
@@ -149,6 +149,7 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
           amount,
           storeId,
           description,
+          category,
         },
       ],
     }));

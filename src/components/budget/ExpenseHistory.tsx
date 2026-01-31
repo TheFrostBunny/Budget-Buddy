@@ -8,6 +8,7 @@ import { ChartPie } from 'lucide-react';
 import { ExportExcelButton } from '@/components/budget/ExportExcelButton';
 import { Button } from '@/components/ui/button';
 import { Trash2, Clock } from 'lucide-react';
+import { categoryIcons } from './categoryIcons';
 import BudgetAnalysisGraph from '@/components/budget/BudgetAnalysisGraph';
 
 export interface ExpenseHistoryProps {
@@ -94,13 +95,16 @@ const ExpenseHistory: React.FC<ExpenseHistoryProps> = React.memo(({ betaEnabled,
                       key={tx.id}
                       className="flex items-center justify-between p-4 transition-colors hover:bg-muted/50"
                     >
-                      <div className="flex flex-col">
-                        <span className="text-sm font-medium">
-                          {tx.description || t('dashboard.history.noDescription')}
-                        </span>
-                        <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <Clock className="h-3 w-3" /> {timeStr}
-                        </span>
+                      <div className="flex items-center gap-2">
+                        <span>{categoryIcons[tx.category || 'Annet']}</span>
+                        <div className="flex flex-col">
+                          <span className="text-sm font-medium">
+                            {tx.description || t('dashboard.history.noDescription')}
+                          </span>
+                          <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                            <Clock className="h-3 w-3" /> {timeStr}
+                          </span>
+                        </div>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="font-bold">{tx.amount.toFixed(0)} kr</span>
