@@ -15,14 +15,24 @@ interface BudgetContextType {
   updateBudget: (amount: number, period?: 'weekly' | 'monthly' | 'daily') => void;
   addSpending: (amount: number, storeId?: string, description?: string, category?: string) => void;
   removeSpending: (id: string) => void;
+  updateTransactionCategory: (id: string, category: string) => void;
   resetSpending: () => void;
   completePeriod: () => void;
   resetSavingsBalance: () => void;
 }
 
+
 const BudgetContext = createContext<BudgetContextType | undefined>(undefined);
 
 export function BudgetProvider({ children }: { children: ReactNode }) {
+    const updateTransactionCategory = (id: string, category: string) => {
+      setSpendingState((prev) => ({
+        ...prev,
+        transactions: prev.transactions.map((tx) =>
+          tx.id === id ? { ...tx, category } : tx
+        ),
+      }));
+    };
   const [budget, setBudgetState] = useState<Budget | null>(() => {
     const stored = localStorage.getItem(STORAGE_KEYS.BUDGET);
     return stored ? JSON.parse(stored) : null;
@@ -207,6 +217,7 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
         updateBudget,
         addSpending,
         removeSpending,
+        updateTransactionCategory,
         resetSpending,
         completePeriod,
         resetSavingsBalance,

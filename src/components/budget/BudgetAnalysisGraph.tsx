@@ -121,51 +121,60 @@ const BudgetAnalysisGraph = () => {
       </div>
       <ChartContainer config={{ amount: { label: 'Forbruk', color: '#3b82f6' } }}>
         <ResponsiveContainer width="100%" height={250}>
-          {chartType === 'line' && (
-            <LineChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" fontSize={12} />
-              <YAxis fontSize={12} />
-              <Tooltip />
-              <Line type="monotone" dataKey="amount" stroke="#3b82f6" strokeWidth={2} dot />
-            </LineChart>
-          )}
-          {chartType === 'bar' && (
-            <BarChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" fontSize={12} />
-              <YAxis fontSize={12} />
-              <Tooltip />
-              <Bar dataKey="amount" fill="#3b82f6" />
-            </BarChart>
-          )}
-          {chartType === 'pie' && (
-            <PieChart>
-              <Pie
-                data={pieData}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                label
-              >
-                {pieData.map((entry, idx) => {
-                  if (type === 'daily') {
-                    return (
-                      <Cell
-                        key={`cell-${idx}`}
-                        fill={entry.name === t('dashboard.graph.spent', 'Spent') ? '#3b82f6' : '#22c55e'}
-                      />
-                    );
-                  }
-                  return <Cell key={`cell-${idx}`} fill="#3b82f6" />;
-                })}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          )}
+          {(() => {
+            if (chartType === 'line') {
+              return (
+                <LineChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" fontSize={12} />
+                  <YAxis fontSize={12} />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="amount" stroke="#3b82f6" strokeWidth={2} dot />
+                </LineChart>
+              );
+            }
+            if (chartType === 'bar') {
+              return (
+                <BarChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" fontSize={12} />
+                  <YAxis fontSize={12} />
+                  <Tooltip />
+                  <Bar dataKey="amount" fill="#3b82f6" />
+                </BarChart>
+              );
+            }
+            if (chartType === 'pie') {
+              return (
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    dataKey="value"
+                    nameKey="name"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={80}
+                    label
+                  >
+                    {pieData.map((entry, idx) => {
+                      if (type === 'daily') {
+                        return (
+                          <Cell
+                            key={`cell-${idx}`}
+                            fill={entry.name === t('dashboard.graph.spent', 'Spent') ? '#3b82f6' : '#22c55e'}
+                          />
+                        );
+                      }
+                      return <Cell key={`cell-${idx}`} fill="#3b82f6" />;
+                    })}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              );
+            }
+            return null;
+          })()}
         </ResponsiveContainer>
       </ChartContainer>
     </div>

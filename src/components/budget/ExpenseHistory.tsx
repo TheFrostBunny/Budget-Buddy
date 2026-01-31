@@ -7,8 +7,17 @@ import { CardTitle } from '@/components/ui/card';
 import { ChartPie } from 'lucide-react';
 import { ExportExcelButton } from '@/components/budget/ExportExcelButton';
 import { Button } from '@/components/ui/button';
-import { Trash2, Clock } from 'lucide-react';
+import { Trash2, Clock, Pencil } from 'lucide-react';
 import { categoryIcons } from './categoryIcons';
+const categories = [
+  'Mat',
+  'Transport',
+  'Underholdning',
+  'Helse',
+  'Shopping',
+  'Bolig',
+  'Annet',
+];
 import BudgetAnalysisGraph from '@/components/budget/BudgetAnalysisGraph';
 
 export interface ExpenseHistoryProps {
@@ -17,7 +26,9 @@ export interface ExpenseHistoryProps {
   convert: (amount: number) => number;
 }
 const ExpenseHistory: React.FC<ExpenseHistoryProps> = React.memo(({ betaEnabled, currency, convert }) => {
-  const { spending, removeSpending } = useBudget();
+  const { spending, removeSpending, updateTransactionCategory } = useBudget?.() ?? {};
+    const [editingId, setEditingId] = useState<string | null>(null);
+    const [newCategory, setNewCategory] = useState<string>('');
   const { t } = useTranslation();
   const [showGraph, setShowGraph] = useState(false);
 
@@ -108,15 +119,62 @@ const ExpenseHistory: React.FC<ExpenseHistoryProps> = React.memo(({ betaEnabled,
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="font-bold">{tx.amount.toFixed(0)} kr</span>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => removeSpending(tx.id)}
-                          aria-label="Slett utgift"
-                          className="h-auto w-auto p-0"
-                        >
-                          <Trash2 className="h-5 w-5 cursor-pointer text-red-500" />
-                        </Button>
+                        {editingId === tx.id ? (
+                          <>
+                            <select
+                              value={newCategory}
+                              onChange={e => setNewCategory(e.target.value)}
+                              className="rounded border px-2 py-1 text-sm bg-background text-foreground border-border focus:outline-none focus:ring-2 focus:ring-primary/50 dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-700"
+                            >
+                              {categories.map((cat) => (
+                                <option key={cat} value={cat}>{cat}</option>
+                              ))}
+                            </select>
+                            <Button
+                              size="sm"
+                              onClick={() => {
+                                if (updateTransactionCategory) {
+                                  updateTransactionCategory(tx.id, newCategory);
+                                }
+                                setEditingId(null);
+                              }}
+                              className="ml-2"
+                            >
+                              Lagre
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={() => setEditingId(null)}
+                            >
+                              Avbryt
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              onClick={() => {
+                                setEditingId(tx.id);
+                                setNewCategory(tx.category || 'Annet');
+                              }}
+                              aria-label="Endre kategori"
+                              className="h-auto w-auto p-0"
+                            >
+                              <Pencil className="h-5 w-5 text-primary" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => removeSpending(tx.id)}
+                              aria-label="Slett utgift"
+                              className="h-auto w-auto p-0"
+                            >
+                              <Trash2 className="h-5 w-5 cursor-pointer text-red-500" />
+                            </Button>
+                          </>
+                        )}
                       </div>
                     </li>
                   );
