@@ -6,6 +6,7 @@
 
 ### 2. **Advanced Budgeting Tools**
 
+
 - **Recurring Expenses**: Add support for recurring expenses (e.g., monthly subscriptions).
 - **Savings Goals**: Allow users to set and track savings goals.
 
