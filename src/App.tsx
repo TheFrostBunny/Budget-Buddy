@@ -14,8 +14,6 @@ import Onboarding from '@/components/Onboarding';
 
 import ShoppingList from './pages/ShoppingList';
 import Stores from './pages/Stores';
-import Profile from './pages/Profile';
-import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 import CurrencyConverter from './components/budget/CurrencyConverter';
 import SettingsProfile from './pages/SettingsProfile';
@@ -84,7 +82,6 @@ const App = () => {
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/shopping-list" element={<ShoppingList />} />
                   <Route path="/stores" element={<Stores />} />
-                  <Route path="/profile" element={<SettingsProfile />} />
                   <Route path="/settings" element={<SettingsProfile />} />
                   <Route path="/currency-converter" element={<CurrencyConverter />} />
                   <Route path="*" element={<NotFound />} />

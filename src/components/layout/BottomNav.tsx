@@ -8,7 +8,7 @@ const navItems = [
   { to: '/', icon: Home, labelKey: 'nav.home' },
   { to: '/shopping-list', icon: ShoppingCart, labelKey: 'nav.shoppingList' },
    { to: '/stores', icon: Store, labelKey: 'nav.stores' },
-  { to: '/profile', icon: User, labelKey: 'nav.profile' },
+  { to: '/settings', icon: User, labelKey: 'nav.settings' },
 ];
 
 export function BottomNav() {
