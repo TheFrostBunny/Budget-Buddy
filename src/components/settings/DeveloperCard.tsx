@@ -16,18 +16,24 @@ const DeveloperCard = () => {
   const [isDevMode, setIsDevMode] = useState(false);
   const { t } = useTranslation();
 
-  const handleImport = (data: {
-    preferences?: UserPreferences;
-    budget?: { amount: number; period: 'weekly' | 'monthly' | 'daily' };
-  }) => {
+  const handleImport = (data: any) => {
     if (data.preferences) {
       setPreferencesState(data.preferences);
     }
     if (data.budget) {
+      // Sjekk om det finnes et budsjett fra før
+      if (budget.budget) {
+        const overwrite = confirm(
+          t('settings.developer.confirmOverwriteBudget', 'Det finnes allerede et budsjett. Vil du overskrive det med det importerte?')
+        );
+        if (!overwrite) return;
+      }
       const validPeriods: Array<'weekly' | 'monthly' | 'daily'> = ['weekly', 'monthly', 'daily'];
       const period = validPeriods.includes(data.budget.period) ? data.budget.period : 'weekly';
       budget.setBudget(data.budget.amount, period);
     }
+    // Sikre at alle hooks/state oppdateres
+    setTimeout(() => window.location.reload(), 300);
   };
 
   return (
@@ -65,9 +71,12 @@ const DeveloperCard = () => {
               <Button
                 variant="outline"
                 className="w-full border-dashed"
-                onClick={() => exportDataToJson({ preferences, budget })}
+                onClick={async () => {
+                  const encrypt = confirm('Vil du kryptere eksporten med passord?');
+                  await exportDataToJson('budgetbuddy-data.json', encrypt);
+                }}
               >
-                {t('settings.developer.exportData', 'Export Data to JSON')}
+                {t('settings.developer.exportData', 'Eksporter data til JSON')}
               </Button>
               {/* Import Data Feature */}
               <Button
@@ -75,7 +84,7 @@ const DeveloperCard = () => {
                 className="w-full border-dashed"
                 onClick={() => importDataFromJson(handleImport)}
               >
-                {t('settings.developer.importData', 'Import Data from JSON')}
+                {t('settings.developer.importData', 'Importer data fra JSON')}
               </Button>
             </div>
             <BetaFeaturesCard />

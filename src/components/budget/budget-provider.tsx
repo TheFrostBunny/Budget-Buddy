@@ -40,9 +40,17 @@ export function BudgetProvider({ children }: { children: ReactNode }) {
 
   const [spending, setSpendingState] = useState<BudgetSpending>(() => {
     const stored = localStorage.getItem(STORAGE_KEYS.SPENDING);
-    return stored
-      ? JSON.parse(stored)
-      : { budgetId: '', spent: 0, transactions: [], dailyRollover: 0 };
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      return {
+        budgetId: parsed.budgetId || '',
+        spent: typeof parsed.spent === 'number' ? parsed.spent : 0,
+        transactions: Array.isArray(parsed.transactions) ? parsed.transactions : [],
+        dailyRollover: typeof parsed.dailyRollover === 'number' ? parsed.dailyRollover : 0,
+        coveredBySavings: typeof parsed.coveredBySavings === 'number' ? parsed.coveredBySavings : 0,
+      };
+    }
+    return { budgetId: '', spent: 0, transactions: [], dailyRollover: 0, coveredBySavings: 0 };
   });
 
   const [savings, setSavings] = useState<number>(() => {

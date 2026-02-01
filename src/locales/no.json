@@ -107,17 +107,21 @@
     "history": {
       "title": "Utgiftshistorikk",
       "noDescription": "Ingen beskrivelse",
-      "noExpenses": "Noen utgifter registrert enda."
+      "noExpenses": "Ingen utgifter registrert enda."
     },
     "graph": {
       "daily": "Daglig",
       "weekly": "Ukentlig",
       "monthly": "Månedlig",
+      "loading": "Laster data...",
+      "type": "Graf type",
+      "noData": "Ingen data tilgjengelig",
       "line": "Linje",
       "bar": "Søyle",
       "pie": "Pai",
       "remaining": "Gjenstående",
-      "spent": "Brukt"
+      "spent": "Brukt",
+      "share": "Del budsjett"
     }
   },
   "nav": {
