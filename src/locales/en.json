@@ -25,6 +25,14 @@
         "de": "German"
       }
     },
+    "beta": {
+      "title": "Become a Beta Tester",
+      "description": "Get early access to new features",
+      "join": "Join Beta Program",
+      "leave": "Leave Beta Program",
+      "confirmLeave": "Are you sure you want to leave the beta program?"
+    },
+
     "developer": {
       "title": "Developer Mode",
       "description": "Enable advanced features",

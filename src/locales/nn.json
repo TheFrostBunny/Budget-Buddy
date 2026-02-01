@@ -25,6 +25,13 @@
         "de": "Tysk"
       }
     },
+    "beta": {
+      "title": "Bli ein beta-testar",
+      "description": "Få tidleg tilgang til nye funksjonar",
+      "join": "Bli med i beta-programmet",
+      "leave": "Forlat beta-programmet",
+      "confirmLeave": "Er du sikker på at du vil forlate beta-programmet?"
+    },
     "developer": {
       "title": "Utviklarmodus",
       "description": "Aktiver avanserte funksjonar",

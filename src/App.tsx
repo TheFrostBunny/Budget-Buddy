@@ -18,6 +18,7 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 import CurrencyConverter from './components/budget/CurrencyConverter';
+import SettingsProfile from './pages/SettingsProfile';
 
 
 const queryClient = new QueryClient();
@@ -83,8 +84,8 @@ const App = () => {
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/shopping-list" element={<ShoppingList />} />
                   <Route path="/stores" element={<Stores />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/settings" element={<Settings />} />
+                  <Route path="/profile" element={<SettingsProfile />} />
+                  <Route path="/settings" element={<SettingsProfile />} />
                   <Route path="/currency-converter" element={<CurrencyConverter />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
