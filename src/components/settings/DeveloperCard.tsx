@@ -8,7 +8,6 @@ import { usePreferences } from '@/hooks/useLocalStorage';
 import { useTranslation } from 'react-i18next';
 import { UserPreferences } from '@/types';
 import { exportDataToJson, importDataFromJson } from '@/lib/dataTransfer';
-import BetaFeaturesCard from '@/components/settings/BetaFeaturesCard';
 
 const DeveloperCard = () => {
   const { preferences, setPreferencesState } = usePreferences();
@@ -87,7 +86,6 @@ const DeveloperCard = () => {
                 {t('settings.developer.importData', 'Importer data fra JSON')}
               </Button>
             </div>
-            <BetaFeaturesCard />
           </div>
         )}
       </CardContent>

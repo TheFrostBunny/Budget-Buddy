@@ -13,7 +13,7 @@ interface BudgetContextType {
   savings: number;
   setBudget: (amount: number, period: 'weekly' | 'monthly' | 'daily') => void;
   updateBudget: (amount: number, period?: 'weekly' | 'monthly' | 'daily') => void;
-  addSpending: (amount: number, storeId?: string, description?: string, category?: string) => void;
+  addSpending: (amount: number, storeId?: string, description?: string, category?: string, currency?: string) => void;
   removeSpending: (id: string) => void;
   updateTransactionCategory: (id: string, category: string) => void;
   resetSpending: () => void;

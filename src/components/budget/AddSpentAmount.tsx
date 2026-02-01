@@ -11,7 +11,7 @@ import { toast } from '@/hooks/use-toast';
 export interface AddSpentAmountProps {
   currency: string;
   convert: (amount: number) => number;
-  betaEnabled: boolean;
+  betaEnabled?: boolean;
 }
 const categories = [
   'Mat',
@@ -60,19 +60,27 @@ const AddSpentAmount: React.FC<AddSpentAmountProps> = React.memo(({ currency, co
   const [success, setSuccess] = useState(false);
 
   const handleAdd = () => {
-    const value = parseFloat(amount);
-    if (!isNaN(value) && value > 0 && date && time) {
+    let value: number | null = null;
+    let currencyLabel = inputCurrency;
+    if (inputCurrency === 'EUR') {
+      value = parseFloat(eurAmount.replace(',', '.'));
+      currencyLabel = 'EUR';
+    } else {
+      value = parseFloat(amount);
+      currencyLabel = 'NOK';
+    }
+    if (!isNaN(value!) && value! > 0 && date && time) {
       if (!budget) {
         return;
       }
-      // Send kategori som både description og category
-      addSpending(value, undefined, category, category);
+      // Lagre beløpet med valgt valuta
+      addSpending(value, undefined, category, category, currencyLabel);
       setAmount('');
       setEurAmount('');
       setSuccess(true);
       toast({
         title: 'Utgift lagret!',
-        description: `Du har lagt til ${value} kr i kategorien "${category}".`,
+        description: `Du har lagt til ${value} ${currencyLabel} i kategorien "${category}".`,
       });
     }
   };
@@ -125,7 +133,7 @@ const AddSpentAmount: React.FC<AddSpentAmountProps> = React.memo(({ currency, co
                 />
               </div>
             )}
-            {inputCurrency === 'EUR' && betaEnabled && (
+            {inputCurrency === 'EUR' && (
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base font-bold text-muted-foreground">
                   €
@@ -150,11 +158,6 @@ const AddSpentAmount: React.FC<AddSpentAmountProps> = React.memo(({ currency, co
                     Skriv inn euro-beløp for å konvertere til norske kroner.
                   </div>
                 )}
-              </div>
-            )}
-            {inputCurrency === 'EUR' && !betaEnabled && (
-              <div className="text-xs text-yellow-700 mt-1">
-                Euro-funksjonen er i beta. Aktiver beta-funksjoner i innstillinger for å bruke denne.
               </div>
             )}
             {inputCurrency === 'OTHER' && (

@@ -5,10 +5,9 @@ import AppearanceCard from '@/components/settings/AppearanceCard';
 import LanguageCard from '@/components/settings/LanguageCard';
 import DeveloperCard from '@/components/settings/DeveloperCard';
 import BetaFeaturesCard from '@/components/settings/BetaFeaturesCard';
-import ProfileHeader from '@/components/profile/ProfileHeader';
 import BudgetPeriodSelector from '@/components/profile/BudgetPeriodSelector';
 import BudgetStatusCard from '@/components/profile/BudgetStatusCard';
-import { usePreferences } from '@/hooks/useLocalStorage';
+import { usePreferences, currencyOptions } from '@/hooks/useLocalStorage';
 import { useBudget } from '@/components/budget/budget-provider';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
@@ -19,7 +18,7 @@ import { useEffect } from 'react';
 
 const SettingsProfile = () => {
   const { t, i18n } = useTranslation();
-  const { preferences, setDefaultBudgetPeriod, setPreferencesState } = usePreferences();
+  const { preferences, setDefaultBudgetPeriod, setPreferencesState, inputCurrency, setInputCurrency } = usePreferences();
   const { budget, updateBudget, resetSpending, spending, resetSavingsBalance } = useBudget();
   const { customRates, editRates, handleRateChange, handleRateSave, handleRateDelete } = useCustomRates();
 
@@ -187,6 +186,24 @@ const SettingsProfile = () => {
             <AccordionItem value="language">
               <AccordionTrigger>{t('settings.language.title', { defaultValue: 'Språk' })}</AccordionTrigger>
               <AccordionContent><LanguageCard /></AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="currency">
+              <AccordionTrigger>{t('settings.currency.title', { defaultValue: 'Standard valuta' })}</AccordionTrigger>
+              <AccordionContent>
+                <div className="flex flex-col gap-4 py-2">
+                  <label className="font-medium mb-2" htmlFor="currency-select">{t('settings.currency.label', { defaultValue: 'Velg din standard valuta' })}</label>
+                  <select
+                    id="currency-select"
+                    value={inputCurrency}
+                    onChange={e => setInputCurrency(e.target.value as 'NOK' | 'EUR' | 'OTHER')}
+                    className="w-64 rounded border border-border bg-background px-3 py-2 text-base text-foreground"
+                  >
+                    {currencyOptions.map(opt => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                </div>
+              </AccordionContent>
             </AccordionItem>
             <AccordionItem value="dietary">
               <AccordionTrigger>{t('settings.dietary.title', { defaultValue: 'Kostpreferanser' })}</AccordionTrigger>

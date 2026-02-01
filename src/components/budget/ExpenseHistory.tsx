@@ -21,11 +21,11 @@ const categories = [
 import BudgetAnalysisGraph from '@/components/budget/BudgetAnalysisGraph';
 
 export interface ExpenseHistoryProps {
-  betaEnabled: boolean;
   currency: string;
   convert: (amount: number) => number;
+  betaEnabled?: boolean; // behold for andre beta-funksjoner
 }
-const ExpenseHistory: React.FC<ExpenseHistoryProps> = React.memo(({ betaEnabled, currency, convert }) => {
+const ExpenseHistory: React.FC<ExpenseHistoryProps> = React.memo(({ currency, convert, betaEnabled }) => {
   const { spending, removeSpending, updateTransactionCategory } = useBudget?.() ?? {};
     const [editingId, setEditingId] = useState<string | null>(null);
     const [newCategory, setNewCategory] = useState<string>('');
@@ -70,18 +70,17 @@ const ExpenseHistory: React.FC<ExpenseHistoryProps> = React.memo(({ betaEnabled,
           >
             <ChartPie className="h-6 w-6 text-primary" />
           </button>
-          {betaEnabled && (
-            <ExportExcelButton
-              data={(spending.transactions as Transaction[]).map((tx) => ({
-                Dato: new Date(tx.date).toLocaleString('nb-NO'),
-                Beløp: tx.amount,
-                Beskrivelse: tx.description || '',
-                Butikk: tx.storeId || '',
-              }))}
-              filename="utgifter.xlsx"
-              label="Eksporter til Excel"
-            />
-          )}
+          {/* Euro-funksjonen er alltid aktiv, men betaEnabled kan styre andre beta-funksjoner */}
+          <ExportExcelButton
+            data={(spending.transactions as Transaction[]).map((tx) => ({
+              Dato: new Date(tx.date).toLocaleString('nb-NO'),
+              Beløp: tx.amount,
+              Beskrivelse: tx.description || '',
+              Butikk: tx.storeId || '',
+            }))}
+            filename="utgifter.xlsx"
+            label="Eksporter til Excel"
+          />
         </div>
       </CardTitle>
       {showGraph && (
